@@ -1,0 +1,9 @@
+<div style="overflow: auto" fxFlex>
+  <md-list>
+    <md-list-item *ngFor="let item of itemController.model.items" [listItem]="item" [routerLink]="[ '../', item.$key ]">
+      <ng-template *ngComponentOutlet="itemController.view.itemComponent"></ng-template>
+    </md-list-item>
+  </md-list>
+</div>
+
+<div><button md-button type="button" [routerLink]="[ '../new' ]">New</button>

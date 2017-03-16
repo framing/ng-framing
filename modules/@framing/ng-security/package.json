@@ -1,0 +1,29 @@
+{
+  "name": "@framing/ng-security",
+  "version": "0.0.0-PLACEHOLDER",
+  "description": "Framing for Angular - the security library",
+  "main": "./index.js",
+  "typings": "./index.d.ts",
+  "author": "framing",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^4.0.0-rc.2",
+    "@angular/compiler": "^4.0.0-rc.2",
+    "@angular/compiler-cli": "^4.0.0-rc.2",
+    "@angular/core": "^4.0.0-rc.2",
+    "@angular/forms": "^4.0.0-rc.2",
+    "@angular/http": "^4.0.0-rc.2",
+    "@angular/platform-browser": "^4.0.0-rc.2",
+    "@angular/platform-browser-dynamic": "^4.0.0-rc.2",
+    "@angular/platform-server": "^4.0.0-rc.2",
+    "@angular/router": "^4.0.0-rc.2",
+    "@framing/ng-core": "0.0.0-PLACEHOLDER",
+    "lodash": "4.x.x",
+    "rxjs": "5.2.x",
+    "zone.js": "0.7.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/framing/ng-framing.git"
+  }
+}

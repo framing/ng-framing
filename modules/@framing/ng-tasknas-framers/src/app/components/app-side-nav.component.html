@@ -1,0 +1,10 @@
+<md-toolbar>
+  <ng-template *ngComponentOutlet="appController.view.sideNavTitleComponent">
+  </ng-template>
+</md-toolbar>
+
+<ng-template *ngComponentOutlet="appController.view.sideNavSubTitleComponent"></ng-template>
+
+<div fxLayoutPadding>
+  <ng-template *ngComponentOutlet="appController.view.sideNavContentComponent"></ng-template>
+</div>

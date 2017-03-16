@@ -1,0 +1,11 @@
+<form (submit)="itemController.updateItem()">
+  <div>Edit {{itemController.model.name}}</div>
+
+  <ng-template *ngComponentOutlet="itemController.view.itemEditFormComponent || itemController.view.itemFormComponent"></ng-template>
+
+  <div>
+    <button md-button class="md-primary" type="submit">Save</button>
+
+    <button md-button (click)="itemController.cancel()" type="button">Cancel</button>
+  </div>
+</form>

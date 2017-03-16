@@ -1,0 +1,6 @@
+<md-list>
+  <md-list-item *ngFor="let item of appController.model.sideNavItems" [routerLink]="item.routerLink">
+    <md-icon *ngIf="item.icon">{{item.icon}}</md-icon>
+    <p>{{item.label}}</p>
+  </md-list-item>
+</md-list>
