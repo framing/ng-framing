@@ -9,3 +9,4 @@ export * from './framing-ng-module';
 export * from './framing-root-component-config';
 export * from './framing-route-config';
 export * from './framing';
+export * from './simple-framer';

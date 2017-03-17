@@ -57,9 +57,18 @@ export abstract class Controller<Model, View> {
    * Constructor.
    */
   constructor(injector: Injector) {
-    this._model = injector.get(this.controllerName + 'Model');
-    this._view = injector.get(this.controllerName + 'View');
-    this._frame = injector.get(this.controllerName + 'Frame');
+    this._model = injector.get(this.controllerName + 'Model', undefined);
+    if (!this._model) {
+      console.warn(`Failed in inject model for ${this.controllerName} controller`);
+    }
+    this._view = injector.get(this.controllerName + 'View', undefined);
+    if (!this._view) {
+      console.warn(`Failed in inject view for ${this.controllerName} controller`);
+    }
+    this._frame = injector.get(this.controllerName + 'Frame', undefined);
+    if (!this._frame) {
+      console.warn(`Failed in inject frame for ${this.controllerName} controller`);
+    }
     if (this._frame) {
       this._frame.resolveStart$.subscribe(() => { this.onResolveStart(); });
       this._frame.resolveEnd$.subscribe(() => { this.onResolveEnd(); });

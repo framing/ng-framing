@@ -35,9 +35,19 @@ export abstract class Framer<Model, View> {
   public get theController(): Type<Controller<Model, View>> { return this._controller; }
 
   /**
+   * When true, framing will create a frame for this framer.
+   */
+  public get createFrame(): boolean { return true; }
+
+  /**
    * When true, framing will setup the model as a provider by its type (if it has a valid type)
    */
   public get provideModelByType(): boolean { return true; }
+
+  /**
+   * When true, framing will setup the model as a provider by its name
+   */
+  public get provideModelByName(): boolean { return true; }
 
   /**
    * When true, framing will setup the view as a provider by its type (if it has a valid type)
@@ -45,9 +55,34 @@ export abstract class Framer<Model, View> {
   public get provideViewByType(): boolean { return true; }
 
   /**
+   * When true, framing will setup the view as a provider by its name
+   */
+  public get provideViewByName(): boolean { return true; }
+
+  /**
    * When true, framing will setup the controller as a provider by its type.
    */
   public get provideControllerByType(): boolean { return true; }
+
+  /**
+   * When true, framing will setup the frame as a provider by its name
+   */
+  public get provideFrameByName(): boolean { return true; }
+
+  /**
+   * When true, framing will add the model to the route data.
+   */
+  public get addModelToRouteData(): boolean { return true; }
+
+  /**
+   * When true, framing will add the view to the route data.
+   */
+  public get addViewToRouteData(): boolean { return true; }
+
+  /**
+   * When true, framing will add the frame to the route data.
+   */
+  public get addFrameToRouteData(): boolean { return true; }
 
   /**
    * The default model.
@@ -129,7 +164,7 @@ export abstract class Framer<Model, View> {
   /**
    * The frame.
    */
-  private _frame: Frame = new Frame();
+  private _frame: Frame;
 
   /**
    * The framer's injector.
@@ -264,9 +299,15 @@ export abstract class Framer<Model, View> {
       }
     }
 
-    this.provideValueByName(framing, this.framerName + 'Frame', this._frame);
-    this.provideValueByName(framing, this.framerName + 'Model', this._model);
-    this.provideValueByName(framing, this.framerName + 'View', this._view);
+    if (this.provideFrameByName) {
+      this.provideValueByName(framing, this.framerName + 'Frame', this._frame);
+    }
+    if (this.provideModelByName) {
+      this.provideValueByName(framing, this.framerName + 'Model', this._model);
+    }
+    if (this.provideViewByName) {
+      this.provideValueByName(framing, this.framerName + 'View', this._view);
+    }
 
     if (this.provideModelByType) {
       this.provideInstanceByType(framing, this._model);
@@ -276,51 +317,59 @@ export abstract class Framer<Model, View> {
     }
 
     if (this.route) {
-      this.addRouteData(framing, this.framerName + 'Frame', this._frame);
-      this.addRouteData(framing, this.framerName + 'Model', this._model);
-      this.addRouteData(framing, this.framerName + 'View', this._view);
-
-      class FrameResolver {
-        constructor(
-          private injector: Injector,
-          private router: Router,
-          private route: ActivatedRoute) {
-          self._injector = this.injector;
-        }
-
-        resolve(routeSnapshot: ActivatedRouteSnapshot, routeStateSnapshot: RouterStateSnapshot): any {
-          self._frame.resolveStartSubject.next();
-
-          const routeUrl = Framer.buildUrlLink(routeSnapshot);
-          const sub = this.router.events.subscribe((event) => {
-            if (event instanceof NavigationStart) {
-              console.error('Unexpected NavigationStart');
-            } else if (event instanceof NavigationEnd) {
-              /* tslint:disable:no-console */
-              console.info(`Route url for framer ${self.framerIdent} changed to ${routeUrl}`);
-              /* tslint:enable:no-console */
-              self._frame.routeSnapshot = self.findActivateRouteSnapshot(this.route);
-              self._frame.routeUrl = routeUrl;
-              self._frame.routeUrlSubject.next(routeUrl);
-              self.framerOnResolveRoute();
-              self._frame.resolveEndSubject.next();
-            } else if (event instanceof NavigationError) {
-              self._frame.resolveCancelSubject.next();
-            } else if (event instanceof NavigationCancel) {
-              self._frame.resolveCancelSubject.next();
-            }
-            sub.unsubscribe();
-          });
-          return self._frame;
-        }
+      if (this.addFrameToRouteData) {
+        this.addRouteData(framing, this.framerName + 'Frame', this._frame);
+      }
+      if (this.addModelToRouteData) {
+        this.addRouteData(framing, this.framerName + 'Model', this._model);
+      }
+      if (this.addViewToRouteData) {
+        this.addRouteData(framing, this.framerName + 'View', this._view);
       }
 
-      framing
-        .resolve(this.framerIdent, FrameResolver, this.route)
-        .provide({
-          provide: FrameResolver,
-          useFactory: (i: Injector, r: Router, a: ActivatedRoute) => new FrameResolver(i, r, a),
-          deps: [ Injector, Router, ActivatedRoute ] });
+      if (this._frame) {
+        class FrameResolver {
+          constructor(
+            private injector: Injector,
+            private router: Router,
+            private route: ActivatedRoute) {
+            self._injector = this.injector;
+          }
+
+          resolve(routeSnapshot: ActivatedRouteSnapshot, routeStateSnapshot: RouterStateSnapshot): any {
+            self._frame.resolveStartSubject.next();
+
+            const routeUrl = Framer.buildUrlLink(routeSnapshot);
+            const sub = this.router.events.subscribe((event) => {
+              if (event instanceof NavigationStart) {
+                console.error('Unexpected NavigationStart');
+              } else if (event instanceof NavigationEnd) {
+                /* tslint:disable:no-console */
+                console.info(`Route url for framer ${self.framerIdent} changed to ${routeUrl}`);
+                /* tslint:enable:no-console */
+                self._frame.routeSnapshot = self.findActivateRouteSnapshot(this.route);
+                self._frame.routeUrl = routeUrl;
+                self._frame.routeUrlSubject.next(routeUrl);
+                self.framerOnResolveRoute();
+                self._frame.resolveEndSubject.next();
+              } else if (event instanceof NavigationError) {
+                self._frame.resolveCancelSubject.next();
+              } else if (event instanceof NavigationCancel) {
+                self._frame.resolveCancelSubject.next();
+              }
+              sub.unsubscribe();
+            });
+            return self._frame;
+          }
+        }
+
+        framing
+          .resolve(this.framerIdent, FrameResolver, this.route)
+          .provide({
+            provide: FrameResolver,
+            useFactory: (i: Injector, r: Router, a: ActivatedRoute) => new FrameResolver(i, r, a),
+            deps: [ Injector, Router, ActivatedRoute ] });
+      }
     }
 
     this._route = undefined; // clear the route so we're not holding any references to its properties
@@ -342,6 +391,9 @@ export abstract class Framer<Model, View> {
    */
   protected construct(model?: Model, view?: View, controller?: Type<Controller<Model, View>>): void {
     this._framerId = Framer._nextId++;
+    if (this.createFrame) {
+      this._frame = new Frame();
+    }
     const defaultModel = this.defaultModel;
     this._model = defaultModel ? _.merge(defaultModel, model) : model;
     const defaultView = this.defaultView;
