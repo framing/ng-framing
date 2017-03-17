@@ -7,6 +7,8 @@ export class SecurityGuardFramer extends Framer<SecurityGuardModel, void> {
 
   public get framerName(): string { return 'securityGuard'; }
 
+  public get addModelToRouteData(): boolean { return true; }
+
   public get defaultModel(): SecurityGuardModel {
     return {
       authorization: undefined,

@@ -40,49 +40,24 @@ export abstract class Framer<Model, View> {
   public get createFrame(): boolean { return true; }
 
   /**
-   * When true, framing will setup the model as a provider by its type (if it has a valid type)
-   */
-  public get provideModelByType(): boolean { return true; }
-
-  /**
-   * When true, framing will setup the model as a provider by its name
-   */
-  public get provideModelByName(): boolean { return true; }
-
-  /**
-   * When true, framing will setup the view as a provider by its type (if it has a valid type)
-   */
-  public get provideViewByType(): boolean { return true; }
-
-  /**
-   * When true, framing will setup the view as a provider by its name
-   */
-  public get provideViewByName(): boolean { return true; }
-
-  /**
    * When true, framing will setup the controller as a provider by its type.
    */
   public get provideControllerByType(): boolean { return true; }
 
   /**
-   * When true, framing will setup the frame as a provider by its name
-   */
-  public get provideFrameByName(): boolean { return true; }
-
-  /**
    * When true, framing will add the model to the route data.
    */
-  public get addModelToRouteData(): boolean { return true; }
+  public get addModelToRouteData(): boolean { return false; }
 
   /**
    * When true, framing will add the view to the route data.
    */
-  public get addViewToRouteData(): boolean { return true; }
+  public get addViewToRouteData(): boolean { return false; }
 
   /**
    * When true, framing will add the frame to the route data.
    */
-  public get addFrameToRouteData(): boolean { return true; }
+  public get addFrameToRouteData(): boolean { return false; }
 
   /**
    * The default model.
@@ -282,7 +257,26 @@ export abstract class Framer<Model, View> {
       this.provideTypeByName(framing, this.framerName + 'Controller', this._controller);
 
       if (this.provideControllerByType) {
-        framing.provide(this._controller);
+        let controllerInstance: Controller<Model, View>;
+
+        framing
+          .provide({
+            provide: this.framerIdent + '-Controller',
+            useClass: this._controller,
+          })
+          .provide({
+            provide: this._controller,
+            useFactory: (injector: Injector) => {
+              if (controllerInstance) {
+                return controllerInstance;
+              }
+              controllerInstance = injector.get(this.framerIdent + '-Controller');
+              controllerInstance.initController(this._model, this._view, this._frame);
+              return controllerInstance;
+            },
+            deps: [ Injector ],
+          });
+
         /* tslint:disable:no-console */
         console.info(`Providing controller for framer ${this.framerIdent} by type`);
         /* tslint:enable:no-console */
@@ -290,7 +284,7 @@ export abstract class Framer<Model, View> {
         if (this.defaultController && this._controller !== this.defaultController) {
           framing.provide({
             provide: this.defaultController,
-            useClass: this._controller,
+            useExisting: this._controller,
           });
           /* tslint:disable:no-console */
           console.info(`Providing controller overload for framer ${this.framerIdent} by default controller type`);
@@ -299,22 +293,14 @@ export abstract class Framer<Model, View> {
       }
     }
 
-    if (this.provideFrameByName) {
-      this.provideValueByName(framing, this.framerName + 'Frame', this._frame);
-    }
-    if (this.provideModelByName) {
-      this.provideValueByName(framing, this.framerName + 'Model', this._model);
-    }
-    if (this.provideViewByName) {
-      this.provideValueByName(framing, this.framerName + 'View', this._view);
-    }
+    // FUTURE: frame, model & view provided by name
+    // this.provideValueByName(framing, this.framerName + 'Frame', this._frame);
+    // this.provideValueByName(framing, this.framerName + 'Model', this._model);
+    // this.provideValueByName(framing, this.framerName + 'View', this._view);
 
-    if (this.provideModelByType) {
-      this.provideInstanceByType(framing, this._model);
-    }
-    if (this.provideViewByType) {
-      this.provideInstanceByType(framing, this._view);
-    }
+    // FUTURE: model & view provided by type
+    // this.provideInstanceByType(framing, this._model);
+    // this.provideInstanceByType(framing, this._view);
 
     if (this.route) {
       if (this.addFrameToRouteData) {
@@ -428,31 +414,31 @@ export abstract class Framer<Model, View> {
   }
 
   /**
-   *
+   * FUTURE
    */
-  private provideInstanceByType(framing: FramingNgModule, instance: any): void {
-    if (instance &&
-      (instance as any).__proto__ &&
-      (instance as any).__proto__.constructor &&
-      (instance as any).__proto__.constructor.name !== 'Object') {
-      framing.provide({ provide: (instance as any).__proto__.constructor, useValue: instance });
-      /* tslint:disable:no-console */
-      console.info(`Providing ${(instance as any).__proto__.constructor.name} for framer ${this.framerIdent} by type`);
-      /* tslint:enable:no-console */
-    }
-  }
+  // private provideInstanceByType(framing: FramingNgModule, instance: any): void {
+  //   if (instance &&
+  //     (instance as any).__proto__ &&
+  //     (instance as any).__proto__.constructor &&
+  //     (instance as any).__proto__.constructor.name !== 'Object') {
+  //     framing.provide({ provide: (instance as any).__proto__.constructor, useValue: instance });
+  //     /* tslint:disable:no-console */
+  //     console.info(`Providing ${(instance as any).__proto__.constructor.name} for framer ${this.framerIdent} by type`);
+  //     /* tslint:enable:no-console */
+  //   }
+  // }
 
   /**
-   *
+   * FUTURE
    */
-  private provideValueByName(framing: FramingNgModule, name: string, value: any): void {
-    if (value) {
-      framing.provide({ provide: name, useValue: value });
-      /* tslint:disable:no-console */
-      console.info(`Providing ${name} for framer ${this.framerIdent} by name`);
-      /* tslint:enable:no-console */
-    }
-  }
+  // private provideValueByName(framing: FramingNgModule, name: string, value: any): void {
+  //   if (value) {
+  //     framing.provide({ provide: name, useValue: value });
+  //     /* tslint:disable:no-console */
+  //     console.info(`Providing ${name} for framer ${this.framerIdent} by name`);
+  //     /* tslint:enable:no-console */
+  //   }
+  // }
 
   private addRouteData(framing: FramingNgModule, name: string, value: any): void {
     if (value) {

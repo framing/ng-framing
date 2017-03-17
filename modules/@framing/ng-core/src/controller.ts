@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Frame } from './frame';
 
 @Injectable()
@@ -19,11 +19,6 @@ export abstract class Controller<Model, View> {
   // ========================================
 
   /**
-   * The name of this framer.
-   */
-  public abstract get controllerName(): string;
-
-  /**
    * Model accessor.
    */
   public get model(): Model { return this._model; }
@@ -37,6 +32,11 @@ export abstract class Controller<Model, View> {
    * Frame accessor.
    */
   public get frame(): Frame { return this._frame; }
+
+  /**
+   * Called after controller is initialized with model, view & frame from framing.
+   */
+  public onControllerInit(): void {}
 
   /**
    * Called when the controller's route starts resolving.
@@ -54,25 +54,17 @@ export abstract class Controller<Model, View> {
   public onResolveCancel(): void {}
 
   /**
-   * Constructor.
+   * Called by framing after construction to link the model, view & frame for this controller.
    */
-  constructor(injector: Injector) {
-    this._model = injector.get(this.controllerName + 'Model', undefined);
-    if (!this._model) {
-      console.warn(`Failed in inject model for ${this.controllerName} controller`);
-    }
-    this._view = injector.get(this.controllerName + 'View', undefined);
-    if (!this._view) {
-      console.warn(`Failed in inject view for ${this.controllerName} controller`);
-    }
-    this._frame = injector.get(this.controllerName + 'Frame', undefined);
-    if (!this._frame) {
-      console.warn(`Failed in inject frame for ${this.controllerName} controller`);
-    }
+  public initController(model: Model, view: View, frame: Frame): void {
+    this._model = model;
+    this._view = view;
+    this._frame = frame;
     if (this._frame) {
       this._frame.resolveStart$.subscribe(() => { this.onResolveStart(); });
       this._frame.resolveEnd$.subscribe(() => { this.onResolveEnd(); });
       this._frame.resolveCancel$.subscribe(() => { this.onResolveCancel(); });
     }
+    this.onControllerInit();
   }
 }

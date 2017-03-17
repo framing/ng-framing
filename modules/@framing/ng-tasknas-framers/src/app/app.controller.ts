@@ -9,12 +9,9 @@ import { AppView } from './app.view';
 export class AppController extends Controller<AppModel, AppView> {
   public constructor(
     private router: Router,
-    injector: Injector,
   ) {
-    super(injector);
+    super();
   }
-
-  public get controllerName(): string { return 'app'; }
 
   public toggleSideNav(opened: boolean): void {
     console.log('toogleSideNav ' + opened);

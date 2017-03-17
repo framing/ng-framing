@@ -12,12 +12,9 @@ export class ItemController extends Controller<ItemModel, ItemView> {
   public constructor(
     private itemDataProvider: ItemDataProvider,
     private router: Router,
-    injector: Injector,
   ) {
-    super(injector);
+    super();
   }
-
-  public get controllerName(): string { return 'item'; }
 
   public beforeSaveItem(): void {}
 
