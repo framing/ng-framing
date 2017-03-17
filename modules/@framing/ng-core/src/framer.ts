@@ -40,6 +40,11 @@ export abstract class Framer<Model, View> {
   public get createFrame(): boolean { return true; }
 
   /**
+   * When true, framing will use multi on all providers so multiple framers of the same type can be setup on the same module.
+   */
+  public get multiFramer(): boolean { return false; }
+
+  /**
    * When true, framing will setup the controller as a provider by its type.
    */
   public get provideControllerByType(): boolean { return true; }
@@ -97,7 +102,7 @@ export abstract class Framer<Model, View> {
   public get framed(): boolean { return this._framed; }
 
   /**
-   * The injector (available on and after framerOnResolveRoute)
+   * The injector (available on and after framerOnResolveRoute or framerOnControllerInit, whichever comes first)
    */
   public get injector(): Injector { return this._injector; }
 
@@ -219,6 +224,12 @@ export abstract class Framer<Model, View> {
   public framerOnResolveRoute(): void {}
 
   /**
+   * Framer on controller init function is called when the controller is first injected.
+   * To be overwritten if needed.
+   */
+  public framerOnControllerInit(controller: Controller<Model, View>): void {}
+
+  /**
    * Calls derived framing()
    */
   public runFraming(framing: FramingNgModule, routeParam?: Route): void {
@@ -244,7 +255,14 @@ export abstract class Framer<Model, View> {
     }
 
     this._framing = framing; // set _framing to framing ONLY for the duration of the controller() function
-    this.frame(framing);
+    try {
+      this.frame(framing);
+    } catch (e) {
+      console.error(`Exception when framing ${this.framerIdent} :`, e);
+      this._model = undefined;
+      this._view = undefined;
+      this._controller = undefined;
+    }
     this._framing = undefined;
 
     if (this.routeRule === 'auto') { // check this again incase the framer created a route
@@ -254,7 +272,8 @@ export abstract class Framer<Model, View> {
     const self = this;
 
     if (this._controller) {
-      this.provideTypeByName(framing, this.framerName + 'Controller', this._controller);
+      // FUTURE
+      // this.provideTypeByName(framing, this.framerName + 'Controller', this._controller);
 
       if (this.provideControllerByType) {
         let controllerInstance: Controller<Model, View>;
@@ -270,11 +289,14 @@ export abstract class Framer<Model, View> {
               if (controllerInstance) {
                 return controllerInstance;
               }
+              self._injector = this.injector;
               controllerInstance = injector.get(this.framerIdent + '-Controller');
               controllerInstance.initController(this._model, this._view, this._frame);
+              this.framerOnControllerInit(controllerInstance);
               return controllerInstance;
             },
             deps: [ Injector ],
+            multi: this.multiFramer && this._controller === this.defaultController,
           });
 
         /* tslint:disable:no-console */
@@ -285,6 +307,7 @@ export abstract class Framer<Model, View> {
           framing.provide({
             provide: this.defaultController,
             useExisting: this._controller,
+            multi: this.multiFramer,
           });
           /* tslint:disable:no-console */
           console.info(`Providing controller overload for framer ${this.framerIdent} by default controller type`);
@@ -402,16 +425,16 @@ export abstract class Framer<Model, View> {
   }
 
   /**
-   *
+   * FUTURE
    */
-  private provideTypeByName(framing: FramingNgModule, name: string, type: any): void {
-    if (type) {
-      framing.provide({ provide: name, useClass: type });
-      /* tslint:disable:no-console */
-      console.info(`Providing ${name} for framer ${this.framerIdent} by name`);
-      /* tslint:enable:no-console */
-    }
-  }
+  // private provideTypeByName(framing: FramingNgModule, name: string, type: any): void {
+  //   if (type) {
+  //     framing.provide({ provide: name, useClass: type });
+  //     /* tslint:disable:no-console */
+  //     console.info(`Providing ${name} for framer ${this.framerIdent} by name`);
+  //     /* tslint:enable:no-console */
+  //   }
+  // }
 
   /**
    * FUTURE
