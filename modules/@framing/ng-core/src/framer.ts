@@ -470,7 +470,7 @@ export abstract class Framer<Model, View> {
 
   private addRouteData(framing: FramingNgModule, name: string, value: any): void {
     if (value) {
-      const routeConfig = framing.getRoute(this.route);
+      const routeConfig = framing.getOrAddRoute(this.route);
       if (routeConfig.data && routeConfig.data[name]) {
         console.warn(`Failed to add ${name} route data for framer ${this.framerIdent}. Data item already exists.`);
       } else {
