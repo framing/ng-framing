@@ -20,11 +20,11 @@ export class SecurityGuardService implements CanActivate, CanActivateChild, CanL
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const model = route.data ? (route.data as any).securityGuardModel as SecurityGuardModel : undefined;
+    const model = route.data ? (route.data as any).SecurityGuardModel as SecurityGuardModel : undefined;
     if (model) {
       return this.authService.canActivate(model, route, state);
     } else {
-      console.warn(`Expecting 'securityGuardModel' in route data`, { route });
+      console.warn(`Expecting 'SecurityGuardModel' in route data`, { route });
       return false;
     }
   }
@@ -36,11 +36,11 @@ export class SecurityGuardService implements CanActivate, CanActivateChild, CanL
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const model = route.data ? (route.data as any).securityGuardModel as SecurityGuardModel : undefined;
+    const model = route.data ? (route.data as any).SecurityGuardModel as SecurityGuardModel : undefined;
     if (model) {
       return this.authService.canActivate(model, route, state);
     } else {
-      console.warn(`Expecting 'securityGuardModel' in route data`, { route });
+      console.warn(`Expecting 'SecurityGuardModel' in route data`, { route });
       return false;
     }
   }
@@ -51,11 +51,11 @@ export class SecurityGuardService implements CanActivate, CanActivateChild, CanL
   public canLoad(
     route: Route,
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const model = route.data ? (route.data as any).securityGuardModel as SecurityGuardModel : undefined;
+    const model = route.data ? (route.data as any).SecurityGuardModel as SecurityGuardModel : undefined;
     if (model) {
       return this.authService.canLoad(model, route);
     } else {
-      console.warn(`Expecting 'securityGuardModel' in route data`, { route });
+      console.warn(`Expecting 'SecurityGuardModel' in route data`, { route });
       return false;
     }
   }

@@ -4,7 +4,7 @@ import { MenuItemModel } from './menu-item.model';
 
 export class MenuItemFramer extends Framer<MenuItemModel, void> {
 
-  public get framerName(): string { return 'menuItem'; }
+  public get framerName(): string { return 'MenuItem'; }
 
   /**
    * The frame function.

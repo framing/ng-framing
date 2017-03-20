@@ -34,7 +34,7 @@ export class ItemFramer extends Framer<ItemModelData, ItemViewData> {
     return this;
   }
 
-  public get framerName(): string { return 'item'; }
+  public get framerName(): string { return 'Item'; }
 
   public get defaultModel(): ItemModel {
     return _.defaults(new ItemModel(), {

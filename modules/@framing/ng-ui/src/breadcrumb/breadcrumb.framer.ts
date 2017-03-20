@@ -5,7 +5,7 @@ import { BreadcrumbResolver } from './breadcrumb.resolver';
 
 export class BreadcrumbFramer extends Framer<BreadcrumbModel, void> {
 
-  public get framerName(): string { return 'breadcrumb'; }
+  public get framerName(): string { return 'Breadcrumb'; }
 
   /**
    * The frame function.

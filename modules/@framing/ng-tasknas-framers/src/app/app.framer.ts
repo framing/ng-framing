@@ -22,7 +22,7 @@ import { AppSideNavComponent } from './components/app-side-nav.component';
 
 export class AppFramer extends Framer<AppModel, AppView> {
 
-  public get framerName(): string { return 'app'; }
+  public get framerName(): string { return 'App'; }
 
   public get defaultModel(): AppModel {
     return {

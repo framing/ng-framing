@@ -5,7 +5,7 @@ import { SecurityGuardService } from './security-guard.service';
 
 export class SecurityGuardFramer extends Framer<SecurityGuardModel, void> {
 
-  public get framerName(): string { return 'securityGuard'; }
+  public get framerName(): string { return 'SecurityGuard'; }
 
   public get addModelToRouteData(): boolean { return true; }
 

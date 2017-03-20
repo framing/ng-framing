@@ -5,7 +5,7 @@ import { RibbonResolver } from './ribbon.resolver';
 
 export class RibbonFramer extends Framer<RibbonModel, void> {
 
-  public get framerName(): string { return 'ribbon'; }
+  public get framerName(): string { return 'Ribbon'; }
 
   public get defaultModel(): RibbonModel {
     return {
