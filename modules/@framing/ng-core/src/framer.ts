@@ -280,23 +280,27 @@ export abstract class Framer<Model, View> {
 
         framing
           .provide({
-            provide: this.framerIdent + '-Controller',
+            provide: this.framerIdent + '-ControllerInternal',
             useClass: this._controller,
           })
           .provide({
-            provide: this._controller,
+            provide: this.framerIdent + '-Controller',
             useFactory: (injector: Injector) => {
               if (controllerInstance) {
                 return controllerInstance;
               }
-              self._injector = this.injector;
-              controllerInstance = injector.get(this.framerIdent + '-Controller');
-              controllerInstance.initController(this._model, this._view, this._frame);
+              self._injector = injector;
+              controllerInstance = injector.get(this.framerIdent + '-ControllerInternal');
+              controllerInstance.initController(this._model, this._view, this._frame, injector);
               this.framerOnControllerInit(controllerInstance);
               return controllerInstance;
             },
             deps: [ Injector ],
-            multi: this.multiFramer && this._controller === this.defaultController,
+          })
+          .provide({
+            provide: this._controller,
+            useExisting: this.framerIdent + '-Controller',
+            multi: this.multiFramer,
           });
 
         /* tslint:disable:no-console */
@@ -306,7 +310,7 @@ export abstract class Framer<Model, View> {
         if (this.defaultController && this._controller !== this.defaultController) {
           framing.provide({
             provide: this.defaultController,
-            useExisting: this._controller,
+            useExisting: this.framerIdent + '-Controller',
             multi: this.multiFramer,
           });
           /* tslint:disable:no-console */
@@ -339,10 +343,11 @@ export abstract class Framer<Model, View> {
       if (this._frame) {
         class FrameResolver {
           constructor(
-            private injector: Injector,
             private router: Router,
-            private route: ActivatedRoute) {
-            self._injector = this.injector;
+            private route: ActivatedRoute,
+            injector: Injector,
+          ) {
+            self._injector = injector;
           }
 
           resolve(routeSnapshot: ActivatedRouteSnapshot, routeStateSnapshot: RouterStateSnapshot): any {
@@ -376,8 +381,8 @@ export abstract class Framer<Model, View> {
           .resolve(this.framerIdent, FrameResolver, this.route)
           .provide({
             provide: FrameResolver,
-            useFactory: (i: Injector, r: Router, a: ActivatedRoute) => new FrameResolver(i, r, a),
-            deps: [ Injector, Router, ActivatedRoute ] });
+            useFactory: (r: Router, a: ActivatedRoute, i: Injector) => new FrameResolver(r, a, i),
+            deps: [ Router, ActivatedRoute, Injector ] });
       }
     }
 
