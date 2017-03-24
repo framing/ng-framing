@@ -22,7 +22,7 @@
     "@framing/ng-core": "0.0.0-PLACEHOLDER",
     "lodash": "4.x.x",
     "rxjs": "5.2.x",
-    "zone.js": "0.7.x"
+    "zone.js": "0.8.x"
   },
   "repository": {
     "type": "git",

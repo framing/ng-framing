@@ -23,7 +23,7 @@
     "angularfire2": "^2.0.0-beta.8",
     "lodash": "4.x.x",
     "rxjs": "5.2.x",
-    "zone.js": "0.7.x"
+    "zone.js": "0.8.x"
   },
   "repository": {
     "type": "git",
