@@ -244,26 +244,27 @@ export class FramingNgModule {
     return this;
   }
 
-  public declare(declaration: Type<any>): FramingNgModule {
+  public declare(declaration: Type<any> | Type<any>[]): FramingNgModule {
     return this.declaration(declaration);
   }
 
-  public declaration(declaration: Type<any>): FramingNgModule {
-    return this.declarations([ declaration ]);
+  public declaration(declaration: Type<any> | Type<any>[]): FramingNgModule {
+    return this.declarations(_.isArray(declaration) ? declaration : [ declaration ]);
   }
 
   public declarations(declarations: Type<any>[]): FramingNgModule {
-    this._ngModule.declarations = _.uniqWith(this._ngModule.declarations.concat(_.reject(declarations, _.isNil)), _.isEqual);
+    const flattened = [].concat.apply([], declarations);
+    this._ngModule.declarations = _.uniqWith(this._ngModule.declarations.concat(_.reject(flattened, _.isNil)), _.isEqual);
 
     return this;
   }
 
-  public declareAndExport(declaration: Type<any>): FramingNgModule {
+  public declareAndExport(declaration: Type<any> | Type<any>[]): FramingNgModule {
     return this.declarationAndExport(declaration);
   }
 
-  public declarationAndExport(declaration: Type<any>): FramingNgModule {
-    return this.declarationsAndExports([ declaration ]);
+  public declarationAndExport(declaration: Type<any> | Type<any>[]): FramingNgModule {
+    return this.declarationsAndExports(_.isArray(declaration) ? declaration : [ declaration ]);
   }
 
   public declarationsAndExports(declarations: Type<any>[]): FramingNgModule {
@@ -273,12 +274,12 @@ export class FramingNgModule {
     return this;
   }
 
-  public declareAndEntryComponent(declaration: Type<any>): FramingNgModule {
+  public declareAndEntryComponent(declaration: Type<any> | Type<any>[]): FramingNgModule {
     return this.declarationAndEntryComponent(declaration);
   }
 
-  public declarationAndEntryComponent(declaration: Type<any>): FramingNgModule {
-    return this.declarationsAndEntryComponents([ declaration ]);
+  public declarationAndEntryComponent(declaration: Type<any> | Type<any>[]): FramingNgModule {
+    return this.declarationsAndEntryComponents(_.isArray(declaration) ? declaration : [ declaration ]);
   }
 
   public declarationsAndEntryComponents(declarations: Type<any>[]): FramingNgModule {
@@ -288,38 +289,41 @@ export class FramingNgModule {
     return this;
   }
 
-  public entryComponent(entryComponent: Type<any>): FramingNgModule {
-    return this.entryComponents([ entryComponent ]);
+  public entryComponent(entryComponent: Type<any> | Type<any>[]): FramingNgModule {
+    return this.entryComponents(_.isArray(entryComponent) ? entryComponent : [ entryComponent ]);
   }
 
   public entryComponents(entryComponents: Type<any>[]): FramingNgModule {
-    this._ngModule.entryComponents = _.uniqWith(this._ngModule.entryComponents.concat(_.reject(entryComponents, _.isNil)), _.isEqual);
+    const flattened = [].concat.apply([], entryComponents);
+    this._ngModule.entryComponents = _.uniqWith(this._ngModule.entryComponents.concat(_.reject(flattened, _.isNil)), _.isEqual);
 
     return this;
   }
 
-  public export(e: Type<any>): FramingNgModule {
-    return this.exports([ e ]);
+  public export(e: Type<any> | Type<any>[]): FramingNgModule {
+    return this.exports(_.isArray(e) ? e : [ e ]);
   }
 
   public exports(exports: Type<any>[]): FramingNgModule {
-    this._ngModule.exports = _.uniqWith(this._ngModule.exports.concat(_.reject(exports, _.isNil)), _.isEqual);
+    const flattened = [].concat.apply([], exports);
+    this._ngModule.exports = _.uniqWith(this._ngModule.exports.concat(_.reject(flattened, _.isNil)), _.isEqual);
 
     return this;
   }
 
-  public import(i: Type<any> | ModuleWithProviders): FramingNgModule {
-    return this.imports([ i ]);
+  public import(i: Type<any> | Type<any>[] | ModuleWithProviders | ModuleWithProviders): FramingNgModule {
+    return this.imports(_.isArray(i) ? i : [ i ]);
   }
 
   public imports(imports: (Type<any> | ModuleWithProviders)[]): FramingNgModule {
-    this._ngModule.imports = _.uniqWith(this._ngModule.imports.concat(_.reject(imports, _.isNil)), _.isEqual);
+    const flattened = [].concat.apply([], imports);
+    this._ngModule.imports = _.uniqWith(this._ngModule.imports.concat(_.reject(flattened, _.isNil)), _.isEqual);
 
     return this;
   }
 
-  public importAndExport(m: Type<any>): FramingNgModule {
-    return this.importsAndExports([ m ]);
+  public importAndExport(m: Type<any> | Type<any>[]): FramingNgModule {
+    return this.importsAndExports(_.isArray(m) ? m : [ m ]);
   }
 
   public importsAndExports(modules: Type<any>[]): FramingNgModule {
@@ -329,16 +333,17 @@ export class FramingNgModule {
     return this;
   }
 
-  public provide(provider: Provider | Type<any>): FramingNgModule {
+  public provide(provider: Provider | Provider[] | Type<any> | Type<any>[]): FramingNgModule {
     return this.provider(provider);
   }
 
-  public provider(provider: Provider | Type<any>): FramingNgModule {
-    return this.providers([ provider ]);
+  public provider(provider: Provider | Provider[] | Type<any> | Type<any>[]): FramingNgModule {
+    return this.providers(_.isArray(provider) ? provider : [ provider ]);
   }
 
-  public providers(providers: Provider | Type<any>[]): FramingNgModule {
-    this._ngModule.providers = _.uniqWith(this._ngModule.providers.concat(_.reject(providers, _.isNil)), _.isEqual);
+  public providers(providers: Provider[] | Type<any>[]): FramingNgModule {
+    const flattened = [].concat.apply([], providers);
+    this._ngModule.providers = _.uniqWith(this._ngModule.providers.concat(_.reject(flattened, _.isNil)), _.isEqual);
 
     return this;
   }

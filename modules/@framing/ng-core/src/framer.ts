@@ -300,7 +300,7 @@ export abstract class Framer<Model, View> {
           .provide({
             provide: this._controller,
             useExisting: this.framerIdent + '-Controller',
-            multi: this.multiFramer,
+            multi: this.multiFramer && this._controller === this.defaultController,
           });
 
         /* tslint:disable:no-console */

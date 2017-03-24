@@ -24,17 +24,17 @@ export class Frame {
   public get routeUrl$(): Observable<string> { return this.routeUrlSubject; }
 
   /**
-   * Emitted when the frame resolve method starts.
+   * Emitted when the frame resolve method starts if this controller is attached to a route.
    */
   public get resolveStart$(): Observable<void> { return this.resolveStartSubject; }
 
   /**
-   * Emitted when the frame resolve method ends.
+   * Emitted when the frame resolve method ends if this controller is attached to a route.
    */
   public get resolveEnd$(): Observable<void> { return this.resolveEndSubject; }
 
   /**
-   * Emitted when the frame resolve method is cancelled
+   * Emitted when the frame resolve method is cancelled if this controller is attached to a route.
    */
   public get resolveCancel$(): Observable<void> { return this.resolveCancelSubject; }
 
