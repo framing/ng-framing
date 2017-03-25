@@ -1,30 +1,24 @@
-import { Injectable, Injector, Type } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 
 import { FramingContainerOutletContent } from './container-outlet-content';
 
 @Injectable()
-export class FramingContainerOutletResolver implements Resolve<{ [key: string]: FramingContainerOutletContent }> {
+export class FramingContainerOutletResolver implements Resolve<FramingContainerOutletContent[]> {
 
   constructor(
-    private containers: { [key: string]: Type<any> },
+    private containers: FramingContainerOutletContent[],
     private injector: Injector,
   ) {}
 
   /**
    * Resolve hook.
    */
-  public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): { [key: string]: FramingContainerOutletContent } {
-    let result: { [key: string]: FramingContainerOutletContent } = {};
-    for (let key in this.containers) {
-      if (this.containers.hasOwnProperty(key)) {
-        result[key] = {
-          container: key,
-          component: this.containers[key],
-          injector: this.injector,
-        };
-      }
+  public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): FramingContainerOutletContent[] {
+    // set the injector in each container
+    for (let container of this.containers) {
+      container.injector = this.injector;
     }
-    return result;
+    return this.containers;
   }
 }

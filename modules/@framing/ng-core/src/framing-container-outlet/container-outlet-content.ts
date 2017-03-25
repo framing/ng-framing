@@ -16,4 +16,9 @@ export interface FramingContainerOutletContent {
    * If not set then container-outlet Injector is used.
    */
   injector?: Injector;
+
+  /**
+   * A unique id.
+   */
+  id?: string;
 }

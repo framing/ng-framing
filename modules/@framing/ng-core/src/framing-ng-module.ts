@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { Route, RouterModule } from '@angular/router';
 
+import { FramingContainerOutletContent } from './framing-container-outlet/container-outlet-content';
 import { FramingContainerOutletResolver } from './framing-container-outlet/container-outlet.resolver';
 
 import { Framer } from './framer';
@@ -17,6 +18,8 @@ import { FramingRouteConfig } from './framing-route-config';
  *
  */
 export class FramingNgModule {
+
+  private static _nextId: number = 1;
 
   // ========================================
   // private properties
@@ -139,12 +142,12 @@ export class FramingNgModule {
    * Adds containers to route data
    * Adds container components to exports and declarations
    */
-  public container(container: string, component: Type<any>): FramingNgModule;
-  public container(container: string, component: Type<any>, route: Route): FramingNgModule;
-  public container(container: string, component: Type<any>, route: Route[]): FramingNgModule;
-  public container(container: string, component: Type<any>, route?: Route | Route[]): FramingNgModule {
-    let containers: { [key: string]: Type<any> } = {};
-    containers[container] = component;
+  public container(container: string, components: Type<any> | Type<any>[]): FramingNgModule;
+  public container(container: string, components: Type<any> | Type<any>[], route: Route): FramingNgModule;
+  public container(container: string, components: Type<any> | Type<any>[], route: Route[]): FramingNgModule;
+  public container(container: string, components: Type<any> | Type<any>[], route?: Route | Route[]): FramingNgModule {
+    let containers: { [key: string]: Type<any> | Type<any>[]} = {};
+    containers[container] = components;
     this.containers(containers, route);
 
     return this;
@@ -154,10 +157,10 @@ export class FramingNgModule {
    * Adds containers to route data
    * Adds container components to exports and declarations
    */
-  public containers(containers: { [key: string]: Type<any> }): FramingNgModule;
-  public containers(containers: { [key: string]: Type<any> }, route: Route): FramingNgModule;
-  public containers(containers: { [key: string]: Type<any> }, route: Route[]): FramingNgModule;
-  public containers(containers: { [key: string]: Type<any> }, route?: Route | Route[]): FramingNgModule {
+  public containers(containers: { [key: string]: Type<any> | Type<any>[] }): FramingNgModule;
+  public containers(containers: { [key: string]: Type<any> | Type<any>[] }, route: Route): FramingNgModule;
+  public containers(containers: { [key: string]: Type<any> | Type<any>[] }, route: Route[]): FramingNgModule;
+  public containers(containers: { [key: string]: Type<any> | Type<any>[] }, route?: Route | Route[]): FramingNgModule {
     for (let key in containers) {
       if (containers.hasOwnProperty(key)) {
         if (_.isNil(containers[key])) {
@@ -166,16 +169,24 @@ export class FramingNgModule {
       }
     }
 
-    this.data({ framingContainers: containers }, route);
+    const routeConfig = this.getOrAddRoute(route);
+    if (!routeConfig.resolve) {
+      routeConfig.resolve = {};
+    }
+    if (!routeConfig.resolve.containers) {
+      routeConfig.resolve.containers = [];
+    }
 
     for (let key in containers) {
       if (containers.hasOwnProperty(key)) {
-        this.resolves({ containers: 'containerResolver' }, route);
-        this.provide({
-          provide: 'containerResolver',
-          useFactory: (i: Injector) => new FramingContainerOutletResolver(containers, i),
-          deps: [ Injector ],
-        });
+        const components: Type<any> | Type<any>[] = containers[key];
+        if (_.isArray(components)) {
+          for (const component of components) {
+            routeConfig.resolve.containers.push({ container: key, component });
+          }
+        } else {
+          routeConfig.resolve.containers.push({ container: key, component: components });
+        }
       }
     }
 
@@ -450,6 +461,7 @@ export class FramingNgModule {
   public build(): NgModule {
     this.buildRouteFramers(this._routes);
     this.buildRoot();
+    this.buildContainers(this._routes);
     this.buildRoute();
     this.inspectModule();
 
@@ -531,6 +543,28 @@ export class FramingNgModule {
       }
       if (route.children) {
         this.buildRouteFramers(route.children);
+      }
+    }
+  }
+
+  private buildContainers(routes: Route[]): void {
+    for (let route of routes) {
+      if (route.resolve && route.resolve.containers) {
+        const containers: FramingContainerOutletContent[] = route.resolve.containers;
+        for (const container of containers) {
+          const containerId = FramingNgModule._nextId++;
+          container.id = '' + containerId;
+        }
+        const resolveId = FramingNgModule._nextId++;
+        this.provide({
+          provide: 'containerResolver' + resolveId,
+          useFactory: (i: Injector) => new FramingContainerOutletResolver(containers, i),
+          deps: [ Injector ],
+        });
+        route.resolve.containers = 'containerResolver' + resolveId;
+      }
+      if (route.children) {
+        this.buildContainers(route.children);
       }
     }
   }

@@ -60,11 +60,9 @@ export class FramingContainerOutletService {
 
   private resolveRouteContents(snapshot: ActivatedRouteSnapshot, routeContents: FramingContainerOutletContent[]): void {
     if (snapshot.data && (snapshot.data as any).containers) {
-      const containers: { [key: string]: FramingContainerOutletContent } = (snapshot.data as any).containers;
-      for (let key in containers) {
-        if (containers.hasOwnProperty(key)) {
-          routeContents.push(containers[key]);
-        }
+      const containers: FramingContainerOutletContent[] = (snapshot.data as any).containers;
+      for (const container of containers) {
+        routeContents.push(container);
       }
     }
     for (let child of snapshot.children) {
