@@ -1,0 +1,30 @@
+{
+  "name": "@framing/ng-core",
+  "version": "0.0.0-PLACEHOLDER",
+  "description": "Framing for Angular - the core framework",
+  "main": "./bundles/ng-core.umd.js",
+  "module": "./@framing/ng-core.es5.js",
+  "es2015": "./@framing/ng-core.js",
+  "typings": "./ng-core.d.ts",
+  "author": "framing",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/compiler-cli": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/forms": "^4.0.0",
+    "@angular/http": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@angular/platform-server": "^4.0.0",
+    "@angular/router": "^4.0.0",
+    "lodash": "4.x.x",
+    "rxjs": "5.2.x",
+    "zone.js": "0.8.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/framing/ng-framing.git"
+  }
+}
