@@ -40,7 +40,7 @@ then
   exit 1
 fi
 
-./build.sh $1 $2 $3 $4
+./build.sh $1
 
 for PACKAGE in ${PACKAGES[@]}
 do
