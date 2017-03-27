@@ -28,6 +28,11 @@ export class DialogComponent implements OnInit, OnDestroy {
       this.dialogController.model.component,
       this.dialogController.model.dialogConfig,
     );
+    this.dialogRef.afterClosed.then(result => {
+      if (!result) {
+        window.history.go(-1);
+      }
+    });
   }
 
   private closeDialog(): void {
