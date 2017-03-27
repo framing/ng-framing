@@ -2,10 +2,7 @@
   "name": "@framing/ng-tasknas-framers",
   "version": "0.0.0-PLACEHOLDER",
   "description": "Framing for Angular - Framers for Tasknas Demo App",
-  "main": "./bundles/ng-tasknas-framers.umd.js",
-  "module": "./@framing/ng-tasknas-framers.es5.js",
-  "es2015": "./@framing/ng-tasknas-framers.js",
-  "typings": "./ng-tasknas-framers.d.ts",
+  "main": "./index.ts",
   "author": "framing",
   "license": "MIT",
   "peerDependencies": {

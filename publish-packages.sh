@@ -1,23 +1,18 @@
 #!/usr/bin/env bash
 
-set -e -o pipefail
+set -u -e -o pipefail
 
-cd `dirname $0`
+readonly currentDir=$(cd $(dirname $0); pwd)
+cd ${currentDir}
 
-VERSION=$1
+VERSION_PREFIX=$(node -p "require('./package.json').version")
+PUBLISH_VERSION=""
 
 PACKAGES=(
   ng-core
   ng-security
+  ng-tasknas-framers
   ng-ui)
-
-if [[ "${VERSION}" == "" ]]
-then
-  echo "Version number required"
-  exit 1
-fi
-
-./build.sh $1 $2 $3 $4
 
 for ARG in "$@"; do
   case "$ARG" in
@@ -26,6 +21,11 @@ for ARG in "$@"; do
       PACKAGES=( ${PACKAGES_STR//,/ } )
       ;;
     --publish=*)
+      PUBLISH_VERSION=${ARG#--publish=}
+      if [[ ${VERSION_PREFIX} != ${PUBLISH_VERSION} ]]; then
+        echo "--publish=VERSION ${PUBLISH_VERSION} must match package.json version ${VERSION_PREFIX}";
+        exit 1
+      fi
       ;;
     *)
       echo "Unknown option $ARG."
@@ -33,6 +33,14 @@ for ARG in "$@"; do
       ;;
   esac
 done
+
+if [[ "${PUBLISH_VERSION}" == "" ]]
+then
+  echo "--publish=VERSION is required"
+  exit 1
+fi
+
+./build.sh $1 $2 $3 $4
 
 for PACKAGE in ${PACKAGES[@]}
 do

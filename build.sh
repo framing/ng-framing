@@ -10,6 +10,9 @@ PACKAGES=(
   ng-security
   ng-ui)
 
+NOBUILD_PACKAGES=(
+  ng-tasknas-framers)
+
 BUILD_ALL=true
 BUNDLE=true
 VERSION_PREFIX=$(node -p "require('./package.json').version")
@@ -31,11 +34,6 @@ for ARG in "$@"; do
       ;;
     --publish=*)
       VERSION_SUFFIX=""
-      PUBLISH_VERSION=${ARG#--publish=}
-      if [[ ${VERSION_PREFIX} != ${PUBLISH_VERSION} ]]; then
-        echo "PUBLISH VERSION ${PUBLISH_VERSION} must match package.json version ${VERSION_PREFIX}";
-        exit 1
-      fi
       ;;
     --compile=*)
       COMPILE_SOURCE=${ARG#--compile=}
@@ -219,6 +217,20 @@ minify() {
 }
 
 #######################################
+# Rsync a package (no build packages)
+# Arguments:
+#   param1 - Source directory
+#   param2 - Out dir
+#   param3 - Package Name
+# Returns:
+#   None
+#######################################
+rsyncPackage() {
+  echo "======      [${3}]: RSYNC: $RSYNC -ru ${1}/* ${2} --include='*/' --include='*.ts' --include='*.html' --include='*.css' --include='*.scss' --include='*.less' --exclude='*'"
+  $RSYNC -ru --force ${1}/* ${2} --include='*/' --include='*.ts' --include='*.html' --include='*.css' --include='*.scss' --include='*.less' --exclude='*'
+}
+
+#######################################
 # Recursively compile package
 # Arguments:
 #   param1 - Source directory
@@ -229,20 +241,11 @@ minify() {
 #   None
 #######################################
 compilePackage() {
-  if [[ ${3} == 'ng-tasknas-framers' ]]; then
+  echo "======      [${3}]: COMPILING: ${NGC} -p ${1}/tsconfig-build.json"
+  $TSC -p ${1}/tsconfig-build.json
 
-    echo "====== [${3}]: RSYNC: $RSYNC -ru ${1}/* ${2} --include='*/' --include='*.ts' --include='*.html' --include='*.css' --include='*.scss' --include='*.less' --exclude='*'"
-    $RSYNC -ru ${1}/* ${2} --include='*/' --include='*.ts' --include='*.html' --include='*.css' --include='*.scss' --include='*.less' --exclude='*'
-
-  else
-
-    echo "======      [${3}]: COMPILING: ${NGC} -p ${1}/tsconfig-build.json"
-    $TSC -p ${1}/tsconfig-build.json
-
-    echo "======      [${3}]: LINTING: $TSLINT -c ./tslint.json --type-check --project ${1}/tsconfig-build.json ${1}/**/*.ts"
-    $TSLINT -c ./tslint.json --type-check --project ${1}/tsconfig-build.json ${1}/**/*.ts
-
-  fi
+  echo "======      [${3}]: LINTING: $TSLINT -c ./tslint.json --type-check --project ${1}/tsconfig-build.json ${1}/**/*.ts"
+  $TSLINT -c ./tslint.json --type-check --project ${1}/tsconfig-build.json ${1}/**/*.ts
 
   local package_name=$(basename "${2}")
   echo "======           Create ${1}/../${package_name}.d.ts re-export file for Closure"
@@ -320,6 +323,34 @@ if [[ ${BUILD_ALL} == true ]]; then
     rm -rf ./dist/packages-dist
   fi
 fi
+
+mkdir ./dist/packages
+mkdir ./dist/packages-dist
+
+for PACKAGE in ${NOBUILD_PACKAGES[@]}
+do
+  PWD=`pwd`
+  ROOT_DIR=${PWD}/packages
+  SRC_DIR=${ROOT_DIR}/${PACKAGE}
+  NPM_DIR=${PWD}/dist/packages-dist/${PACKAGE}
+
+  rsyncPackage ${SRC_DIR} ${NPM_DIR} ${PACKAGE}
+
+  echo "======        Copy ${PACKAGE} package.json files"
+  rsync -am --include="package.json" --include="*/" --exclude=* ${SRC_DIR}/ ${NPM_DIR}/
+
+  cp ${ROOT_DIR}/README.md ${NPM_DIR}/
+  cp ${PWD}/LICENSE ${NPM_DIR}/
+
+  if [[ -d ${NPM_DIR} ]]; then
+    (
+      echo "======      VERSION: Updating version references"
+      cd ${NPM_DIR}
+      echo "======       EXECUTE: perl -p -i -e \"s/0\.0\.0\-PLACEHOLDER/${VERSION}/g\" $""(grep -ril 0\.0\.0\-PLACEHOLDER .)"
+      perl -p -i -e "s/0\.0\.0\-PLACEHOLDER/${VERSION}/g" $(grep -ril 0\.0\.0\-PLACEHOLDER .) < /dev/null 2> /dev/null
+    )
+  fi
+done
 
 for PACKAGE in ${PACKAGES[@]}
 do
