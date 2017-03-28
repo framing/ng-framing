@@ -4,7 +4,7 @@
   "private": false,
   "description": "Framing for Angular",
   "homepage": "https://github.com/framing/ng-framing",
-  "license": "MIT",
+  "license": "Apache 2.0",
   "engines": {
     "node": ">=6.9.5 <7.0.0",
     "npm": ">=4.0.0 <4.5.0",

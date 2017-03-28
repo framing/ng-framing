@@ -1,5 +1,5 @@
 /**
  * @license Framing v0.0.0-PLACEHOLDER
- * (c) 2016-2017 Biznas Innovations Inc. https://framing.io/
- * License: MIT
+ * Copyright 2016-2017 Biznas Innovations, Inc. http://biznas.io
+ * License: Apache License, Version 2.0
  */

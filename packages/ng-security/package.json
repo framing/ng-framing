@@ -7,7 +7,7 @@
   "es2015": "./@framing/ng-security.js",
   "typings": "./ng-security.d.ts",
   "author": "framing",
-  "license": "MIT",
+  "license": "Apache 2.0",
   "peerDependencies": {
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
