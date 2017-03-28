@@ -17,11 +17,14 @@
   },
   "scripts": {
     "start": "npm run debug",
+    "serve": "history-server dist",
     "tslint": "tslint './src/**/*.ts?(x)' -t verbose",
     "debug": "webpack-dev-server --env.debug --progress",
     "debug-build": "webpack --env.debug --progress",
+    "debug-serve": "npm-run-all debug-build serve",
     "release": "webpack-dev-server --env.debug --progress",
     "release-build": "webpack --env.debug --progress",
+    "release-serve": "npm-run-all release-build serve",
     "check-env": "node ../tools/check-environment.js",
     "docs": "dgeni ./transforms/framing.io-package"
   },
@@ -98,6 +101,7 @@
     "less-loader": "^4.0.2",
     "ng-annotate-loader": "^0.2.0",
     "node-sass": "^4.5.1",
+    "npm-run-all": "^4.0.2",
     "partialify": "^3.1.6",
     "phantomjs-prebuilt": "^2.1.14",
     "progress-bar-webpack-plugin": "^1.9.3",
