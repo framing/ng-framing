@@ -1,7 +1,7 @@
 Framing for Angular
 ===================
 
-[framing.io](https://framing.io)
+[framing.io](http://framing.io)
 
 Framing is a new concept that increases the level of re-usability in Open Source for Enterprise Web Applications using Angular.
 
