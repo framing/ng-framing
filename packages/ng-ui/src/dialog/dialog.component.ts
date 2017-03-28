@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
+import { Subscription } from 'rxjs';
+
 import { DialogController } from './dialog.controller';
 
 @Component({
@@ -9,6 +11,8 @@ import { DialogController } from './dialog.controller';
 export class DialogComponent implements OnInit, OnDestroy {
 
   public dialogRef: MdDialogRef<any>;
+
+  private afterClosedSubscription: Subscription;
 
   constructor(
     public dialogController: DialogController,
@@ -28,7 +32,11 @@ export class DialogComponent implements OnInit, OnDestroy {
       this.dialogController.model.component,
       this.dialogController.model.dialogConfig,
     );
-    this.dialogRef.afterClosed.then(result => {
+
+    this.afterClosedSubscription = this.dialogRef.afterClosed().subscribe((result) => {
+      this.afterClosedSubscription.unsubscribe();
+      this.afterClosedSubscription = null;
+
       if (!result) {
         window.history.go(-1);
       }
@@ -36,6 +44,11 @@ export class DialogComponent implements OnInit, OnDestroy {
   }
 
   private closeDialog(): void {
+    if (this.afterClosedSubscription) {
+      this.afterClosedSubscription.unsubscribe();
+      this.afterClosedSubscription = null;
+    }
+
     if (this.dialogRef) {
       this.dialogRef.close();
     }
