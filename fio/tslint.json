@@ -1,0 +1,13 @@
+{
+  "extends": "./node_modules/@biznas/ng-tslint-rules/tslint-recommended.json",
+
+  "rulesDirectory": [
+    "node_modules/codelyzer",
+    "node_modules/vrsource-tslint-rules/rules",
+    "node_modules/tslint-eslint-rules/dist/rules"
+  ],
+
+  "rules": {
+    "ordered-imports": [ false ]
+  }
+}

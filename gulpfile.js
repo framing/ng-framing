@@ -19,8 +19,3 @@ gulp.task('check-env', loadTask('check-env'));
 gulp.task('build', ['check-env'], loadTask('build'));
 gulp.task('lint', ['tslint']);
 gulp.task('tslint', ['check-env'], loadTask('lint'));
-
-gulp.task('doc-gen', loadTask('docs', 'generate'));
-gulp.task('doc-gen-test', loadTask('docs', 'test'));
-gulp.task('docs', ['doc-gen']);
-gulp.task('docs-test', ['doc-gen-test']);
