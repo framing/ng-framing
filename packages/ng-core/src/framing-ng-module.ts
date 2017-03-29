@@ -495,7 +495,7 @@ export class FramingNgModule {
     if (this._root) {
       m.imports = _.uniqWith(m.imports.concat([
         BrowserModule.withServerTransition({
-          appId: 'app'
+          appId: 'app',
         }),
         FormsModule,
       ]), _.isEqual);
