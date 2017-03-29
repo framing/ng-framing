@@ -6,7 +6,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 import { ItemDataProvider } from '../types/item-data-provider';
 
-import { ItemModel } from '../item.model';
+import { ItemController } from '../item.controller';
 
 @Injectable()
 export class ItemDataFirebaseService extends ItemDataProvider {
@@ -14,7 +14,7 @@ export class ItemDataFirebaseService extends ItemDataProvider {
   private items: FirebaseListObservable<any>;
 
   public constructor(
-    @Inject('itemModel') public itemModel: ItemModel,
+    public itemController: ItemController,
     public af: AngularFire,
   ) {
     super();
@@ -25,7 +25,7 @@ export class ItemDataFirebaseService extends ItemDataProvider {
   }
 
   public getItem(id: any): Observable<any> {
-    return this.af.database.object('/' + this.itemModel.endpoint + '/' + id);
+    return this.af.database.object('/' + this.itemController.model.endpoint + '/' + id);
   }
 
   public saveItem(item: any): Observable<any> {
@@ -46,7 +46,7 @@ export class ItemDataFirebaseService extends ItemDataProvider {
 
   private getItems(): FirebaseListObservable<any> {
     if (! this.items) {
-      this.items = this.af.database.list(this.itemModel.endpoint);
+      this.items = this.af.database.list(this.itemController.model.endpoint);
     }
 
     return this.items;
