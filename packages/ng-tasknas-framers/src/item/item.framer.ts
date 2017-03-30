@@ -6,8 +6,8 @@ import { Framer, FramingNgModule } from '@framing/ng-core';
 import { SharedModule } from './shared/shared.module';
 
 import { ItemController } from './item.controller';
-import { ItemModel, ItemModelData } from './item.model';
-import { ItemView, ItemViewData } from './item.view';
+import { ItemModel } from './item.model';
+import { ItemView } from './item.view';
 
 import { ItemDataProvider } from './types/item-data-provider';
 
@@ -25,7 +25,7 @@ import { ItemComponent } from './components/item.component';
 
 import * as _ from 'lodash';
 
-export class ItemFramer extends Framer<ItemModelData, ItemViewData> {
+export class ItemFramer extends Framer<ItemModel, ItemView> {
 
   private _itemDataProvider: Type<ItemDataProvider> = ItemDataRestService;
 
@@ -37,25 +37,25 @@ export class ItemFramer extends Framer<ItemModelData, ItemViewData> {
   public get framerName(): string { return 'Item'; }
 
   public get defaultModel(): ItemModel {
-    return _.defaults(new ItemModel(), {
+    return {
       endpoint: null,
       listItemDataTransform: ListItemDataTransformService,
       itemDataLabelField: 'label',
       itemDataIconField: 'icon',
       items: [],
       item: {},
-    });
+    };
   }
 
   public get defaultView(): ItemView {
-    return _.defaults(new ItemView(), {
+    return {
       itemListComponent: ItemListComponent,
       itemComponent: ItemComponent,
       itemNewComponent: ItemNewComponent,
       itemEditComponent: ItemEditComponent,
       itemFormComponent: ItemFormComponent,
       itemDeleteComponent: ItemDeleteComponent,
-    });
+    };
   }
 
   public get defaultController(): Type<ItemController> { return ItemController; }
