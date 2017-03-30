@@ -7,14 +7,14 @@ import { AppView } from './app.view';
 
 @Injectable()
 export class AppController extends Controller<AppModel, AppView> {
-  public constructor(
-    private router: Router,
-  ) {
-    super();
+
+  public router: Router;
+
+  public onControllerInit(): void {
+    this.router = this.injector.get(Router);
   }
 
   public toggleSideNav(opened: boolean): void {
-    console.log('toogleSideNav ' + opened);
     this.model.sideNavOpened = opened;
   }
 

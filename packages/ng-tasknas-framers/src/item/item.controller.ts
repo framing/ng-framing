@@ -9,11 +9,14 @@ import { ItemDataProvider } from './types/item-data-provider';
 
 @Injectable()
 export class ItemController extends Controller<ItemModel, ItemView> {
-  public constructor(
-    private itemDataProvider: ItemDataProvider,
-    private router: Router,
-  ) {
-    super();
+
+  private itemDataProvider: ItemDataProvider;
+
+  private router: Router;
+
+  public onControllerInit(): void {
+    this.itemDataProvider = this.injector.get(ItemDataProvider);
+    this.router = this.injector.get(Router);
   }
 
   public beforeSaveItem(): void {}

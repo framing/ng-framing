@@ -1,6 +1,6 @@
 import { Type } from '@angular/core';
 
-export class ItemViewData {
+export interface ItemView {
   itemDeleteComponent?: Type<any>;
 
   itemEditComponent?: Type<any>;
@@ -17,5 +17,3 @@ export class ItemViewData {
 
   itemNewFormComponent?: Type<any>;
 }
-
-export class ItemView extends ItemViewData {}
