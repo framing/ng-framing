@@ -2,7 +2,7 @@ import { Type } from '@angular/core';
 
 import { ListItemDataTransform } from './types/list-item-data-transform';
 
-export class ItemModelData {
+export interface ItemModel {
   name?: string;
 
   endpoint?: string;
@@ -17,5 +17,3 @@ export class ItemModelData {
 
   item?: any;
 }
-
-export class ItemModel extends ItemModelData {}
