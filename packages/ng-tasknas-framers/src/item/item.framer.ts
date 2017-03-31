@@ -11,7 +11,7 @@ import { ItemView } from './item.view';
 
 import { ItemDataProvider } from './types/item-data-provider';
 
-import { ItemDataRestService } from './shared/item-data-rest.service';
+import { ItemDataInMemoryService } from './shared/item-data-in-memory.service';
 import { ListItemDataTransformService } from './shared/list-item-data-transform.service';
 
 import { ItemComponentsModule } from './components/item-components.module';
@@ -27,7 +27,7 @@ import * as _ from 'lodash';
 
 export class ItemFramer extends Framer<ItemModel, ItemView> {
 
-  private _itemDataProvider: Type<ItemDataProvider> = ItemDataRestService;
+  private _itemDataProvider: Type<ItemDataProvider> = ItemDataInMemoryService;
 
   public itemDataProvider(p: Type<ItemDataProvider>): ItemFramer {
     this._itemDataProvider = p;
