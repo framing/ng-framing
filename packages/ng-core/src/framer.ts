@@ -7,6 +7,9 @@ import { FramingNgModule } from './framing-ng-module';
 
 import * as _ from 'lodash';
 
+/**
+ * @description This is a description
+ */
 export abstract class Framer<Model, View> {
   private static _nextId: number = 1;
 

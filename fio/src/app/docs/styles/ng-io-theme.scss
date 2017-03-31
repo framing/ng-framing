@@ -5,10 +5,46 @@
 // have to load a single css file for Angular Material in your app.
 @include mat-core();
 
+
+ $mat-fio: (
+  50: #6AE048,
+  100: #5FDB55,
+  200: #54D563,
+  300: #49D070,
+  400: #3DCA80,
+  500: #33C58C,
+  600: #27BF99,
+  700: #1FBBA2,
+  800: #19B8AC,
+  900: #0BAB9F,
+  A100: #59D85D,
+  A200: #59D85D,
+  A400: #59D85D,
+  A700: #59D85D,
+  contrast: (
+    50: #4A4A4A,
+    100: #4A4A4A,
+    200: #4A4A4A,
+    300: #4A4A4A,
+    400: #4A4A4A,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: #4A4A4A,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$ng-io-primary: mat-palette($mat-blue, 700, 600, 800);
+$ng-io-primary: mat-palette($mat-fio, 700, 600, 800);
 $ng-io-accent:  mat-palette($mat-red, 700, 600, 800);
 
 // The warn palette is optional (defaults to red).
