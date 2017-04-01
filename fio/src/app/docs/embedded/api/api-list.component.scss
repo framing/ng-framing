@@ -54,6 +54,7 @@ $lightgrey: #F5F6F7;
 */
 .docs-content {
   position: relative;
+
 }
 
 .l-content-small {
@@ -358,22 +359,20 @@ $api-symbols: (
   overflow: hidden;
 
   li {
+    margin: 5px 0;
     font-size: 14px;
-    line-height: 14px;
+    line-height: initial;
     padding: 0;
-    float: left;
-    width: 33%;
     min-width: 220px;
     text-overflow: ellipsis;
     white-space: nowrap;
 
     .symbol {
-      margin-right: $unit;
+      margin-right: 15px;
     }
     a {
       color: $blue-grey-600;
       display: inline-block;
-      line-height: $unit * 2;
       text-decoration: none;
       width: 100%;
       box-sizing: border-box;
@@ -381,6 +380,30 @@ $api-symbols: (
       transition: all .3s;
 
       padding: 0.5rem;
+
+
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+
+
+      .title-description {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .title {
+          font-size: 1rem;
+        }
+
+        .description {
+          opacity: 0.75;
+          margin-top: 2px;
+        }
+      }
+
 
       &:hover {
         transition: ease all 300ms;

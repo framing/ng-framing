@@ -31,10 +31,12 @@ function getModuleInfo(moduleDoc) {
 }
 
 function getExportInfo(exportDoc) {
+  console.log(exportDoc);
   return {
     name: exportDoc.name.toLowerCase(),
     title: exportDoc.name,
     path: exportDoc.path,
+    description: exportDoc.description,
     docType: getDocType(exportDoc),
     stability: getStability(exportDoc),
     securityRisk: !!exportDoc.security
