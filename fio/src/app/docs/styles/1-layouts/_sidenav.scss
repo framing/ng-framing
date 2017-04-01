@@ -56,8 +56,8 @@
   display: block;
   max-width: 260px;
   overflow-wrap: break-word;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   padding-left: 20px;
   text-decoration: none;
   text-align: left;
@@ -76,13 +76,12 @@
   //icons _within_ nav
   .material-icons {
     position: absolute;
-    top: 6px;
-    margin-left: 10px;
+    top: 30%;
   }
 
   @include bp(tiny) {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
 }
@@ -135,7 +134,7 @@
   font-size: 14px;
   font-weight: 400;
   text-transform: uppercase;
-  padding-left: 10px;
+  padding-left: 20px;
   transition: background-color 0.2s;
 }
 
@@ -144,7 +143,7 @@
   font-size: 14px;
   color: $mediumgray;
   font-weight: 400;
-  padding-left: 20px;
+  padding-left: 30px;
   text-transform: none;
 }
 
@@ -152,7 +151,7 @@
   font-family: $main-font;
   font-size: 14px;
   color: $mediumgray;
-  padding-left: 30px;
+  padding-left: 40px;
 }
 
 .level-1.expanded .material-icons, .level-2.expanded .material-icons {
@@ -164,5 +163,18 @@
 }
 
 .version-info {
-  border: 3px $blue solid;
+  color: rgba(0,0,0,0.35);
+  border-bottom: 1px solid rgba(0,0,0,0.35);
+  padding-bottom: 20px;
+
+  &:hover { background: none; }
+
+  &:before {
+    content: "Docs Version";
+    display: block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-bottom: 5px;
+  }
 }

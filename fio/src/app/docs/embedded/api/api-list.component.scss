@@ -52,9 +52,13 @@ $lightgrey: #F5F6F7;
 /*
 * Layout
 */
+
+:host {
+  width: 100%;
+}
+
 .docs-content {
   position: relative;
-
 }
 
 .l-content-small {
