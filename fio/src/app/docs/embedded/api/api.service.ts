@@ -77,8 +77,6 @@ export class ApiService implements OnDestroy {
       .do(() => this.logger.log(`Got API sections from ${url}`))
       .subscribe(
         (sections) => {
-          console.error(url);
-          console.error(sections);
           this.sectionsSubject.next(sections);
         },
         (err) => {
