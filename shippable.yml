@@ -11,10 +11,11 @@ build:
   ci:
     - echo 'CI is running'
     - cd fio
-    - npm install
     - npm install dgeni -g
     - npm install npm-run-all -g
     - npm install webpack -g
+    - npm install yarn -g
+    - yarn
     - npm run docs
     - npm run release-build
     - cd ..
