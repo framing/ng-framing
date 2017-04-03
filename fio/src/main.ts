@@ -12,7 +12,7 @@ const buildConfig = require('build-config'); // require path is a webpack config
 if (buildConfig.isReleaseBuild) {
   // put Angular runtime into production mode
   enableProdMode();
-  console.warn('Production mode enabled');
+  console.info('Angular production mode enabled');
   console.log = () => {};
   console.info = () => {};
   console.warn = () => {};
