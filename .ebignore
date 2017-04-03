@@ -1,6 +1,8 @@
 *.iml
 .asscache
+.editorconfig
 .git/
+.gitattributes
 .gitignore
 .idea/
 .npmrc
@@ -10,6 +12,7 @@ CHANGELOG.md
 check-environment.sh
 COMMITTER.md
 CONTRIBUTING.md
+DEVELOPER.md
 Dockerfile
 gulpfile.js
 package.json
@@ -23,6 +26,7 @@ yarn.lock
 
 node_modules/
 packages/
+scripts/
 tools/
 
 fio/node_modules/
