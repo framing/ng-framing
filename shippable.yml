@@ -17,8 +17,6 @@ build:
     - npm install webpack -g
     - npm run docs
     - npm run release-build
-    - rm -rf node_modules
-    - rm -rf dist
     - cd ..
     - docker build -t "framing-io:$BRANCH.$BUILD_NUMBER" .
     - docker tag framing-io:$BRANCH.$BUILD_NUMBER 496226330360.dkr.ecr.us-east-1.amazonaws.com/framing-io:$BRANCH.$BUILD_NUMBER
