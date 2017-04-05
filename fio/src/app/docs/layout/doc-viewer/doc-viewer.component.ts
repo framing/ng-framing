@@ -20,6 +20,7 @@ const initialDocViewerContent = initialDocViewerElement ? initialDocViewerElemen
   selector: 'fio-doc-viewer',
   template: '',
   styles: [ `
+    :host { flex-direction: column; }
     :host >>> doc-title.not-found h1 {
       color: white;
       background-color: red;
