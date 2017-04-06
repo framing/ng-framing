@@ -1,0 +1,2 @@
+  .root()
+  .componentAndDeclare(AppComponent)))

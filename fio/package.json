@@ -30,6 +30,7 @@
     "release-build": "webpack --env.release --progress",
     "release-serve": "npm-run-all release-build serve",
     "check-env": "node ../tools/check-environment.js",
+    "predocs": "rimraf src/content",
     "docs": "dgeni ./transforms/framing.io-package"
   },
   "dependencies": {

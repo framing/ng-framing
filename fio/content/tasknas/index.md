@@ -33,20 +33,9 @@ the welcome screen is nice, but we want our app to look like a material app
 
 open up the src/app/app.module.ts, and this is what you’re going to see 
 
-```typescript
-import { NgModule } from '@angular/core';
-import { Framing } from '@framing/ng-core';
+<code-example path="tasknas/getting-started/1.ts" title="src/app/app.module.ts" linenums="false"></code-example>
 
-import { AppComponent } from './app.component';
-
-@NgModule(Framing((framing) => framing
-  .root()
-  .componentAndDeclare(AppComponent)))
-export class AppModule {}
-```
-The ng-app project got you up and running quickly with Angular 4, but it's not much of an app yet. To help with that, I'll introduce you to the AppFramer, it's job is to enforce the Google Material Layout Structure Guidelines. 
-
-https://material.io/guidelines/layout/structure.html
+The ng-app project got you up and running quickly with Angular 4, but it's not much of an app yet. To help with that, I'll introduce you to the AppFramer, it's job is to enforce the [Google Material Layout Structure Guidelines](https://material.io/guidelines/layout/structure.html).
 
 To do this:
 
@@ -56,21 +45,15 @@ npm i @framing/ng-tasknas-framers --save
 
 Open up src/app/app.module.ts, remove the AppComponent import and replace it with the following:
 
-```typescript
-import { AppFramer } from '@framing/ng-tasknas-framers';
-```
+<code-example path="tasknas/getting-started/2.ts" linenums="false"></code-example>
 
 And replace:
 
-```typescript
-  .root()
-  .componentAndDeclare(AppComponent)))
-```
+<code-example path="tasknas/getting-started/3.ts" linenums="false"></code-example>
+
 with:
 
-```typescript
-  .frame(new AppFramer())))
-```
+<code-example path="tasknas/getting-started/4.ts" linenums="false"></code-example>
 
 Ok, wait for it to build, your browser will automatically refresh.
 
@@ -80,9 +63,7 @@ Woo hoo! Now it’s looking like a Material Design app!
 
 Give your app a name by configuring it in the AppFramer
 
-```typescript
-  .frame(new AppFramer().model({ title: 'Tasknas' }))))
-```
+<code-example path="tasknas/getting-started/5.ts" linenums="false"></code-example>
 
 as you can see in the screenshot, everything is strongly typed, so if your editor supports it, it will auto complete 
 
