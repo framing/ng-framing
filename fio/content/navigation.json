@@ -3,24 +3,9 @@
     {
       "url": "api",
       "title": "API"
-    },
-    {
-      "url": "features",
-      "title": "Features"
     }
   ],
   "SideNav": [
-    {
-      "url": "quickstart",
-      "title": "Quickstart",
-      "tooltip": "A quick look at an Angular app using Framing."
-    },
-
-    {
-      "url": "framing",
-      "title": "Framing for Angular"
-    },
-
     {
       "title": "Tasknas Tutorial",
       "tooltip": "The Tasknas tutorial takes you through the steps of creating an Angular application using Framing.",
