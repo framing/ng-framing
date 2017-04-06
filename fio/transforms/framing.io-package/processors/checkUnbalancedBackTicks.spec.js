@@ -1,12 +1,11 @@
 var testPackage = require('../../helpers/test-package');
 var Dgeni = require('dgeni');
-var path = require('canonical-path');
 
 describe('checkUnbalancedBackTicks', function() {
   var dgeni, injector, processor, log;
 
   beforeEach(function() {
-    dgeni = new Dgeni([testPackage('framing.io-package')]);
+    dgeni = new Dgeni([testPackage('angular.io-package')]);
     injector = dgeni.configureInjector();
     processor = injector.get('checkUnbalancedBackTicks');
     log = injector.get('log');

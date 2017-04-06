@@ -14,7 +14,7 @@
 @import'./2-modules/modules-dir';
 
 // import additional scss
-@import "~compass-mixins";
+
 // ********************************************************* //
 
 [md-button], [md-raised-button], [mat-button], [mat-raised-button] {
@@ -30,114 +30,4 @@ h1.docs-primary-header, h1 .docs-primary-header{
     font-weight: 300;
     margin: 0;
     padding: 30px;
-}
-
-
-fio-doc-viewer {
-  display: flex;
-  height: 100%;
-}
-
-.welcome {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  position: relative;
-  
-  .welcome-header {
-    display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 350px;
-    padding: 20px;
-    padding-bottom: 70px;
-
-    box-sizing: border-box;
-    text-align: center;
-
-    @include background-image(linear-gradient(#57D974, #37CC95));
-
-    h1 {
-      color: white;
-      &:after { content: none; }
-    }
-
-    &:before {
-      content: " ";
-      display: block;
-
-      position: absolute;
-      top: -150px;
-      left: -180px;
-      
-      width: 120%;
-      height: 50%;
-      
-      transform: rotate(-15deg);
-      
-      background: rgba(0,0,0,0.025);
-    }
-  }
-
-  .welcome-options {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    justify-content: space-between;
-    align-items: flex-start;
-
-    position: relative;
-    top: -90px;
-    margin: 0 auto;
-    padding: 0 20px 50px;
-
-    max-width: 1000px;
-    min-height: 300px;
-
-    @media (min-width:1000px) {
-      flex-direction: row;
-      padding: 0 0 50px;
-    }
-
-    .option {
-      transition: ease all 300ms;
-
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-
-      position: relative;
-      margin: 10px 0;
-      padding: 60px 30px;
-      width: 100%;
-
-      background: white;
-      border-radius: 5px;
-      box-shadow: 0 0 50px 0 rgba(0,0,0,0.15);
-      box-sizing: border-box;
-
-      color: #6d6d6d;
-      text-align: center;
-
-      h2 {
-        margin: 0;
-        font-size: 1.5rem;
-        font-weight: 100; 
-      }
-
-      p { margin: 10px 0 0; }
-
-      &:hover {
-        transform: translate3d(0, -10px, 0);
-      }
-
-      @media (min-width:1000px) {
-        margin: 10px;
-      }
-    }
-  }
 }

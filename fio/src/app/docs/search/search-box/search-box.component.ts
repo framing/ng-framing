@@ -16,7 +16,11 @@ import { LocationService } from 'app/shared/location.service';
  */
 @Component({
   selector: 'fio-search-box',
-  templateUrl: './search-box.component.html',
+  template: `<input #searchBox
+    placeholder="Search"
+    (keyup)="onSearch($event.target.value, $event.which)"
+    (focus)="onSearch($event.target.value)"
+    (click)="onSearch($event.target.value)">`,
 })
 export class SearchBoxComponent implements OnInit {
 
@@ -25,6 +29,9 @@ export class SearchBoxComponent implements OnInit {
   constructor(private searchService: SearchService, private locationService: LocationService) { }
 
   ngOnInit(): void {
+    this.searchService.initWorker('/search/search-worker.js');
+    this.searchService.loadIndex();
+
     const query = this.locationService.search().search;
     if (query) {
       this.searchBox.nativeElement.value = query;

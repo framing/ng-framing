@@ -1,20 +1,30 @@
 <md-toolbar color="primary" class="app-toolbar">
-  <button *ngIf="isHamburgerVisible" class="hamburger" md-button (click)="sidenav.toggle()"><md-icon>menu</md-icon></button>
-  <fio-top-menu *ngIf="isSideBySide" [nodes]="(navigationViews | async)?.TopBar" [homeImageUrl]="homeImageUrl"></fio-top-menu>
+  <button class="hamburger" md-button
+    (click)="sidenav.toggle()" title="Docs menu">
+    <md-icon>menu</md-icon>
+  </button>
+  <a class="nav-link home" href="/"><img src="{{ homeImageUrl }}" title="Home" alt="Home"></a>
+  <fio-top-menu *ngIf="isSideBySide" [nodes]="topMenuNodes"></fio-top-menu>
   <fio-search-box class="search-container" #searchBox></fio-search-box>
   <span class="fill-remaining-space"></span>
 </md-toolbar>
 
 <md-sidenav-container class="sidenav-container">
 
-  <md-sidenav #sidenav class="sidenav" [opened]="isSideBySide" [mode] = "isSideBySide ? 'side' : 'over'">
-    <div class="version-info vertical-menu-item">{{ (versionInfo | async)?.full }}</div>
-    <fio-top-menu *ngIf="!isSideBySide" class="small" [nodes]="(navigationViews | async)?.TopBar" [homeImageUrl]="homeImageUrl"></fio-top-menu>
-    <fio-nav-menu [nodes]="(navigationViews | async)?.SideNav" [selectedNodes]="selectedNodes | async"></fio-nav-menu>
+  <md-sidenav #sidenav class="sidenav" [opened]="isOpened" [mode]="mode">
+    <fio-nav-menu *ngIf="!isSideBySide" class="top-menu" [nodes]="topMenuNodes" [currentNode]="currentNode"></fio-nav-menu>
+    <fio-nav-menu [nodes]="sideNavNodes" [currentNode]="currentNode" ></fio-nav-menu>
   </md-sidenav>
 
-  <section class="sidenav-content">
-    <fio-search-results #searchResults></fio-search-results>
-    <fio-doc-viewer [doc]="currentDocument | async" (docRendered)="onDocRendered($event)"></fio-doc-viewer>
+  <section class="sidenav-content" [id]="pageId">
+    <fio-doc-viewer [doc]="currentDocument" (docRendered)="onDocRendered()"></fio-doc-viewer>
+    <fio-dt [on]="dtOn" [(doc)]="currentDocument"></fio-dt>
   </section>
+
 </md-sidenav-container>
+
+<fio-search-results #searchResults></fio-search-results>
+
+<footer>
+  <fio-footer [nodes]="footerNodes" [versionInfo]="versionInfo" ></fio-footer>
+</footer>

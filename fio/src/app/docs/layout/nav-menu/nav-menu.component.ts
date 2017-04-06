@@ -1,15 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { NavigationNode } from 'app/docs/navigation/navigation.service';
+import { CurrentNode, NavigationNode } from '../../navigation/navigation.service';
 
 @Component({
   selector: 'fio-nav-menu',
-  template: `<fio-nav-item *ngFor="let node of nodes" [selectedNodes]="selectedNodes" [node]="node"></fio-nav-item>`,
+  template: `
+  <fio-nav-item *ngFor="let node of filteredNodes" [node]="node" [selectedNodes]="currentNode.nodes">
+  </fio-nav-item>`,
 })
 export class NavMenuComponent {
-
-  @Input()
-  selectedNodes: NavigationNode[];
-
-  @Input()
-  nodes: NavigationNode[];
+  @Input() currentNode: CurrentNode;
+  @Input() nodes: NavigationNode[] ;
+  get filteredNodes(): any[] { return this.nodes ? this.nodes.filter((n) => !n.hidden) : []; }
 }

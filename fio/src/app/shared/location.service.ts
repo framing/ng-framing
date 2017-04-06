@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Location, PlatformLocation } from '@angular/common';
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { ConnectableObservable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class LocationService {
 
-  currentUrl: Observable<string>;
+  currentUrl: ConnectableObservable<string>;
 
   private readonly urlParser: any = document.createElement('a');
-  private urlSubject: Subject<string> = new ReplaySubject<string>(1);
+  private urlSubject: Subject<string> = new Subject<string>();
 
   constructor(
     private location: Location,
     private platformLocation: PlatformLocation) {
 
-    this.currentUrl = this.urlSubject.asObservable();
+    this.currentUrl = this.urlSubject.publishReplay(1);
 
+    this.currentUrl.connect();
     const initialUrl = this.apiUrl(this.stripLeadingSlashes(location.path(true)));
     this.urlSubject.next(initialUrl);
 
@@ -96,8 +96,13 @@ export class LocationService {
       return true;
     }
 
-    // check for external link
+    // don't navigate if external link or zip
     const { pathname, search, hash } = anchor;
+
+    if (anchor.getAttribute('download') !== null) {
+      return true; // let the download happen
+    }
+
     const relativeUrl = pathname + search + hash;
     this.urlParser.href = relativeUrl;
     if (anchor.href !== this.urlParser.href) {

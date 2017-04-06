@@ -5,7 +5,7 @@ const Dgeni = require('dgeni');
 describe('filterIgnoredDocs processor', () => {
 
   it('should be available on the injector', () => {
-    const dgeni = new Dgeni([testPackage('framing.io-package')]);
+    const dgeni = new Dgeni([testPackage('angular.io-package')]);
     const injector = dgeni.configureInjector();
     const processor = injector.get('filterIgnoredDocs');
     expect(processor.$process).toBeDefined();
@@ -13,7 +13,7 @@ describe('filterIgnoredDocs processor', () => {
 
   it('should run before the correct processor', () => {
     const processor = processorFactory();
-    expect(processor.$runBefore).toEqual(['computing-paths'])
+    expect(processor.$runBefore).toEqual(['computing-paths']);
   });
 
   it('should run after the correct processor', () => {
@@ -35,5 +35,5 @@ describe('filterIgnoredDocs processor', () => {
       { id: 'public1'},
       { id: 'public2'}
     ]);
-  })
+  });
 });
