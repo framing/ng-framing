@@ -1,0 +1,15 @@
+<div>
+  <md-input-container>
+    <input mdInput [(ngModel)]="itemController.model.item.label" placeholder="Label">
+  </md-input-container>
+</div>
+
+<div>
+  <md-checkbox [(ngModel)]="itemController.model.item.done">Done</md-checkbox>
+</div>
+
+<div>
+  <md-input-container>
+    <input mdInput [(ngModel)]="itemController.model.item.dueDate" placeholder="Due Date" type="date">
+  </md-input-container>
+</div>

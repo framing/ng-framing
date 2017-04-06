@@ -10,70 +10,35 @@ Create a second screen
 
 Let’s add a task screen!
 
-Inside the app folder create a tasks folder.
+Inside the app folder create a `tasks` folder.
 
-create a tasks.component.html 
+create a `tasks.component.html`
 
-```html
-<div>this is my task list </div>
-```
+<code-example path="tasknas/pt2/tasks.component.html" title="src/tasks/tasks.component.html" linenums="false"></code-example>
 
-create tasks.component.ts 
+create `tasks.component.ts`
 
-```typescript 
-import { Component } from '@angular/core';
+<code-example path="tasknas/pt2/tasks.component.ts" title="src/tasks/tasks.component.ts" linenums="false"></code-example>
 
-@Component({
-  selector: 'tasks',
-  templateUrl: './tasks.component.html',
-})
-export class TasksComponent {}
-```
+create `tasks.module.ts`
 
-create tasks.module.ts
-
-```typescript
-import { NgModule } from '@angular/core';
-import { Framing } from '@framing/ng-core';
-
-import { TasksComponent } from './tasks.component';
-
-@NgModule(Framing((framing) => framing
-  .componentAndDeclare(TasksComponent)))
-export class TasksModule {}
-```
+<code-example path="tasknas/pt2/tasks.module.ts" title="src/tasks/tasks.module.ts" linenums="false"></code-example>
 
 now we have the tasks screen, but we have to do 2 things! 
 
-1. import the tasks module
+1. import the `TasksModule`
 2. add tasks as a child route of the app 
 
-first, import the tasks module 
+first, import the `TasksModule`
 
-```typescript
-import { TasksModule } from './tasks/tasks.module';
-```
+<code-example path="tasknas/pt2/1.ts" linenums="false"></code-example>
 
 then the Tasks screen to the sideNavItems array 
 
-```typescript
-.frame(new AppFramer().model({
-    title: 'Tasknas',
-    sideNavItems: [
-      { label: 'Dashboard', routerLink: '/dashboard' },
-      { label: 'Tasks', routerLink: '/tasks' },
-    ],
-  }))
-```
+<code-example path="tasknas/pt2/2.ts" linenums="false"></code-example>
 
-then add another item to the .children array
+then add another item to the `.children` array
 
-```typescript
-  .children([
-    { path: '', redirectTo: 'dashboard' },
-    { path: 'dashboard', loadChildren: () => DashboardModule },
-    { path: 'tasks', loadChildren: () => TasksModule },
-  ])))
-```
+<code-example path="tasknas/pt2/3.ts" linenums="false"></code-example>
 
 hit save and the app will auto refresh in the browser and you’ll now see the tasks screen and you can navigate to it 

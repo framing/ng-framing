@@ -1,0 +1,1 @@
+.import(AngularFireModule.initializeApp(firebaseConfig))

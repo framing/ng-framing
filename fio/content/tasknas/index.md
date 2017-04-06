@@ -11,9 +11,7 @@ How to build the tasknas app with framing
 
 Use our ng-app project to get started
 
-```
-git clone https://github.com/biznas/ng-app.git tasknas
-```
+`git clone https://github.com/biznas/ng-app.git tasknas`
 
 ### **NPM INSTALL**
 
@@ -27,23 +25,21 @@ loads app and developer dependencies (these are maintained by Biznas)
 
 ### **SETTING UP MATERIAL DESIGN**
 
-open up http://localhost:8080 in a browser, you’ll see a starter screen 
+open up `http://localhost:8080` in a browser, you’ll see a starter screen 
 
 the welcome screen is nice, but we want our app to look like a material app
 
-open up the src/app/app.module.ts, and this is what you’re going to see 
+open up the `src/app/app.module.ts`, and this is what you’re going to see 
 
 <code-example path="tasknas/getting-started/1.ts" title="src/app/app.module.ts" linenums="false"></code-example>
 
-The ng-app project got you up and running quickly with Angular 4, but it's not much of an app yet. To help with that, I'll introduce you to the AppFramer, it's job is to enforce the [Google Material Layout Structure Guidelines](https://material.io/guidelines/layout/structure.html).
+The ng-app project got you up and running quickly with Angular 4, but it's not much of an app yet. To help with that, I'll introduce you to the `AppFramer`, it's job is to enforce the [Google Material Layout Structure Guidelines](https://material.io/guidelines/layout/structure.html).
 
 To do this:
 
-```
-npm i @framing/ng-tasknas-framers --save
-```
+`npm i @framing/ng-tasknas-framers --save`
 
-Open up src/app/app.module.ts, remove the AppComponent import and replace it with the following:
+Open up `src/app/app.module.ts`, remove the `AppComponent` import and replace it with the following:
 
 <code-example path="tasknas/getting-started/2.ts" linenums="false"></code-example>
 
@@ -61,7 +57,7 @@ Woo hoo! Now it’s looking like a Material Design app!
 
 ### **WHAT'S NEXT?**
 
-Give your app a name by configuring it in the AppFramer
+Give your app a name by configuring it in the `AppFramer`
 
 <code-example path="tasknas/getting-started/5.ts" linenums="false"></code-example>
 
