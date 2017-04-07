@@ -21,7 +21,6 @@ import { Logger } from 'app/shared/logger.service';
 import { LocationService } from 'app/shared/location.service';
 import { AutoScrollService } from 'app/shared/auto-scroll.service';
 
-import { SwUpdatesModule } from './sw-updates/sw-updates.module';
 import { DocsComponent } from './docs.component';
 import { ApiService } from './embedded/api/api.service';
 import { DocViewerComponent } from './layout/doc-viewer/doc-viewer.component';
@@ -47,7 +46,6 @@ import { SearchBoxComponent } from './search/search-box/search-box.component';
     MdToolbarModule,
     MdSidenavModule,
     MdTabsModule,
-    SwUpdatesModule,
   ])
   .declarations([
     DocViewerComponent,

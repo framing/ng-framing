@@ -9,7 +9,6 @@ import { CurrentNode, NavigationService, NavigationNode, VersionInfo } from './n
 import { DocumentService, DocumentContents } from './documents/document.service';
 import { DocViewerComponent } from './layout/doc-viewer/doc-viewer.component';
 import { SearchResultsComponent } from './search/search-results/search-results.component';
-import { SwUpdateNotificationsService } from './sw-updates/sw-update-notifications.service';
 
 const sideNavView = 'SideNav';
 
@@ -64,7 +63,6 @@ export class DocsComponent implements OnInit {
     private documentService: DocumentService,
     private locationService: LocationService,
     private navigationService: NavigationService,
-    private swUpdateNotifications: SwUpdateNotificationsService,
   ) { }
 
   ngOnInit(): void {
@@ -93,8 +91,6 @@ export class DocsComponent implements OnInit {
     });
 
     this.navigationService.versionInfo.subscribe( (vi) => this.versionInfo = vi );
-
-    this.swUpdateNotifications.enable();
 
     this.onResize(window.innerWidth);
   }
