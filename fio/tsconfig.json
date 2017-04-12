@@ -9,7 +9,7 @@
       "app/*": ["./src/app/*"]
     },
     "typeRoots": [
-      "../node_modules/@types"
+      "./node_modules/@types"
     ],
     "sourceMap": true,
     "emitDecoratorMetadata": true,
