@@ -38,7 +38,8 @@
             <span class="symbol {{item.docType}}"></span>
             <div class="title-description">
               <span class="title">{{item.title}}</span>
-              <span class="description">{{item.description}}</span>
+              <span *ngIf="item.description" class="description">{{item.description}}</span>
+              <span *ngIf="item.selector" class="selector">Selector: {{item.selector}}</span>
             </div>
           </a>
         </li>

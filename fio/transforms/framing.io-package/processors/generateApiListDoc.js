@@ -31,7 +31,7 @@ function getModuleInfo(moduleDoc) {
 }
 
 function getExportInfo(exportDoc) {
-  return {
+  let info = {
     name: exportDoc.name.toLowerCase(),
     title: exportDoc.name,
     path: exportDoc.path,
@@ -40,6 +40,10 @@ function getExportInfo(exportDoc) {
     stability: getStability(exportDoc),
     securityRisk: !!exportDoc.security
   };
+  if (exportDoc.componentOptions && exportDoc.componentOptions.selector) {
+    info.selector = exportDoc.componentOptions.selector;
+  }
+  return info;
 }
 
 function getDocType(doc) {
