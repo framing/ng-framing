@@ -11,7 +11,7 @@
     </ul>
   </div>
 
-  <div class="form-select-menu">
+  <!--<div class="form-select-menu">
     <button class="form-select-button" (click)="toggleStatusMenu()">
       <strong>Status:</strong>{{status.title}}
     </button>
@@ -20,7 +20,7 @@
         {{s.title}}
       </li>
     </ul>
-  </div>
+  </div>-->
 
   <div class="form-search">
     <i class="material-icons">search</i>
@@ -34,7 +34,13 @@
     <ul class="api-list">
       <ng-container *ngFor="let item of section.items">
         <li *ngIf="item.show" class="api-item">
-          <a [href]="item.path"><span class="symbol {{item.docType}}"></span> {{item.title}}</a>
+          <a [href]="item.path">
+            <span class="symbol {{item.docType}}"></span>
+            <div class="title-description">
+              <span class="title">{{item.title}}</span>
+              <span class="description">{{item.description}}</span>
+            </div>
+          </a>
         </li>
       </ng-container>
     </ul>

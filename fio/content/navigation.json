@@ -11,35 +11,39 @@
   ],
   "SideNav": [
     {
-      "url": "guide/quickstart",
-      "title": "Quickstart",
-      "tooltip": "A quick look at an Angular app using Framing."
+      "url": "guide/intro",
+      "title": "Introduction",
+      "tooltip": "A intro to Framing."
     },
 
     {
       "url": "guide/framing",
-      "title": "Framing for Angular",
-      "tooltip": "Framign for Angular."
+      "title": "Framing for Angular"
     },
 
     {
-      "title": "Tutorial",
+      "title": "Tasknas Tutorial",
       "tooltip": "The Tasknas tutorial takes you through the steps of creating an Angular application using Framing.",
       "children": [
         {
           "url": "tasknas",
-          "title": "Introduction",
-          "tooltip": "Introduction to the Tour of Heroes tutorial"
+          "title": "Getting started"
         },
         {
           "url": "tasknas/tasknas-pt1",
-          "title": "Part 1",
-          "tooltip": "Part 1"
+          "title": "Create a Screen"
         },
         {
           "url": "tasknas/tasknas-pt2",
-          "title": "Part 2",
-          "tooltip": "Part 2"
+          "title": "Create a second screen"
+        },
+        {
+          "url": "tasknas/tasknas-pt3",
+          "title": "Manage tasks"
+        },
+        {
+          "url": "tasknas/tasknas-pt4",
+          "title": "Lastly"
         }
       ]
     }

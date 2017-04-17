@@ -1,0 +1,14 @@
+branch-defaults:
+  default:
+    environment: framing-io-develop
+  develop:
+    environment: framing-io-develop
+  master:
+    environment: framing-io-master
+global:
+  application_name: framing-io
+  default_ec2_keyname: aws-eb
+  default_platform: 64bit Amazon Linux 2016.09 v2.5.1 running Docker 1.12.6
+  default_region: us-east-1
+  profile: biznas
+  sc: git

@@ -17,6 +17,7 @@ export interface ApiItem {
   docType: string;
   stability: string;
   securityRisk: boolean;
+  description: string;
 
   show?: boolean;
 }
@@ -75,7 +76,9 @@ export class ApiService implements OnDestroy {
       .map((response) => response.json())
       .do(() => this.logger.log(`Got API sections from ${url}`))
       .subscribe(
-        (sections) => this.sectionsSubject.next(sections),
+        (sections) => {
+          this.sectionsSubject.next(sections);
+        },
         (err) => {
           // Todo: handle error
           this.logger.error(err);

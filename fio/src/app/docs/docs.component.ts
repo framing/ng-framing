@@ -19,7 +19,8 @@ import { SearchResultsComponent } from './search/search-results/search-results.c
 })
 export class DocsComponent implements OnInit {
   readonly sideBySideWidth: number = 600;
-  readonly homeImageUrl: string = 'imgs/logos/standard/logo-nav.png';
+  readonly homeImageUrl: string = '/imgs/light.logo.framing.png';
+
 
   isHamburgerVisible: boolean = true; // always ... for now
   isSideBySide: boolean = false;
