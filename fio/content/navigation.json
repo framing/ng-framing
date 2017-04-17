@@ -1,24 +1,17 @@
 {
   "TopBar": [
-    {
-      "url": "api",
-      "title": "API"
-    },
-    {
-      "url": "features",
-      "title": "Features"
-    }
   ],
   "SideNav": [
     {
       "url": "guide/intro",
       "title": "Introduction",
-      "tooltip": "A intro to Framing."
+      "tooltip": "An intro to Framing."
     },
 
     {
-      "url": "guide/framing",
-      "title": "Framing for Angular"
+      "url": "api",
+      "title": "API",
+      "tooltip": "Explore everything under the hood inside of Framing."
     },
 
     {
