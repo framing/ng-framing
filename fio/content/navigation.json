@@ -7,6 +7,17 @@
   ],
   "SideNav": [
     {
+      "url": "guide/intro",
+      "title": "Introduction",
+      "tooltip": "A intro to Framing."
+    },
+
+    {
+      "url": "guide/framing",
+      "title": "Framing for Angular"
+    },
+
+    {
       "title": "Tasknas Tutorial",
       "tooltip": "The Tasknas tutorial takes you through the steps of creating an Angular application using Framing.",
       "children": [
