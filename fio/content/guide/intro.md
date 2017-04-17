@@ -11,7 +11,7 @@ An intro to Framing
 
 Framing is a more efficient, easier, smarter way of developing applications using existing well-established patterns. It has helped teams on large applications cut down lines of code by 50%. It’s built on top of Angular with future plans to support other frameworks. It’s a framework on top of a framework, a super framework really. It’s a higher level of abstraction, a new evolution of development… welcome :) If Angular was the C language, Framing would be C++. Our team is excited about it and we hope we can convince you of the same (and if not [email Biznas CEO Ryan Campbell](mailto:ryan@biznas.io) and tell him why or [join the Framing slack team](http://framing.herokuapp.com/)).
 
-The easiest way to understand what Framing is, is to compare the “pre framing” typical way applications are built using Angular with the “post framing” new way of assembling applications.
+The easiest way to understand what Framing is, is to compare the “pre-framing” typical way applications are built using Angular with the “post-framing” new way of assembling applications.
 
 ### Pre-Framing Development Scenario
 
@@ -51,7 +51,7 @@ If you compare the above scenarios and you add in a few not so obvious benefits,
 * Much less to test. Fully unit test a feature instead of duplicating unit tests for screens with similar functionality.
 * Stop writing the same functionality over and over again. Write once and evolve over time. Focus your energy and new more innovation features.
 
-Lastly, if you choose Framing you are helping it become a standard. The more developers, the more open source and commercial features will be released and evolved. Your internal team over time will build up an internal company framework that new developers who join your team can quickly become familiar with. Who knows, in the future you might be able to hire developers who are already seasoned Framing developers.
+Lastly, if you choose Framing you are helping it become a standard. The more developers, the more open source and commercial features will be released and evolved. Your internal team over time will build up an internal company framework that new developers who join your team can quickly become familiar with. Who knows, in the future you might be able to hire developers who are already seasoned Framing developer.
 
 ## What Next?
 
