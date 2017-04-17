@@ -49,9 +49,9 @@ If you compare the above scenarios and you add in a few not so obvious benefits,
 * Much less code. If a new screen is similar to another screen, move the similar code in to a feature so both screens share that functionality
 * Much easier to maintain. New functionality added to a feature is instantly available to any screens that use it.
 * Much less to test. Fully unit test a feature instead of duplicating unit tests for screens with similar functionality.
-* Stop writing the same functionality over and over again. Write once and evolve over time. Focus your energy and new more innovation features.
+* Stop writing the same functionality over and over again. Write once and evolve over time. Focus your energy on new more exciting features.
 
-Lastly, if you choose Framing you are helping it become a standard. The more developers, the more open source and commercial features will be released and evolved. Your internal team over time will build up an internal company framework that new developers who join your team can quickly become familiar with. Who knows, in the future you might be able to hire developers who are already seasoned Framing developers.
+Lastly, if you choose Framing you are helping it become a standard. The more developers, the more open source and commercial features will be released and evolved. Your internal team over time will build up an internal company framework that new developers who join your team can quickly become familiar with. Who knows, in the future you might be able to hire a developer who is already a seasoned Framing developers.
 
 ## What Next?
 
