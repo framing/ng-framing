@@ -11,9 +11,9 @@
   ],
   "SideNav": [
     {
-      "url": "guide/quickstart",
-      "title": "Quickstart",
-      "tooltip": "A quick look at an Angular app using Framing."
+      "url": "guide/intro",
+      "title": "Introduction",
+      "tooltip": "A intro to Framing."
     },
 
     {
