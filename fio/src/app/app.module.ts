@@ -21,6 +21,7 @@ import { NotFoundComponent } from './status/not-found/not-found.component';
     { path: 'quickstart', loadChildren: () => DocsModule },
     { path: 'framing', loadChildren: () => DocsModule },
     { path: 'tasknas', loadChildren: () => DocsModule },
+    { path: 'guide', loadChildren: () => DocsModule },
     { path: '**', component: NotFoundComponent },
   ],
   {

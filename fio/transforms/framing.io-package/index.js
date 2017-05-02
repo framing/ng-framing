@@ -76,6 +76,11 @@ module.exports =
           readFilesProcessor.sourceFiles = [
             {
               basePath: CONTENTS_PATH,
+              include: CONTENTS_PATH + '/guide/**/*.md',
+              fileReader: 'contentFileReader'
+            },
+            {
+              basePath: CONTENTS_PATH,
               include: CONTENTS_PATH + '/tasknas/**/*.md',
               fileReader: 'contentFileReader'
             },
