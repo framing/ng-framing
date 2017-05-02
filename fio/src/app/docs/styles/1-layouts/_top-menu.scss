@@ -1,3 +1,4 @@
+@import '~compass-mixins';
 
 .fill-remaining-space {
   flex: 1 1 auto;
@@ -55,6 +56,7 @@ fio-top-menu {
 }
 
 md-toolbar.mat-toolbar {
+  &.mat-primary { @include background-image(linear-gradient(#57D974 , #37CC95 )) }
   position: relative;
   z-index: 10;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.30);
