@@ -1,3 +1,4 @@
+{%- if doc.componentOptions.selector %}
 {%- if doc.componentOptions.selector.split(',').length %}
 <section class="selectors">
   <h2>Selectors</h2>
@@ -9,4 +10,5 @@
     {% endfor %}
   </div>
 </section>
+{% endif %}
 {% endif %}

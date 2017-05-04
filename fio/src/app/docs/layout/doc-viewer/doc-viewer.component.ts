@@ -4,8 +4,8 @@ import {
   Output,
 } from '@angular/core';
 
-import { EmbeddedComponents } from 'app/docs/embedded';
-import { DocumentContents } from 'app/docs/documents/document.service';
+import { EmbeddedComponents } from '../../embedded/embedded.module';
+import { DocumentContents } from '../../documents/document.service';
 
 interface EmbeddedComponentFactory {
   contentPropertyName: string;
@@ -19,20 +19,14 @@ const initialDocViewerContent = initialDocViewerElement ? initialDocViewerElemen
 @Component({
   selector: 'fio-doc-viewer',
   template: '',
-  styles: [ `
-    :host { flex-direction: column; }
-    :host >>> doc-title.not-found h1 {
-      color: white;
-      background-color: red;
-    }
-  ` ],
+  styleUrls: [ './doc-viewer.component.scss' ],
   // TODO(robwormald): shadow DOM and emulated don't work here (?!)
   // encapsulation: ViewEncapsulation.Native
 })
 export class DocViewerComponent implements DoCheck, OnDestroy {
 
   @Output()
-  docRendered: EventEmitter<DocumentContents> = new EventEmitter<DocumentContents>();
+  docRendered: EventEmitter<void> = new EventEmitter<void>();
 
   private displayedDoc: DisplayedDoc;
   private embeddedComponentFactories: Map<string, EmbeddedComponentFactory> = new Map();
@@ -61,7 +55,7 @@ export class DocViewerComponent implements DoCheck, OnDestroy {
     this.ngOnDestroy();
     if (newDoc) {
       this.build(newDoc);
-      this.docRendered.emit(newDoc);
+      this.docRendered.emit();
     }
   }
 

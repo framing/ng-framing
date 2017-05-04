@@ -1,8 +1,8 @@
 // import global themes
-@import '~@angular/material/core/theming/all-theme';
+@import '~@angular/material/_theming';
 @import './ng-io-theme';
 
-// import global variables / 
+// import global variables /
 @import './constants';
 
 // import global mixins
@@ -15,6 +15,7 @@
 
 // import additional scss
 @import "~compass-mixins";
+
 // ********************************************************* //
 
 [md-button], [md-raised-button], [mat-button], [mat-raised-button] {
@@ -32,7 +33,6 @@ h1.docs-primary-header, h1 .docs-primary-header{
     padding: 30px;
 }
 
-
 fio-doc-viewer {
   display: flex;
   height: 100%;
@@ -43,7 +43,7 @@ fio-doc-viewer {
   flex: 1;
   flex-direction: column;
   position: relative;
-  
+
   .welcome-header {
     display: flex;
     flex: 1;
@@ -71,12 +71,12 @@ fio-doc-viewer {
       position: absolute;
       top: -150px;
       left: -180px;
-      
+
       width: 120%;
       height: 50%;
-      
+
       transform: rotate(-15deg);
-      
+
       background: rgba(0,0,0,0.025);
     }
   }
@@ -126,7 +126,7 @@ fio-doc-viewer {
       h2 {
         margin: 0;
         font-size: 1.5rem;
-        font-weight: 100; 
+        font-weight: 100;
       }
 
       p { margin: 10px 0 0; }

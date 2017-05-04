@@ -17,12 +17,12 @@ const API_SOURCE_PATH = path.resolve(PROJECT_ROOT, 'packages');
 const FIO_PATH = path.resolve(PROJECT_ROOT, 'fio');
 const CONTENTS_PATH = path.resolve(FIO_PATH, 'content');
 const TEMPLATES_PATH = path.resolve(FIO_PATH, 'transforms/templates');
-const OUTPUT_PATH = path.resolve(FIO_PATH, 'src/content/docs');
+const OUTPUT_PATH = path.resolve(FIO_PATH, 'src/content');
+const DOCS_OUTPUT_PATH = path.resolve(OUTPUT_PATH, 'docs');
 
 module.exports =
     new Package(
-        'framing.io',
-        [
+        'framing.io', [
           jsdocPackage, nunjucksPackage, typescriptPackage, linksPackage, examplesPackage,
           gitPackage, targetPackage, contentPackage, rhoPackage
         ])
@@ -44,26 +44,28 @@ module.exports =
         .processor(require('./processors/filterIgnoredDocs'))
         .processor(require('./processors/fixInternalDocumentLinks'))
         .processor(require('./processors/processNavigationMap'))
+        .processor(require('./processors/copyContentAssets'))
 
         // overrides base packageInfo and returns the one for the 'framing/framing' repo.
         .factory('packageInfo', function() { return require(path.resolve(PROJECT_ROOT, 'package.json')); })
 
-        .factory(require('./readers/navigation'))
+        .factory(require('./readers/json'))
+        .factory(require('./services/copyFolder'))
 
-        .config(function(checkAnchorLinksProcessor, log) {
+        .config(function(checkAnchorLinksProcessor) {
           // TODO: re-enable
           checkAnchorLinksProcessor.$enabled = false;
         })
 
         // Where do we get the source files?
         .config(function(
-            readTypeScriptModules, readFilesProcessor, collectExamples, generateKeywordsProcessor, navigationFileReader) {
+            readTypeScriptModules, readFilesProcessor, collectExamples, generateKeywordsProcessor, jsonFileReader) {
 
           // API files are typescript
           readTypeScriptModules.basePath = API_SOURCE_PATH;
           readTypeScriptModules.ignoreExportsMatching = [/^_/];
           readTypeScriptModules.hidePrivateMembers = true;
-          readFilesProcessor.fileReaders.push(navigationFileReader)
+          readFilesProcessor.fileReaders.push(jsonFileReader);
           readTypeScriptModules.sourceFiles = [
             'ng-core/index.ts',
             'ng-security/index.ts',
@@ -74,7 +76,12 @@ module.exports =
           readFilesProcessor.sourceFiles = [
             {
               basePath: CONTENTS_PATH,
-              include: CONTENTS_PATH + '/{cookbook,guide,tasknas}/**/*.md',
+              include: CONTENTS_PATH + '/guide/**/*.md',
+              fileReader: 'contentFileReader'
+            },
+            {
+              basePath: CONTENTS_PATH,
+              include: CONTENTS_PATH + '/tasknas/**/*.md',
               fileReader: 'contentFileReader'
             },
             {
@@ -84,7 +91,7 @@ module.exports =
             },
             {
               basePath: CONTENTS_PATH + '/root',
-              include: CONTENTS_PATH + '/root/file-not-found.md',
+              include: CONTENTS_PATH + '/root/**/*.md',
               fileReader: 'contentFileReader'
             },
             {
@@ -121,7 +128,12 @@ module.exports =
             {
               basePath: CONTENTS_PATH,
               include: CONTENTS_PATH + '/navigation.json',
-              fileReader: 'navigationFileReader'
+              fileReader: 'jsonFileReader'
+            },
+            {
+              basePath: CONTENTS_PATH,
+              include: CONTENTS_PATH + '/root/contributors.json',
+              fileReader: 'jsonFileReader'
             },
           ];
 
@@ -139,7 +151,7 @@ module.exports =
         })
 
         // Where do we write the output files?
-        .config(function(writeFilesProcessor) { writeFilesProcessor.outputFolder = OUTPUT_PATH; })
+        .config(function(writeFilesProcessor) { writeFilesProcessor.outputFolder = DOCS_OUTPUT_PATH; })
 
         // Target environments
         .config(function(targetEnvironments) {
@@ -173,7 +185,7 @@ module.exports =
 
         // Configure nunjucks rendering of docs via templates
         .config(function(
-            renderDocsProcessor, versionInfo, templateFinder, templateEngine, getInjectables) {
+            renderDocsProcessor, versionInfo, templateFinder, templateEngine, getInjectables, renderMarkdown) {
 
           // Where to find the templates for the doc rendering
           templateFinder.templateFolders = [TEMPLATES_PATH];
@@ -200,6 +212,12 @@ module.exports =
           renderDocsProcessor.helpers.relativePath = function(from, to) {
             return path.relative(from, to);
           };
+
+          // Tell the HTML formatter not to format code-example blocks
+          renderMarkdown.unformattedTags = [
+            'code-example',
+            'code-pane'
+          ];
         })
 
         // We are not going to be relaxed about ambiguous links
@@ -212,7 +230,6 @@ module.exports =
             generateKeywordsProcessor) {
 
           const API_SEGMENT = 'api';
-          const GUIDE_SEGMENT = 'guide';
           const APP_SEGMENT = 'app';
 
           generateApiListDoc.outputFolder = API_SEGMENT;
@@ -240,7 +257,8 @@ module.exports =
               getPath: (doc) => `${doc.id.replace(/\/index$/, '')}`,
               outputPathTemplate: '${path}.json'
             },
-            {docTypes: ['navigation-map'], pathTemplate: '${id}', outputPathTemplate: '../${id}.json'}
+            {docTypes: ['navigation-json'], pathTemplate: '${id}', outputPathTemplate: '../${id}.json'},
+            {docTypes: ['contributors-json'], pathTemplate: '${id}', outputPathTemplate: '../${id}.json'}
           ];
         })
 
@@ -248,7 +266,14 @@ module.exports =
           convertToJsonProcessor.docTypes = EXPORT_DOC_TYPES.concat([
             'component', 'content', 'decorator', 'directive', 'pipe', 'module'
           ]);
-        });
+        })
+
+        // FUTURE
+        // .config(function(copyContentAssetsProcessor) {
+        //   copyContentAssetsProcessor.assetMappings.push(
+        //     { from: path.resolve(CONTENTS_PATH, 'images'), to: path.resolve(OUTPUT_PATH, 'images') }
+        //   );
+        // });
 
 function requireFolder(folderPath) {
   const absolutePath = path.resolve(__dirname, folderPath);

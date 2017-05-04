@@ -5,7 +5,7 @@ const Dgeni = require('dgeni');
 describe('fixInternalDocumentLinks processor', () => {
 
   it('should be available on the injector', () => {
-    const dgeni = new Dgeni([testPackage('framing.io-package')]);
+    const dgeni = new Dgeni([testPackage('angular.io-package')]);
     const injector = dgeni.configureInjector();
     const processor = injector.get('fixInternalDocumentLinks');
     expect(processor.$process).toBeDefined();
@@ -13,7 +13,7 @@ describe('fixInternalDocumentLinks processor', () => {
 
   it('should run before the correct processor', () => {
     const processor = processorFactory();
-    expect(processor.$runBefore).toEqual(['writeFilesProcessor'])
+    expect(processor.$runBefore).toEqual(['writeFilesProcessor']);
   });
 
   it('should run after the correct processor', () => {
@@ -48,5 +48,5 @@ describe('fixInternalDocumentLinks processor', () => {
         `
       },
     ]);
-  })
+  });
 });

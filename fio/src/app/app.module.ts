@@ -17,9 +17,11 @@ import { NotFoundComponent } from './status/not-found/not-found.component';
     { path: '', pathMatch: 'full', loadChildren: () => LandingModule },
     { path: 'docs', loadChildren: () => DocsModule },
     { path: 'api', loadChildren: () => DocsModule },
-    { path: 'guide', loadChildren: () => DocsModule },
     { path: 'features', loadChildren: () => DocsModule },
+    { path: 'quickstart', loadChildren: () => DocsModule },
+    { path: 'framing', loadChildren: () => DocsModule },
     { path: 'tasknas', loadChildren: () => DocsModule },
+    { path: 'guide', loadChildren: () => DocsModule },
     { path: '**', component: NotFoundComponent },
   ],
   {

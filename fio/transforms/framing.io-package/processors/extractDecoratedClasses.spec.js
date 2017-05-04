@@ -5,7 +5,7 @@ describe('extractDecoratedClasses processor', function() {
   var dgeni, injector, processor;
 
   beforeEach(function() {
-    dgeni = new Dgeni([testPackage('framing.io-package')]);
+    dgeni = new Dgeni([testPackage('angular.io-package')]);
     injector = dgeni.configureInjector();
     processor = injector.get('extractDecoratedClassesProcessor');
   });

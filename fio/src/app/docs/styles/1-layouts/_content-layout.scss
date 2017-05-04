@@ -1,6 +1,5 @@
 .sidenav-content {
-  // padding: 1rem 3rem;
-  height: calc(100vh - 64px);
+  padding: 1rem 3rem 3rem;
   margin: auto;
 }
 
@@ -16,9 +15,8 @@
 
 .sidenav-container {
   width: 100%;
-  height: calc(100vh - 64px);
+  height: 100vh;
 }
-
 
 .sidenav-content button {
   min-width: 50px;

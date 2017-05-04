@@ -5,7 +5,7 @@ const Dgeni = require('dgeni');
 describe('generateApiListDoc processor', () => {
 
   it('should be available on the injector', () => {
-    const dgeni = new Dgeni([testPackage('framing.io-package')]);
+    const dgeni = new Dgeni([testPackage('angular.io-package')]);
     const injector = dgeni.configureInjector();
     const processor = injector.get('markBarredODocsAsPrivate');
     expect(processor.$process).toBeDefined();
@@ -18,7 +18,7 @@ describe('generateApiListDoc processor', () => {
     const docs = [
       { name: 'ɵPrivate' },
       { name: 'public' }
-    ]
+    ];
     processor.$process(docs);
 
     expect(docs[0].privateExport).toBeTruthy();

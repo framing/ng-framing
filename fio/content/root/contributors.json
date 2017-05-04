@@ -1,0 +1,37 @@
+{
+  "ryan": {
+    "name": "Ryan Cambell",
+    "picture": "ryan.jpg",
+    "twitter": "",
+    "website": "",
+    "bio": "",
+    "group": "Lead"
+  },
+
+  "greg": {
+    "name": "Greg Magolan",
+    "picture": "greg.jpg",
+    "twitter": "gregmagolan",
+    "website": "",
+    "bio": "",
+    "group": "Lead"
+  },
+
+  "naomi": {
+    "name": "Jon Boyd",
+    "picture": "jon.jpg",
+    "twitter": "",
+    "website": "",
+    "bio": "",
+    "group": "Lead"
+  },
+
+  "jeremy": {
+    "name": "Jeremy Becker",
+    "picture": "jeremy.jpg",
+    "twitter": "",
+    "website": "",
+    "bio": "",
+    "group": "Lead"
+  }
+}

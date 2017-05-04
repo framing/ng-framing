@@ -43,6 +43,17 @@ describe('regionParser service', () => {
     expect(output.contents).toEqual(t('abc', 'def', 'ghi'));
   });
 
+  it('should left align the text of the region', () => {
+    const output = regionParser(
+      t(
+        '/* #docregion X */', '  all', '    indented', '    by', '  two', '  spaces', '/* #enddocregion X */',
+        '/* #docregion Y */', '    first', '  line', '  indented', '    more', '  than', '  later', '  lines', '/* #enddocregion Y */',
+        '/* #docregion Z */', '  ignore', '  ', '  empty', '', '  lines', '/* #enddocregion Z */'
+      ), 'test-type');
+    expect(output.regions['X']).toEqual(t('all', '  indented', '  by', 'two', 'spaces'));
+    expect(output.regions['Y']).toEqual(t('  first', 'line', 'indented', '  more', 'than', 'later', 'lines'));
+    expect(output.regions['Z']).toEqual(t('ignore', '', 'empty', '', 'lines'));
+  });
 
   it('should remove doc plaster annotations from the contents', () => {
     const output =
@@ -142,6 +153,16 @@ describe('regionParser service', () => {
     expect(output.regions['A']).toEqual(t('jkl', '/* ... elided ... */', 'pqr'));
   });
 
+  it('should remove the plaster altogether if the current plaster string is ""', () => {
+    const output = regionParser(
+        t('/* #docregion */', 'abc', '/* #enddocregion */', 'def', '/* #docregion */', 'ghi',
+          '/* #enddocregion */', '/* #docplaster */', '/* #docregion A */', 'jkl',
+          '/* #enddocregion A */', 'mno', '/* #docregion A */', 'pqr', '/* #enddocregion A */'),
+        'test-type');
+    expect(output.regions['']).toEqual(t('abc', '/* . . . */', 'ghi'));
+    expect(output.regions['A']).toEqual(t('jkl', 'pqr'));
+  });
+
   it('should parse multiple region names separated by commas', () => {
     const output = regionParser(
         t('/* #docregion , A, B */', 'abc', '/* #enddocregion B */', '/* #docregion C */', 'xyz',
@@ -151,7 +172,7 @@ describe('regionParser service', () => {
     expect(output.regions['A']).toEqual(t('abc', 'xyz'));
     expect(output.regions['B']).toEqual(t('abc'));
     expect(output.regions['C']).toEqual(t('xyz'));
-  })
+  });
 });
 
 function t() {

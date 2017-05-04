@@ -9,7 +9,7 @@
       "app/*": ["./src/app/*"]
     },
     "typeRoots": [
-      "../node_modules/@types"
+      "./node_modules/@types"
     ],
     "sourceMap": true,
     "emitDecoratorMetadata": true,
@@ -21,7 +21,7 @@
     "mapRoot": "./",
 
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,

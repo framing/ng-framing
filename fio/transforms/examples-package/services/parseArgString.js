@@ -39,17 +39,20 @@ module.exports = function parseArgString() {
         } else {
           if (arg.substr(arg.length - 1) === '=') {
             key = arg.substr(0, arg.length - 1);
-            // remove leading '-' if it exists.
+            // remove leading '-' (or '--') if it exists.
+            if (key.substr(0, 1) == '-') {
+              key = key.substr(1);
+            }
             if (key.substr(0, 1) == '-') {
               key = key.substr(1);
             }
           } else {
-            unnammedArgs.push(arg)
+            unnammedArgs.push(arg);
             key = null;
           }
         }
       }
     } while (match !== null);
     return args;
-  }
-}
+  };
+};

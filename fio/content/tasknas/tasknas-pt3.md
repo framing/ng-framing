@@ -8,115 +8,70 @@ Manage tasks
 
 ### **USE ITEM FRAMER TO MANAGE TASKS**
 
-So, that's not really a great list of tasks. To fix that, lets use ItemFramer
+So, that's not really a great list of tasks. To fix that, lets use `ItemFramer`
 
-AppFramer provides standard requirements that would be in a Material based app 
+`AppFramer` provides standard requirements that would be in a Material based app 
 
-ItemFramer provides standard requirements around managing data (CRUD)
+`ItemFramer` provides standard requirements around managing data (CRUD)
 
-Complete the following in src/app/tasks/tasks.module.ts
+Complete the following in `src/app/tasks/tasks.module.ts`
 
-step 1 - import the item framer 
+step 1 - import the `ItemFramer`
 
-```typescript
-import { ItemFramer } from '@framing/ng-tasknas-framers';
-```
+<code-example path="tasknas/pt3/1.ts" linenums="false"></code-example>
 
-step 2 - get rid of the custom tasks component you made and replace it
+step 2 - get rid of the custom `TasksComponent` you made and replace it
 
 so this line: 
 
-```typescript
-  .componentAndDeclare(TasksComponent))
-```
+<code-example path="tasknas/pt3/2.ts" linenums="false"></code-example>
 
 becomes this:
 
-```typescript
-  .frame(new ItemFramer({
-    items: [
-      { label: 'Do laundry' },
-      { label: 'Clean dishes' },
-      { label: 'Wash car' },
-    ],
-  }))))
-```
+<code-example path="tasknas/pt3/3.ts" linenums="false"></code-example>
 
 ### **LET’S KEEP YOUR DATA AROUND FOR A WHILE**
 
-we will persist it by using firebase (neat!)
+we will persist it by using Firebase (neat!)
 
-go to your terminal window and kill the app by hitting “ctrl + c”
+go to your terminal window and kill the app by hitting `ctrl + c`
 
-step 1 - install the firebase dependencies 
+step 1 - install the Firebase dependencies 
 
-```
-npm i angularfire2 firebase --save
-``` 
+`npm i angularfire2 firebase --save`
 
-then you have to go to the firebase website, click “get started” and signup for an account to create a new project.
-
-http://firebase.google.com
+then you have to go to the [Firebase website](http://firebase.google.com), click “get started” and signup for an account to create a new project.
 
 If this is your first project with Firebase you'll be presented with API access keys. Save this information for a later step.
 Otherwise select "Add Firebase to your web app" to see those API credentials
 
 Next, we need to enable read/write access to your data. Click "Database" from the left menu, select the "Rules" tab and paste the following in to the editor:
 
-```json
-{
-  "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null"
-  }
-}
-```
+<code-example path="tasknas/pt3/firebase.json" linenums="false"></code-example>
 
-then go into the src/app/app.module.ts and import the firebase module 
+then go into the `src/app/app.module.ts` and import the Firebase module 
 
-```typescript
-import { AngularFireModule } from 'angularfire2';
-```
+<code-example path="tasknas/pt3/4.ts" linenums="false"></code-example>
 
-next (above @NgModule) you’re going to configure firebase
+next (above `@NgModule`) you’re going to configure Firebase
 
-```typescript
-export const firebaseConfig = {
- apiKey: '<your-key>',
- authDomain: '<your-project-authdomain>',
- databaseURL: '<your-database-URL>',
- storageBucket: '<your-storage-bucket>',
- messagingSenderId: '<your-messaging-sender-id>'
-};
-```
+<code-example path="tasknas/pt3/5.ts" linenums="false"></code-example>
 
-^ populate this with all of the specifics that firebase gave you when you set up your account (you can copy paste this from firebase) 
+^ populate this with all of the specifics that Firebase gave you when you set up your account (you can copy paste this from Firebase) 
 
-above your .frame() method, include this: 
+above your `.frame()` method, include this: 
 
-```typescript
-.import(AngularFireModule.initializeApp(firebaseConfig))
-```
+<code-example path="tasknas/pt3/6.ts" linenums="false"></code-example>
 
-next, open src/app/tasks/tasks.module.ts file 
+next, open `src/app/tasks/tasks.module.ts` file 
 
-Import the firebase adaptor we created 
+Import the Firebase adaptor we created 
 
-```typescript
-import { ItemDataFirebaseService, ItemFramer } from '@framing/ng-tasknas-framers';
-```
+<code-example path="tasknas/pt3/7.ts" linenums="false"></code-example>
 
-next, we are going to update ItemFramer so that it is now longer a static array of tasks 
+next, we are going to update `ItemFramer` so that it is now longer a static array of tasks 
 
-```typescript
-@NgModule(Framing((framing) => framing
-  .frame(new ItemFramer()
-    .itemDataProvider(ItemDataFirebaseService)
-    .model({
-      endpoint: 'tasks',
-    }))))
-export class TasksModule {}
- ```
+<code-example path="tasknas/pt3/8.ts" linenums="false"></code-example>
 
 hit save - the screen will reload 
 

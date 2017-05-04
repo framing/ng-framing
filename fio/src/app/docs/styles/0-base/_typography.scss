@@ -6,13 +6,14 @@
       font-family: $main-font;
       margin: 0;
       color: $darkgray;
+      font-size: 14px;
     }
 
     h1 {
       display:inline-block;
       font-size: 36px;
       font-weight: 400;
-      margin: 12px 0px;
+      margin: 8px 0px;
     }
 
     h1:after {
@@ -20,21 +21,20 @@
       display: block;
       height: 1px;
       width: 40%;
-      margin: 30px 0px 10px;
+      margin: 32px 0px 10px;
       background: $lightgray;
     }
 
     h2 {
       font-size: 30px;
       font-weight: 500;
-      margin: 48px 0px 32px;
+      margin: 32px 0px 24px;
     }
 
     h3 {
       font-size: 24px;
       font-weight: 500;
-      margin: 12px 0px;
-      text-transform: uppercase;
+      margin: 24px 0px;
     }
 
     h4 {
@@ -47,17 +47,31 @@
       font-size: 18px;
       font-weight: 500;
       margin: 8px 0px;
-      text-transform: uppercase;
     }
+
+    h6 {
+      color: $mediumgray;
+      font-size: 18px;
+      font-weight: 400;
+      margin: 8px 0px;
+    }
+
 
     .mat-tab-body-wrapper h2 {
-      margin-top: 0px;
+      margin-top: 0;
     }
 
-    p, ol, ul, input {
+    p, ol, ul, ol, li, input, a  {
       font-size: 14px;
       line-height: 24px;
       letter-spacing: 0.30px;
+      & > em {
+        letter-spacing: 0.30px;
+      }
+    }
+
+    ol li {
+      margin: 14px 0px;
     }
 
     a {
@@ -70,6 +84,10 @@
       color: white;
       font-family: $main-font;
       text-transform: uppercase;
+    }
+
+    strong {
+      font-weight: 500;
     }
 
     table {
@@ -102,7 +120,7 @@
       text-align: left;
     }
 
-    p code {
+    p > code, li > code, table code {
       font-family: $code-font;
       font-size: 90%;
       color: $blue;
@@ -113,8 +131,16 @@
       border-radius: 4px;
     }
 
+    code {
+      font-family: $code-font;
+      font-size: 90%;
+    }
+
     .sidenav-content a {
       color: $blue;
+      &:hover {
+        color: $mediumgray;
+      }
     }
 
 //   }

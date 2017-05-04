@@ -1,19 +1,16 @@
 {
   "TopBar": [
+    {
+      "url": "api",
+      "title": "API"
+    }
   ],
   "SideNav": [
     {
       "url": "guide/intro",
       "title": "Introduction",
-      "tooltip": "An intro to Framing."
+      "tooltip": "A intro to Framing."
     },
-
-    {
-      "url": "api",
-      "title": "API",
-      "tooltip": "Explore everything under the hood inside of Framing."
-    },
-
     {
       "title": "Tasknas Tutorial",
       "tooltip": "The Tasknas tutorial takes you through the steps of creating an Angular application using Framing.",
