@@ -1,6 +1,7 @@
 import { Type } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { Framer, FramingNgModule } from '@framing/ng-core';
 
@@ -60,6 +61,7 @@ export class AppFramer extends Framer<AppModel, AppView> {
         MaterialModule,
         RouterModule,
         AppComponentsModule,
+        BrowserAnimationsModule,
       ]);
   }
 }

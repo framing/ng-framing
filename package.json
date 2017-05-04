@@ -1,6 +1,6 @@
 {
   "name": "ng-framing",
-  "version": "0.7.4",
+  "version": "0.7.5",
   "private": false,
   "description": "Framing for Angular",
   "homepage": "https://github.com/framing/ng-framing",
@@ -20,7 +20,7 @@
     "@angular/compiler": "^4.0.2",
     "@angular/compiler-cli": "^4.0.2",
     "@angular/core": "^4.0.2",
-    "@angular/flex-layout": "^2.0.0-beta.7",
+    "@angular/flex-layout": "^2.0.0-beta.8",
     "@angular/forms": "^4.0.2",
     "@angular/http": "^4.0.2",
     "@angular/material": "^2.0.0-beta.3",
