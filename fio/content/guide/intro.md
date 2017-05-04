@@ -47,6 +47,7 @@ If you compare the above scenarios and you add in a few not so obvious benefits,
 * A clear set of standards on how to architect your application
 * A clear set of roles for your team. Juniors assemble app screens out of features that the seniors developed
 * Much less code. If a new screen is similar to another screen, move the similar code in to a feature so both screens share that functionality
+
 * Much easier to maintain. New functionality added to a feature is instantly available to any screens that use it.
 * Much less to test. Fully unit test a feature instead of duplicating unit tests for screens with similar functionality.
 * Stop writing the same functionality over and over again. Write once and evolve over time. Focus your energy and new more innovation features.
