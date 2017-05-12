@@ -5,8 +5,7 @@ import { DocsRootController } from './docs-root.controller';
 import { DocsRootModel } from './docs-root.model';
 import { DocsRootView } from './docs-root.view';
 
-import { DocsRootViewModule } from './view/docs-root-view.module';
-import { DocsRootComponent } from './view/docs-root.component';
+import { MaterialAppFeature } from 'features/material-app/material-app.feature';
 
 export class DocsRootFeature extends Framer<DocsRootModel, DocsRootView> {
   public get framerName(): string { return 'DocsRoot'; }
@@ -19,7 +18,6 @@ export class DocsRootFeature extends Framer<DocsRootModel, DocsRootView> {
 
   public get defaultView(): DocsRootView {
     return {
-      docsRoot: DocsRootComponent,
     };
   }
 
@@ -29,7 +27,18 @@ export class DocsRootFeature extends Framer<DocsRootModel, DocsRootView> {
 
   public frame(framing: FramingNgModule): void {
     framing
-      .import(DocsRootViewModule)
-      .component(this.theView.docsRoot);
+      .frame(new MaterialAppFeature({
+        sideNavTitle: 'Framing Guidelines',
+        sideNavItems: [
+          {
+            label: 'Features',
+            routerLink: '/guidelines/features',
+          },
+          {
+            label: 'Process',
+            routerLink: '/guidelines/process',
+          },
+        ],
+      }));
   }
 }

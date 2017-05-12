@@ -1,21 +1,21 @@
 import { Type } from '@angular/core';
 
 export interface MaterialAppView {
-  appBarActionsComponent?: Type<any>;
+  appBarActions?: Type<any>;
 
-  appBarTitleComponent?: Type<any>;
+  appBarTitle?: Type<any>;
 
-  appBarComponent?: Type<any>;
+  appBar?: Type<any>;
 
-  appRootComponent?: Type<any>;
+  appRoot?: Type<any>;
 
-  rightNavComponent?: Type<any>;
+  rightNav?: Type<any>;
 
-  sideNavComponent?: Type<any>;
+  sideNav?: Type<any>;
 
-  sideNavContentComponent?: Type<any>;
+  sideNavContent?: Type<any>;
 
-  sideNavSubTitleComponent?: Type<any>;
+  sideNavSubTitle?: Type<any>;
 
-  sideNavTitleComponent?: Type<any>;
+  sideNavTitle?: Type<any>;
 }

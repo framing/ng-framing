@@ -8,23 +8,21 @@
   <button md-button class="md-icon-button" aria-label="Back"
     (click)="appController.goBack()"
     *ngIf="!appController.model.isRoot">
-    <!--<md-tooltip>Back</md-tooltip>-->
     <md-icon>arrow_back</md-icon>
   </button>
 
   <span fxFlex="shrink" style="overflow: hidden">
-    <ng-template [ngComponentOutlet]="appController.view.appBarTitleComponent"></ng-template>
+    <ng-template [ngComponentOutlet]="appController.view.appBarTitle"></ng-template>
   </span>
 
   <span fxFlex></span>
 
   <span fxFlex="none">
-    <ng-template [ngComponentOutlet]="appController.view.appBarActionsComponent"></ng-template>
+    <ng-template [ngComponentOutlet]="appController.view.appBarActions"></ng-template>
   </span>
 
   <button md-button class="md-icon-button" aria-label="More"
-    (click)="appController.toggleSideNav(!appController.model.rightNavOpened)">
-    <!--md-tooltip>More</md-tooltip-->
+    (click)="appController.toggleRightNav(!appController.model.rightNavOpened)">
     <md-icon>more_vert</md-icon>
   </button>
 </div>

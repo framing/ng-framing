@@ -3,6 +3,8 @@ import { AppNavItem } from './types/app-nav-item';
 export interface MaterialAppModel {
   appBarActions?: AppNavItem[];
 
+  appBarTitle?: string;
+
   isRoot?: boolean;
 
   rightNavItems?: AppNavItem[];
@@ -13,5 +15,5 @@ export interface MaterialAppModel {
 
   sideNavOpened?: boolean;
 
-  title?: string;
+  sideNavTitle?: string;
 }

@@ -5,15 +5,13 @@ import { DocsModule } from './docs/docs.module';
 import { GuidelinesModule } from './guidelines/guidelines.module';
 import { LandingModule } from './landing/landing.module';
 import { StatusModule } from './status/status.module';
-
-import { AppComponent } from './app.component';
 import { NotFoundComponent } from './status/not-found/not-found.component';
 
 @NgModule(Framing((framing) => framing
+  .root()
   .imports([
     StatusModule,
   ])
-  .root(AppComponent)
   .routes([
     { path: '', pathMatch: 'full', loadChildren: () => LandingModule },
     { path: 'docs', loadChildren: () => DocsModule },

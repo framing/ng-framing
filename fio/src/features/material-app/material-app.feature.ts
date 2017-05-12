@@ -13,7 +13,7 @@ import { MaterialAppViewModule } from './view/material-app-view.module';
 import { AppBarActionsComponent } from './view/app-bar-actions.component';
 import { AppBarTitleComponent } from './view/app-bar-title.component';
 import { AppBarComponent } from './view/app-bar.component';
-// import { AppRightNavComponent } from './components/app-right-nav.component';
+import { AppRightNavComponent } from './view/app-right-nav.component';
 import { AppRootComponent } from './view/app-root.component';
 import { AppSideNavContentComponent } from './view/app-side-nav-content.component';
 import { AppSideNavSubTitleComponent } from './view/app-side-nav-sub-title.component';
@@ -31,21 +31,21 @@ export class MaterialAppFeature extends Framer<MaterialAppModel, MaterialAppView
       rightNavItems: [],
       rightNavOpened: false,
       sideNavOpened: true,
-      title: '',
+      sideNavTitle: '',
     };
   }
 
   public get defaultView(): MaterialAppView {
     return {
-      appBarActionsComponent: AppBarActionsComponent,
-      appBarTitleComponent: AppBarTitleComponent,
-      appBarComponent: AppBarComponent,
-      appRootComponent: AppRootComponent,
-      // rightNavComponent: AppRightNavComponent,
-      sideNavComponent: AppSideNavComponent,
-      sideNavContentComponent: AppSideNavContentComponent,
-      sideNavSubTitleComponent: AppSideNavSubTitleComponent,
-      sideNavTitleComponent: AppSideNavTitleComponent,
+      appBarActions: AppBarActionsComponent,
+      appBarTitle: AppBarTitleComponent,
+      appBar: AppBarComponent,
+      appRoot: AppRootComponent,
+      rightNav: AppRightNavComponent,
+      sideNav: AppSideNavComponent,
+      sideNavContent: AppSideNavContentComponent,
+      sideNavSubTitle: AppSideNavSubTitleComponent,
+      sideNavTitle: AppSideNavTitleComponent,
     };
   }
 
@@ -53,7 +53,7 @@ export class MaterialAppFeature extends Framer<MaterialAppModel, MaterialAppView
 
   public frame(framing: FramingNgModule): void {
     framing
-      .component(this.theView.appRootComponent)
+      .component(this.theView.appRoot)
       .imports([
         FlexLayoutModule,
         MaterialModule,

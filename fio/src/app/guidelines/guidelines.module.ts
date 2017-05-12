@@ -7,6 +7,7 @@ import { DocsRootFeature } from 'features/docs-root/docs-root.feature';
   .frame(new DocsRootFeature())
   .children([
     { path: 'features', loadChildren: './features/features.module#FeaturesModule' },
+    { path: 'process', loadChildren: './process/process.module#ProcessModule' },
   ]),
 ))
 export class GuidelinesModule {}
