@@ -1,0 +1,21 @@
+<div fxFlex fxLayout="column">
+  <md-toolbar fxLayout="row">
+    <ng-template [ngComponentOutlet]="appController.view.appBarComponent"></ng-template>
+  </md-toolbar>
+
+  <md-sidenav-container fxLayout="row" fxFlex fxLayoutFill>
+    <md-sidenav mode="side" [opened]="appController.model.sideNavOpened" class="sidenav">
+      <ng-template [ngComponentOutlet]="appController.view.sideNavComponent"></ng-template>
+    </md-sidenav>
+
+    <div fxFlex fxLayout="column">
+      <div fxLayout="column" fxFlex>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+    <!--<md-sidenav mode="over" opened="false">
+      <ng-template [ngComponentOutlet]="appController.view.rightNavComponent"></ng-template>
+    </md-sidenav>-->
+  </md-sidenav-container>
+</div>

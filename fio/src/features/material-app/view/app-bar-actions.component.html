@@ -1,0 +1,5 @@
+<div>
+  <button md-button *ngFor="let action of appController.model.appBarActions" [routerLink]="action.link">
+    <md-icon>{{action.icon}}</md-icon>
+  </button>
+</div>

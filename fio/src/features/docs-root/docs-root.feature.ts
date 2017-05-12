@@ -1,0 +1,35 @@
+import { Type } from '@angular/core';
+import { Framer, FramingNgModule } from '@framing/ng-core';
+
+import { DocsRootController } from './docs-root.controller';
+import { DocsRootModel } from './docs-root.model';
+import { DocsRootView } from './docs-root.view';
+
+import { DocsRootViewModule } from './view/docs-root-view.module';
+import { DocsRootComponent } from './view/docs-root.component';
+
+export class DocsRootFeature extends Framer<DocsRootModel, DocsRootView> {
+  public get framerName(): string { return 'DocsRoot'; }
+
+  public get defaultModel(): DocsRootModel {
+    return {
+
+    };
+  }
+
+  public get defaultView(): DocsRootView {
+    return {
+      docsRoot: DocsRootComponent,
+    };
+  }
+
+  public get defaultController(): Type<DocsRootController> {
+    return DocsRootController;
+  }
+
+  public frame(framing: FramingNgModule): void {
+    framing
+      .import(DocsRootViewModule)
+      .component(this.theView.docsRoot);
+  }
+}

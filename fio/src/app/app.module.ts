@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Framing } from '@framing/ng-core';
 
-import { StatusModule } from './status/status.module';
 import { DocsModule } from './docs/docs.module';
+import { GuidelinesModule } from './guidelines/guidelines.module';
 import { LandingModule } from './landing/landing.module';
+import { StatusModule } from './status/status.module';
 
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './status/not-found/not-found.component';
@@ -16,6 +17,7 @@ import { NotFoundComponent } from './status/not-found/not-found.component';
   .routes([
     { path: '', pathMatch: 'full', loadChildren: () => LandingModule },
     { path: 'docs', loadChildren: () => DocsModule },
+    { path: 'guidelines', loadChildren: () => GuidelinesModule },
     { path: 'api', loadChildren: () => DocsModule },
     { path: 'features', loadChildren: () => DocsModule },
     { path: 'quickstart', loadChildren: () => DocsModule },

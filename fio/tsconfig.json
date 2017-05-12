@@ -6,7 +6,8 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
-      "app/*": ["./src/app/*"]
+      "app/*": ["./src/app/*"],
+      "features/*": ["./src/features/*"]
     },
     "typeRoots": [
       "./node_modules/@types"

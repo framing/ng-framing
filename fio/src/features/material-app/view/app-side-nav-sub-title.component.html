@@ -1,0 +1,8 @@
+<md-toolbar *ngIf="appController.model.user">
+    <div class="md-toolbar-tools">
+    <img [src]="appController.model.user.image" style="width: 40px; height: 40px; margin-top: 8px; margin-bottom: 8px; margin-right: 16px; border-radius: 50%; box-sizing: content-box;">
+    <h5>{{appController.model.user.name}}</h5>
+    <span fxFlex></span>
+    <button md-button (click)="appController.logout()">Logout</button>
+  </div>
+</md-toolbar>
