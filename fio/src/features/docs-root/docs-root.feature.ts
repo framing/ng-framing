@@ -27,18 +27,6 @@ export class DocsRootFeature extends Framer<DocsRootModel, DocsRootView> {
 
   public frame(framing: FramingNgModule): void {
     framing
-      .frame(new MaterialAppFeature({
-        sideNavTitle: 'Framing Guidelines',
-        sideNavItems: [
-          {
-            label: 'Features',
-            routerLink: '/guidelines/features',
-          },
-          {
-            label: 'Process',
-            routerLink: '/guidelines/process',
-          },
-        ],
-      }));
+      .frame(new MaterialAppFeature(this.theModel.materialApp));
   }
 }

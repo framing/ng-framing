@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { MaterialAppComponent } from '../material-app.component';
 
@@ -6,6 +6,5 @@ import { MaterialAppComponent } from '../material-app.component';
   selector: 'app-root',
   templateUrl: './app-root.component.html',
   styleUrls: [ './app-root.component.css', './app-root.component.scss' ],
-  encapsulation: ViewEncapsulation.None,
 })
 export class AppRootComponent extends MaterialAppComponent {}

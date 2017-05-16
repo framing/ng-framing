@@ -1,6 +1,14 @@
 <md-list>
-  <md-list-item *ngFor="let item of appController.model.sideNavItems" [routerLink]="item.routerLink">
-    <md-icon *ngIf="item.icon">{{item.icon}}</md-icon>
-    <p>{{item.label}}</p>
-  </md-list-item>
+  <span *ngFor="let item of appController.model.sideNavItems">
+    <md-list-item *ngIf="!item.isSubheader; else elseBlock" [routerLink]="item.routerLink">
+      <md-icon *ngIf="item.icon">{{item.icon}}</md-icon>
+      <p>{{item.label}}</p>
+    </md-list-item>
+    <ng-template #elseBlock>
+      <h3 mg-subheader>
+        <md-icon *ngIf="item.icon">{{item.icon}}</md-icon>
+        <p>{{item.label}}</p>
+      </h3>
+    </ng-template>
+  </span>
 </md-list>
