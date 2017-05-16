@@ -6,21 +6,16 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
 @NgModule(Framing((framing) => framing
   .frame(new DocsArticleFeature({
     article: {
-      title: 'Process',
+      title: 'Why Framing',
       subTitle: '',
       sections: [
         {
-          id: 'process',
-          title: 'Process',
+          id: 'why-framing',
+          title: 'Why Framing',
           rows: [
             {
               cells: [
                 {
-                  flex: '33%',
-                  content: 'TBD',
-                },
-                {
-                  flex: '66%',
                   content: 'TBD',
                 },
               ],
@@ -32,4 +27,4 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
 
   })),
 ))
-export class ProcessModule {}
+export class WhyFramingModule {}
