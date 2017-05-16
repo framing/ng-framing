@@ -6,22 +6,20 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
 @NgModule(Framing((framing) => framing
   .frame(new DocsArticleFeature({
     article: {
-      title: 'Process',
+      title: 'Existing Features',
       subTitle: '',
       sections: [
         {
-          id: 'process',
-          title: 'Process',
+          id: 'anatomy-of-a-feature',
+          title: 'List of available features',
           rows: [
             {
               cells: [
                 {
-                  flex: '33%',
-                  content: 'TBD',
-                },
-                {
-                  flex: '66%',
-                  content: 'TBD',
+                  content: '\
+                    <ul>\
+                      <li>TBD</li>\
+                    </ul>',
                 },
               ],
             },
@@ -32,4 +30,4 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
 
   })),
 ))
-export class ProcessModule {}
+export class FeaturesExistingModule {}

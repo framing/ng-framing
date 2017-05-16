@@ -6,40 +6,9 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
 @NgModule(Framing((framing) => framing
   .frame(new DocsArticleFeature({
     article: {
-      title: 'Features overview',
+      title: 'Develop a feature',
       subTitle: '',
       sections: [
-        {
-          id: 'anatomy-of-a-feature',
-          title: 'Anatomy of a feature',
-          rows: [
-            {
-              cells: [
-                {
-                  flex: '40%',
-                  content: '\
-                    <p>A feature is made up of:</p>\
-                    <ul>\
-                      <li>Components</li>\
-                      <li>Views</li>\
-                      <li>Controllers</li>\
-                      <li>Models</li>\
-                      <li>Framing</li>\
-                      <li>Routes</li>\
-                      <li>Guards</li>\
-                      <li>Resolves</li>\
-                      <li>Services</li>\
-                      <li>Modules</li>\
-                    </ul>',
-                },
-                {
-                  flex: '60%',
-                  content: 'TBD (Graph of a feature)',
-                },
-              ],
-            },
-          ],
-        },
         {
           id: 'directory-structure',
           title: 'Directory structure',
@@ -49,6 +18,7 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
                 {
                   flex: '40%',
                   content: '\
+                    <p>Create the nessessary folders</p>\
                     <p><b>src/features</b><br>Root folder of all features in project.</p>\
                     <p><b>src/features/example</b><br>Root folder of individual feature.</p>\
                     <p><b>src/features/example/view</b><br>Folder containing all components used by feature.</p>\
@@ -71,11 +41,10 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
                 {
                   flex: '40%',
                   content: '\
-                    <p>Model\'s are TypeScript interfaces with optional or required properties.</p>\
-                    <p>Model\'s contain properties to configure the feature.</p>\
-                    <p>Configuration properties allow developers using your feature to easily customize it\'s behavior</p>\
-                    <p>Model\'s are also responsibile for containing the current runtime state of your feature.</p>\
-                    <p>A default model object and feature configuration make up the initial runtime state of the feature.</p>\
+                    <p>Create the model interface.</p>\
+                    <p>Create each property for the model.</p>\
+                    <p>Be sure to document each property.</p>\
+                    <p>Mark optional properties as optional using the question mark.</p>\
                   ',
                 },
                 {
@@ -112,11 +81,11 @@ export interface ExampleModel {<br>\
                 {
                   flex: '40%',
                   content: '\
-                    <p>Controllers are TypeScript classes with methods containing feature logic.</p>\
-                    <p>Controllers are injectable services and injected by the features components to handle all user interaction.</p>\
-                    <p>Unlike traditional Angular, all feature/business logic is in the injectable controller.</p>\
-                    <p>Controllers can be extended by the developer using your feature to override any feature logic.</p>\
-                    <p>Controllers are well documented so that it is clear to the developer which method to override.</p>\
+                    <p>Create the controller class.</p>\
+                    <p>Extend Controller from @framing/ng-core.</p>\
+                    <p>Pass your model and view interfaces as generics</p>\
+                    <p>Create a method containing logic for each feature action</p>\
+                    <p>Be sure to document each method</p>\
                   ',
                 },
                 {
@@ -157,9 +126,8 @@ export class ExampleController extends Controller&lt;M, V&gt; {<br>\
                 {
                   flex: '40%',
                   content: '\
-                    <p>A feature\'s view is made up of components.</p>\
-                    <p>Components are declared in a view module.</p>\
-                    <p>The view module is shared between all modules that use the feature.</p>\
+                    <p>Create the view module.</p>\
+                    <p>Declare each component</p>\
                   ',
                 },
                 {
@@ -189,10 +157,8 @@ export class ExampleViewModule {}<br>\
                 {
                   flex: '40%',
                   content: '\
-                    <p>Framing components are just regular Angular components.</p>\
-                    <p>All components for a feature inject the feature\'s controller.</p>\
-                    <p>A component contains not feature/business logic. Only view logic if needed</p>\
-                    <p>A developer using a feature can override any of its components</p>\
+                    <p>Create the component class</p>\
+                    <p>Inject the controller</p>\
                   ',
                 },
                 {
@@ -222,7 +188,7 @@ export class ExampleComponent {<br>\
                 {
                   flex: '40%',
                   content: '\
-                    <p>Framing component templates are just regular Angular templates.</p>\
+                    <p>Create the component template</p>\
                     <p>Templates bind to the feature\'s model.</p>\
                     <p>Templates event listeners call methods on the feature\'s controller.</p>\
                   ',
@@ -261,9 +227,10 @@ export class ExampleComponent {<br>\
                 {
                   flex: '40%',
                   content: '\
-                    <p>View\'s are TypeScript interfaces with optional or required properties.</p>\
-                    <p>View\'s contain properties for each component used by the feature.</p>\
-                    <p>Configuration properties allow developers using your feature to easily override components with their own.</p>\
+                    <p>Create the view interface.</p>\
+                    <p>Create a property for each component in the feature.</p>\
+                    <p>Mark any properties as optional if a default component is available.</p>\
+                    <p>Be sure to document each property</p>\
                   ',
                 },
                 {
@@ -293,7 +260,7 @@ export interface ExampleView {<br>\
                 {
                   flex: '40%',
                   content: '\
-                    <p>Framing contain\'s the @NgModule and router configuration for the feature.</p>\
+                    <p>Create the feature framing.</p>\
                   ',
                 },
                 {
@@ -322,7 +289,7 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {<br>\
                 {
                   flex: '40%',
                   content: '\
-                    <p>A feature has a framer name.</p>\
+                    <p>Set the feature name same as the class name.</p>\
                   ',
                 },
                 {
@@ -340,7 +307,7 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {<br>\
                 {
                   flex: '40%',
                   content: '\
-                    <p>A feature has a default model.</p>\
+                    <p>Set the default model.</p>\
                   ',
                 },
                 {
@@ -363,7 +330,7 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {<br>\
                 {
                   flex: '40%',
                   content: '\
-                    <p>A feature has a default view.</p>\
+                    <p>Set the default view.</p>\
                   ',
                 },
                 {
@@ -386,7 +353,7 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {<br>\
                 {
                   flex: '40%',
                   content: '\
-                    <p>A feature has a default controller.</p>\
+                    <p>Set the default controller.</p>\
                   ',
                 },
                 {
@@ -406,7 +373,7 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {<br>\
                 {
                   flex: '40%',
                   content: '\
-                    <p>A feature configures the @NgModule and router in a frame method.</p>\
+                    <p>Configure the @NgModule, configure the router, and/or depend on other features within the frame method.</p>\
                   ',
                 },
                 {
@@ -426,47 +393,9 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {<br>\
             },
           ],
         },
-        {
-          id: 'best-practices',
-          title: 'Best practices',
-          rows: [
-            {
-              cells: [
-                {
-                  content: '\
-                    <ul>\
-                      <li>All business logic goes in feature controller class</li>\
-                      <li>Only view logic specific to component goes in component class</li>\
-                    </ul>\
-                  ',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 'fequently-asked-questions',
-          title: 'Fequently asked questions',
-          rows: [
-            {
-              cells: [
-                {
-                  content: '\
-                    <ul>\
-                      <li>Do regular Angular components work with Framing?</li>\
-                      <li>Why not just use components?</li>\
-                      <li>How do I customize the style of a feature?</li>\
-                      <li>How do I use ngrx with a feature?</li>\
-                    </ul>\
-                  ',
-                },
-              ],
-            },
-          ],
-        },
       ],
     },
 
   })),
 ))
-export class FeaturesModule {}
+export class FeaturesDevelopModule {}

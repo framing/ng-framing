@@ -14,15 +14,15 @@ import { DocsRootFeature } from 'features/docs-root/docs-root.feature';
         },
         {
           label: 'Why Framing?',
-          routerLink: '/guidelines/introduction',
+          routerLink: '/guidelines/why-framing',
         },
         {
           label: 'Prerequisities',
-          routerLink: '/guidelines/getting-started',
+          routerLink: '/guidelines/prerequisities',
         },
         {
           label: 'Concepts',
-          routerLink: '/guidelines/getting-started',
+          routerLink: '/guidelines/concepts',
         },
         {
           label: 'Getting started',
@@ -35,11 +35,11 @@ import { DocsRootFeature } from 'features/docs-root/docs-root.feature';
         },
         {
           label: 'Build a new app',
-          routerLink: '/guidelines/features',
+          routerLink: '/guidelines/applications-develop',
         },
         {
           label: 'Refactoring an app',
-          routerLink: '/guidelines/features',
+          routerLink: '/guidelines/applications-refactor',
         },
         //
         {
@@ -47,20 +47,20 @@ import { DocsRootFeature } from 'features/docs-root/docs-root.feature';
           isSubheader: true,
         },
         {
-          label: 'Feature overview',
+          label: 'Features overview',
           routerLink: '/guidelines/features',
         },
         {
           label: 'Develop a feature',
-          routerLink: '/guidelines/features',
+          routerLink: '/guidelines/features-develop',
         },
         {
           label: 'Use a feature',
-          routerLink: '/guidelines/features',
+          routerLink: '/guidelines/features-usage',
         },
         {
           label: 'Existing features',
-          routerLink: '/guidelines/features',
+          routerLink: '/guidelines/features-existing',
         },
         //
         {
@@ -75,10 +75,18 @@ import { DocsRootFeature } from 'features/docs-root/docs-root.feature';
     },
   }))
   .children([
+    { path: 'applications-develop', loadChildren: './applications-develop/applications-develop.module#ApplicationsDevelopModule' },
+    { path: 'applications-refactor', loadChildren: './applications-refactor/applications-refactor.module#ApplicationsRefactorModule' },
+    { path: 'concepts', loadChildren: './concepts/concepts.module#ConceptsModule' },
     { path: 'features', loadChildren: './features/features.module#FeaturesModule' },
+    { path: 'features-develop', loadChildren: './features-develop/features-develop.module#FeaturesDevelopModule' },
+    { path: 'features-existing', loadChildren: './features-existing/features-existing.module#FeaturesExistingModule' },
+    { path: 'features-usage', loadChildren: './features-usage/features-usage.module#FeaturesUsageModule' },
     { path: 'getting-started', loadChildren: './getting-started/getting-started.module#GettingStartedModule' },
     { path: 'introduction', loadChildren: './introduction/introduction.module#IntroductionModule' },
+    { path: 'prerequisities', loadChildren: './prerequisities/prerequisities.module#PrerequisitiesModule' },
     { path: 'process', loadChildren: './process/process.module#ProcessModule' },
+    { path: 'why-framing', loadChildren: './why-framing/why-framing.module#WhyFramingModule' },
   ]),
 ))
 export class GuidelinesModule {}
