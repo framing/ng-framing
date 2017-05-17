@@ -1,0 +1,13 @@
+<h1>Features</h1>
+
+<article *ngFor="let featureSet of featureListController.model.featureSets">
+  <h2>
+    <a [href]="'/features/' + featureSet.id">{{ featureSet.title }}</a>
+  </h2>
+
+  <ul>
+    <li *ngFor="let feature of featureSet.features">
+      <a [href]="'/features/' + featureSet.id + '/' + feature.id">{{ feature.title }}</a>
+    </li>
+  </ul>
+</article>
