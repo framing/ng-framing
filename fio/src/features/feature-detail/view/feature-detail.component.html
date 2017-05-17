@@ -1,0 +1,54 @@
+<div fxLayout="column">
+  <h1>@{{ featureSetController.model.featureSet.title }}/{{ featureDetailController.model.feature.title }}</h1>
+
+  <h3>Description</h3>
+
+  <article [innerHTML]="featureDetailController.model.feature.description"></article>
+
+  <h3>Installation</h3>
+
+  <article [innerHTML]="featureDetailController.model.feature.installation"></article>
+
+  <h3>Usage</h3>
+
+  <article [innerHTML]="featureDetailController.model.feature.usage"></article>
+
+  <h3>Customization</h3>
+
+  <p>See the <a href="/guidelines/features-usage">use a feature</a> guide to understand how to customize this feature.</p>
+
+  <section fxLayout="column" *ngIf="featureDetailController.model.feature.modelProperties">
+    <h4>Model Properties</h4>
+
+    <div fxFlex="50%" fxFlex.lt-lg="100%">
+      <div fxLayout="row" *ngFor="let prop of featureDetailController.model.feature.modelProperties">
+        <div fxFlex="40%">{{ prop.name }}</div>
+        <div fxFlex="60%">{{ prop.description }}</div>
+      </div>
+    </div>
+  </section>
+
+  <section fxLayout="column" *ngIf="featureDetailController.model.feature.viewComponents">
+    <h4>View Components</h4>
+
+    <div fxFlex="50%" fxFlex.lt-lg="100%">
+      <div fxLayout="row" *ngFor="let component of featureDetailController.model.feature.viewComponents">
+        <div fxFlex="40%">{{ component.name }}</div>
+        <div fxFlex="60%">{{ component.description }}</div>
+      </div>
+    </div>
+  </section>
+
+
+  <section fxLayout="column" *ngIf="featureDetailController.model.feature.controllerMethods">
+    <h4>Controller Methods</h4>
+
+    <div fxFlex="50%" fxFlex.lt-lg="100%">
+      <div fxLayout="row" *ngFor="let controllerMethod of featureDetailController.model.feature.controllerMethods">
+        <div fxFlex="40%">{{ controllerMethod.name }}</div>
+        <div fxFlex="60%">{{ controllerMethod.description }}</div>
+      </div>
+    </div>
+  </section>
+
+</div>
