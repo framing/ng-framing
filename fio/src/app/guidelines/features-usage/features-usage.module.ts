@@ -11,6 +11,21 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
       subTitle: '',
       sections: [
         {
+          id: 'example-code',
+          title: 'Example Code',
+          rows: [
+            {
+              cells: [
+                {
+                  content: '\
+                    <p>The code referenced in this document is available at <a href="https://github.com/framing/ng-example" target="_blank">github.com/framing/ng-example</a>.</p>\
+                  ',
+                },
+              ],
+            },
+          ],
+        },
+        {
           id: 'anatomy-of-a-feature',
           title: 'Basic usage',
           rows: [
@@ -273,6 +288,26 @@ export class CustomSubmitHandlerController extends ExampleController {<br>\
   }<br>\
 }<br>\
                     </pre>\
+                  ',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'what-next',
+          title: 'What Next?',
+          rows: [
+            {
+              cells: [
+                {
+                  content: '\
+                    <p>If you still have questions, please <a href="mailto:ryan@biznas.io">email Biznas CEO Ryan Campbell</a> or \
+                      <a href="http://framing.herokuapp.com/">join the Framing slack team</a>.\
+                    </p>\
+                    <p>Check out the <a href="/guidelines/features-existing">Existing features</a> open sourced by the community.</p>\
+                    <p>Try out the <a href="http://framing.io/tasknas">Tasknas tutorial</a>.</p>\
+                    <p>Review the <a href="http://github.com/framing/ng-framing">@framing/ng-framing git repo</a>.</p>\
                   ',
                 },
               ],

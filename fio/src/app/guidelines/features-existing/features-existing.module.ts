@@ -26,6 +26,26 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
             },
           ],
         },
+        {
+          id: 'what-next',
+          title: 'What Next?',
+          rows: [
+            {
+              cells: [
+                {
+                  content: '\
+                    <p>If you still have questions, please <a href="mailto:ryan@biznas.io">email Biznas CEO Ryan Campbell</a> or \
+                      <a href="http://framing.herokuapp.com/">join the Framing slack team</a>.\
+                    </p>\
+                    <p>Please let us know in the comments below what features you would find useful.</p>\
+                    <p>Try out the <a href="http://framing.io/tasknas">Tasknas tutorial</a>.</p>\
+                    <p>Review the <a href="http://github.com/framing/ng-framing">@framing/ng-framing git repo</a>.</p>\
+                  ',
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
 

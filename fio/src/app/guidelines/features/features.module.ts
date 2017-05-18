@@ -11,6 +11,21 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
       subTitle: '',
       sections: [
         {
+          id: 'example-code',
+          title: 'Example Code',
+          rows: [
+            {
+              cells: [
+                {
+                  content: '\
+                    <p>The code referenced in this document is available at <a href="https://github.com/framing/ng-example" target="_blank">github.com/framing/ng-example</a>.</p>\
+                  ',
+                },
+              ],
+            },
+          ],
+        },
+        {
           id: 'anatomy-of-a-feature',
           title: 'Anatomy of a feature',
           rows: [
@@ -428,37 +443,19 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {<br>\
           ],
         },
         {
-          id: 'best-practices',
-          title: 'Best practices',
+          id: 'what-next',
+          title: 'What Next?',
           rows: [
             {
               cells: [
                 {
                   content: '\
-                    <ul>\
-                      <li>All business logic goes in feature controller class</li>\
-                      <li>Only view logic specific to component goes in component class</li>\
-                    </ul>\
-                  ',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 'fequently-asked-questions',
-          title: 'Fequently asked questions',
-          rows: [
-            {
-              cells: [
-                {
-                  content: '\
-                    <ul>\
-                      <li>Do regular Angular components work with Framing?</li>\
-                      <li>Why not just use components?</li>\
-                      <li>How do I customize the style of a feature?</li>\
-                      <li>How do I use ngrx with a feature?</li>\
-                    </ul>\
+                    <p>If you still have questions, please <a href="mailto:ryan@biznas.io">email Biznas CEO Ryan Campbell</a> or \
+                      <a href="http://framing.herokuapp.com/">join the Framing slack team</a>.\
+                    </p>\
+                    <p>Read the <a href="/guidelines/features-develop">Develop a feature</a> guide.</p>\
+                    <p>Try out the <a href="http://framing.io/tasknas">Tasknas tutorial</a>.</p>\
+                    <p>Review the <a href="http://github.com/framing/ng-framing">@framing/ng-framing git repo</a>.</p>\
                   ',
                 },
               ],

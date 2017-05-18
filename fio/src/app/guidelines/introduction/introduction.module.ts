@@ -24,7 +24,8 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
                       It’s a framework on top of a framework, a super framework really.\
                       It’s a higher level of abstraction, a new evolution of development… welcome :) If Angular was the C language, Framing would be C++.\
                       Our team is excited about it and we hope we can convince you of the same\
-                      (and if not [email Biznas CEO Ryan Campbell](mailto:ryan@biznas.io) and tell him why or [join the Framing slack team](http://framing.herokuapp.com/)).\
+                      (and if not <a href="mailto:ryan@biznas.io">email Biznas CEO Ryan Campbell</a> and \
+                      tell him why or <a href="http://framing.herokuapp.com/">join the Framing slack team</a>.\
                     </p>\
                     <p>The easiest way to understand what Framing is,\
                        is to compare the “pre-framing” typical way applications are built using Angular with the “post-framing” new way of assembling applications.\
@@ -139,9 +140,12 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
               cells: [
                 {
                   content: '\
-                    <p>If you still have questions, please [email Biznas CEO Ryan Campbell](mailto:ryan@biznas.io) or [join the Framing slack team](http://framing.herokuapp.com/).</p>\
-                    <p>Try out the [Tasknas tutorial](http://framing.io/tasknas).</p>\
-                    <p>Review the [@framing/ng-framing git repo](http://github.com/framing/ng-framing).</p>\
+                    <p>If you still have questions, please <a href="mailto:ryan@biznas.io">email Biznas CEO Ryan Campbell</a> or \
+                      <a href="http://framing.herokuapp.com/">join the Framing slack team</a>.\
+                    </p>\
+                    <p>Read the <a href="/guidelines/features">Features overview</a> guide.</p>\
+                    <p>Try out the <a href="http://framing.io/tasknas">Tasknas tutorial</a>.</p>\
+                    <p>Review the <a href="http://github.com/framing/ng-framing">@framing/ng-framing git repo</a>.</p>\
                   ',
                 },
               ],
