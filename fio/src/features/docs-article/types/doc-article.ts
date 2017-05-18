@@ -1,4 +1,5 @@
 export interface DocArticle {
+  id: string;
   title: string;
   subTitle?: string;
   sections: DocArticleSection[];

@@ -6,6 +6,7 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
 @NgModule(Framing((framing) => framing
   .frame(new DocsArticleFeature({
     article: {
+      id: 'features-usage',
       title: 'Use a Feature',
       subTitle: '',
       sections: [

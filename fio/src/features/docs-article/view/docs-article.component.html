@@ -1,25 +1,27 @@
-<h1>{{ docsArticleController.model.article.title }}</h1>
+<div fxLayout="column" style="margin: 20px">
+  <h1>{{ docsArticleController.model.article.title }}</h1>
 
-<h2 *ngIf="docsArticleController.model.article.subTitle">{{ docsArticleController.model.article.subTitle }}</h2>
+  <h2 *ngIf="docsArticleController.model.article.subTitle">{{ docsArticleController.model.article.subTitle }}</h2>
 
-<p>Contents</p>
+  <p>Contents</p>
 
-<ul>
-  <li *ngFor="let section of docsArticleController.model.article.sections">
-    <a [href]="'#' + section.id">{{ section.title }}</a>
-  </li>
-</ul>
+  <ul>
+    <li *ngFor="let section of docsArticleController.model.article.sections">
+      <a [href]="'#' + section.id">{{ section.title }}</a>
+    </li>
+  </ul>
 
-<section [id]="section.id" *ngFor="let section of docsArticleController.model.article.sections">
-  <h3>{{ section.title }}</h3>
+  <section [id]="section.id" *ngFor="let section of docsArticleController.model.article.sections">
+    <h3>{{ section.title }}</h3>
 
-  <h4 *ngIf="section.subTitle">{{ section.subTitle }}</h4>
+    <h4 *ngIf="section.subTitle">{{ section.subTitle }}</h4>
 
-  <div *ngFor="let row of section.rows" fxLayout="row" fxLayout.lt-md="column">
-    <div *ngFor="let cell of row.cells" [fxFlex]="cell.flex">
-      <div [innerHTML]="cell.content"></div>
+    <div *ngFor="let row of section.rows" fxLayout="row" fxLayout.lt-md="column">
+      <div *ngFor="let cell of row.cells" [fxFlex]="cell.flex">
+        <div [innerHTML]="cell.content"></div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<p>footer</p>
+  <disqus shortname="framing-io" [identifier]="'guidelines/' + docsArticleController.model.article.id" ></disqus>
+</div>

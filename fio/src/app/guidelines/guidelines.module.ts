@@ -17,8 +17,8 @@ import { DocsRootFeature } from 'features/docs-root/docs-root.feature';
           routerLink: '/guidelines/why-framing',
         },
         {
-          label: 'Prerequisities',
-          routerLink: '/guidelines/prerequisities',
+          label: 'Prerequisites',
+          routerLink: '/guidelines/prerequisites',
         },
         {
           label: 'Concepts',
@@ -84,7 +84,7 @@ import { DocsRootFeature } from 'features/docs-root/docs-root.feature';
     { path: 'features-usage', loadChildren: './features-usage/features-usage.module#FeaturesUsageModule' },
     { path: 'getting-started', loadChildren: './getting-started/getting-started.module#GettingStartedModule' },
     { path: 'introduction', loadChildren: './introduction/introduction.module#IntroductionModule' },
-    { path: 'prerequisities', loadChildren: './prerequisities/prerequisities.module#PrerequisitiesModule' },
+    { path: 'prerequisites', loadChildren: './prerequisites/prerequisites.module#PrerequisitesModule' },
     { path: 'process', loadChildren: './process/process.module#ProcessModule' },
     { path: 'why-framing', loadChildren: './why-framing/why-framing.module#WhyFramingModule' },
   ]),

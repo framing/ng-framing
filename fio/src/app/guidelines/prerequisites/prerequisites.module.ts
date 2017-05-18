@@ -6,12 +6,13 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
 @NgModule(Framing((framing) => framing
   .frame(new DocsArticleFeature({
     article: {
-      title: 'Prerequisities',
+      id: 'prerequisites',
+      title: 'Prerequisites',
       subTitle: '',
       sections: [
         {
-          id: 'prerequisities',
-          title: 'Prerequisities',
+          id: 'prerequisites',
+          title: 'Prerequisites',
           rows: [
             {
               cells: [
@@ -27,4 +28,4 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
 
   })),
 ))
-export class PrerequisitiesModule {}
+export class PrerequisitesModule {}
