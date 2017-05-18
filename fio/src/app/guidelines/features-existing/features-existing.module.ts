@@ -19,7 +19,7 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
                 {
                   content: '\
                     <ul>\
-                      <li>TBD</li>\
+                      <li><a href="/features/material/app">Material App</a></li>\
                     </ul>',
                 },
               ],
