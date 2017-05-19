@@ -96,24 +96,24 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
                 },
                 {
                   flex: '60%',
-                  content: '\
-                    <p><b>src/features/example/example.model.ts</b> TBD</p>\
-                    <pre>\
-export interface ExampleModel {<br>\
-  /**<br>\
-   * Number of times \'Press Me\' button has been clicked.<br>\
-   * Default is 0<br>\
-   */<br>\
-  count?: number;<br>\
-<br>\
-  /**<br>\
-   * Amount to increase count each time \'Press Me\' button is clicked.<br>\
-   * Default is 1.<br>\
-   */<br>\
-  increment?: number;<br>\
-}<br>\
-                    </pre>\
-                    ',
+                  content: `
+                    <p><b>src/features/example/example.model.ts</b> TBD</p>
+                    <pre><code>
+export interface ExampleModel {
+  /**
+   * Number of times 'Press Me' button has been clicked.
+   * Default is 0
+   */
+  count?: number;
+
+  /**
+   * Amount to increase count each time 'Press Me' button is clicked.
+   * Default is 1.
+   */
+  increment?: number;
+}
+                    </code></pre>
+                    `,
                 },
               ],
             },
@@ -127,38 +127,38 @@ export interface ExampleModel {<br>\
               cells: [
                 {
                   flex: '40%',
-                  content: '\
-                    <p>Controllers are TypeScript classes with methods containing feature logic.</p>\
-                    <p>Controllers are injectable services and injected by the features components to handle all user interaction.</p>\
-                    <p>Unlike traditional Angular, all feature/business logic is in the injectable controller.</p>\
-                    <p>Controllers can be extended by the developer using your feature to override any feature logic.</p>\
-                    <p>Controllers are well documented so that it is clear to the developer which method to override.</p>\
-                  ',
+                  content: `
+                    <p>Controllers are TypeScript classes with methods containing feature logic.</p>
+                    <p>Controllers are injectable services and injected by the features components to handle all user interaction.</p>
+                    <p>Unlike traditional Angular, all feature/business logic is in the injectable controller.</p>
+                    <p>Controllers can be extended by the developer using your feature to override any feature logic.</p>
+                    <p>Controllers are well documented so that it is clear to the developer which method to override.</p>
+                  `,
                 },
                 {
                   flex: '60%',
-                  content: '\
-                    <p><b>src/features/example/example.controller.ts</b> TBD</p>\
-                    <pre>\
-import { Injectable } from \'@angular/core\';<br>\
-import { Controller } from \'@framing/ng-core\';<br>\
-<br>\
-import { ExampleModel as M } from \'./example.model\';<br>\
-import { ExampleView as V } from \'./example.view\';<br>\
-<br>\
-@Injectable()<br>\
-export class ExampleController extends Controller&lt;M, V&gt; {<br>\
-  <br>\
-  /**<br>\
-   * Increases count property by the increment property.<br>\
-   */<br>\
-  public submit(): void {<br>\
-    this.model.count += this.model.increment;<br>\
-  }<br>\
-  <br>\
-}<br>\
-                    </pre>\
-                  ',
+                  content: `
+                    <p><b>src/features/example/example.controller.ts</b> TBD</p>
+                    <pre><code>
+import { Injectable } from '@angular/core';
+import { Controller } from '@framing/ng-core';
+
+import { ExampleModel as M } from './example.model';
+import { ExampleView as V } from './example.view';
+
+@Injectable()
+export class ExampleController extends Controller<M, V>; {
+  
+  /**
+   * Increases count property by the increment property.
+   */
+  public submit(): void {
+    this.model.count += this.model.increment;
+  }
+  
+}
+                    </code></pre>
+                  `,
                 },
               ],
             },
@@ -180,23 +180,23 @@ export class ExampleController extends Controller&lt;M, V&gt; {<br>\
                 },
                 {
                   flex: '60%',
-                  content: '<p><b>src/features/example/view/example-view.module.ts</b></p>\
-                    <pre>\
-import { NgModule } from \'@angular/core\';<br>\
-import { Framing } from \'@framing/ng-core\';<br>\
-<br>\
-import { ExampleSubComponent } from \'./example-sub.component\';<br>\
-import { ExampleComponent } from \'./example.component\';<br>\
-<br>\
-@NgModule(Framing((framing) => framing<br>\
-  .declarationsAndEntryComponents([<br>\
-    ExampleComponent,<br>\
-    ExampleSubComponent,<br>\
-  ]),<br>\
-))<br>\
-export class ExampleViewModule {}<br>\
-                    </pre>\
-                  ',
+                  content: `<p><b>src/features/example/view/example-view.module.ts</b></p>
+                    <pre><code>
+import { NgModule } from '@angular/core';
+import { Framing } from '@framing/ng-core';
+
+import { ExampleSubComponent } from './example-sub.component';
+import { ExampleComponent } from './example.component';
+
+@NgModule(Framing((framing) => framing
+  .declarationsAndEntryComponents([
+    ExampleComponent,
+    ExampleSubComponent,
+  ]),
+))
+export class ExampleViewModule {}
+                    </code></pre>
+                  `,
                 },
               ],
             },
@@ -213,23 +213,23 @@ export class ExampleViewModule {}<br>\
                 },
                 {
                   flex: '60%',
-                  content: '<p><b>src/features/example/view/example.component.ts</b></p>\
-                    <pre>\
-import { Component } from \'@angular/core\';<br>\
-<br>\
-import { ExampleController } from \'../example.controller\';<br>\
-<br>\
-@Component({<br>\
-  selector: \'example-component\',<br>\
-  templateUrl: \'./example.component.html\',<br>\
-})<br>\
-export class ExampleComponent {<br>\
-  constructor(<br>\
-    public exampleController: ExampleController,<br>\
-  ) {}<br>\
-}\
-                    </pre>\
-                  ',
+                  content: `<p><b>src/features/example/view/example.component.ts</b></p>
+                    <pre><code>
+import { Component } from '@angular/core';
+
+import { ExampleController } from '../example.controller';
+
+@Component({
+  selector: 'example-component',
+  templateUrl: './example.component.html',
+})
+export class ExampleComponent {
+  constructor(
+    public exampleController: ExampleController,
+  ) {}
+}
+                    </code></pre>
+                  `,
                 },
               ],
             },
@@ -245,24 +245,24 @@ export class ExampleComponent {<br>\
                 },
                 {
                   flex: '60%',
-                  content: '<p><b>src/features/example/view/example.component.html</b></p>\
-                    <pre>\
-&lt;h1&gt;Example Component&lt;/h1&gt;<br>\
-<br>\
-&lt;ng-template<br>\
-  [ngComponentOutlet]="exampleController.view.exampleSubComponent"&gt;<br>\
-&lt;/ng-template&gt;<br>\
-<br>\
-&lt;div&gt;<br>\
-  &lt;button<br>\
-    (click)="exampleController.submit()"&gt;<br>\
-    Press Me<br>\
-  &lt;/button&gt;<br>\
-&lt;/div&gt;<br>\
-<br>\
-&lt;h3&gt;Count {{ exampleController.model.count }}&lt;/h3&gt;\
-                    </pre>\
-                  ',
+                  content: `<p><b>src/features/example/view/example.component.html</b></p>
+                    <pre><code class="language-markup">
+<h1>Example Component</h1>
+
+<ng-template
+  [ngComponentOutlet]="exampleController.view.exampleSubComponent">
+</ng-template>
+
+<div>
+  <button
+    (click)="exampleController.submit()">
+    Press Me
+  </button>
+</div>
+
+<h3>Count {{ exampleController.model.count }}</h3>
+                  </code></pre>
+                  `,
                 },
               ],
             },
@@ -284,17 +284,17 @@ export class ExampleComponent {<br>\
                 },
                 {
                   flex: '60%',
-                  content: '<p><b>src/features/example/example.view.ts</b></p>\
-                    <pre>\
-import { Type } from \'@angular/core\';<br>\
-<br>\
-export interface ExampleView {<br>\
-  exampleComponent?: Type<any>;<br>\
-<br>\
-  exampleSubComponent?: Type<any>;<br>\
-}<br>\
-                    </pre>\
-                  ',
+                  content: `<p><b>src/features/example/example.view.ts</b></p>
+                    <pre><code>
+import { Type } from '@angular/core';
+
+export interface ExampleView {
+  exampleComponent?: Type<any>;
+
+  exampleSubComponent?: Type<any>;
+}
+                    </code></pre>
+                  `,
                 },
               ],
             },
@@ -314,22 +314,22 @@ export interface ExampleView {<br>\
                 },
                 {
                   flex: '60%',
-                  content: '<p><b>src/features/example/example.feature.ts</b></p>\
-                    <pre>\
-import { Type } from \'@angular/core\';<br>\
-import { Framer, FramingNgModule } from \'@framing/ng-core\';<br>\
-<br>\
-import { ExampleController } from \'./example.controller\';<br>\
-import { ExampleModel } from \'./example.model\';<br>\
-import { ExampleView } from \'./example.view\';<br>\
-<br>\
-import { ExampleSubComponent } from \'./view/example-sub.component\';<br>\
-import { ExampleViewModule } from \'./view/example-view.module\';<br>\
-import { ExampleComponent } from \'./view/example.component\';<br>\
-<br>\
-export class ExampleFeature extends Framer<ExampleModel, ExampleView> {<br>\
-<br>\
-                    </pre>',
+                  content: `<p><b>src/features/example/example.feature.ts</b></p>
+                    <pre><code>
+import { Type } from '@angular/core';
+import { Framer, FramingNgModule } from '@framing/ng-core';
+
+import { ExampleController } from './example.controller';
+import { ExampleModel } from './example.model';
+import { ExampleView } from './example.view';
+
+import { ExampleSubComponent } from './view/example-sub.component';
+import { ExampleViewModule } from './view/example-view.module';
+import { ExampleComponent } from './view/example.component';
+
+export class ExampleFeature extends Framer<ExampleModel, ExampleView> {
+
+                    </code></pre>`,
                 },
               ],
             },
@@ -343,11 +343,10 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {<br>\
                 },
                 {
                   flex: '60%',
-                  content: '\
-                    <pre>\
-  public get framerName(): string { return \'ExampleFeature\'; }<br>\
-<br>\
-                    </pre>',
+                  content: `
+                    <pre><code>
+  public get framerName(): string { return 'ExampleFeature'; }
+                    </code></pre>`,
                 },
               ],
             },
@@ -361,16 +360,16 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {<br>\
                 },
                 {
                   flex: '60%',
-                  content: '\
-                    <pre>\
-  public get defaultModel(): ExampleModel {<br>\
-    return {<br>\
-      count: 0,<br>\
-      increment: 1,<br>\
-    };<br>\
-  }<br>\
-<br>\
-                    </pre>',
+                  content: `
+                    <pre><code>
+  public get defaultModel(): ExampleModel {
+    return {
+      count: 0,
+      increment: 1,
+    };
+  }
+
+                    </code></pre>`,
                 },
               ],
             },
@@ -384,16 +383,16 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {<br>\
                 },
                 {
                   flex: '60%',
-                  content: '\
-                    <pre>\
-  public get defaultView(): ExampleView {<br>\
-    return {<br>\
-      exampleComponent: ExampleComponent,<br>\
-      exampleSubComponent: ExampleSubComponent,<br>\
-    };<br>\
-  }<br>\
-<br>\
-                    </pre>',
+                  content: `
+                    <pre><code>
+  public get defaultView(): ExampleView {
+    return {
+      exampleComponent: ExampleComponent,
+      exampleSubComponent: ExampleSubComponent,
+    };
+  }
+
+                    </code></pre>`,
                 },
               ],
             },
@@ -407,13 +406,13 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {<br>\
                 },
                 {
                   flex: '60%',
-                  content: '\
-                    <pre>\
-  public get defaultController(): Type<ExampleController> {<br>\
-    return ExampleController;<br>\
-  }<br>\
-<br>\
-                    </pre>',
+                  content: `
+                    <pre><code>
+  public get defaultController(): Type&lt;ExampleController> {
+    return ExampleController;
+  }
+
+                    </code></pre>`,
                 },
               ],
             },
@@ -427,16 +426,16 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {<br>\
                 },
                 {
                   flex: '60%',
-                  content: '\
-                    <pre>\
-  public frame(framing: FramingNgModule): void {<br>\
-    framing<br>\
-      .import(ExampleViewModule)<br>\
-      .component(this.theView.exampleComponent);<br>\
-  }<br>\
-}\
-                    </pre>\
-                  ',
+                  content: `
+                    <pre><code>
+  public frame(framing: FramingNgModule): void {
+    framing
+      .import(ExampleViewModule)
+      .component(this.theView.exampleComponent);
+  }
+}
+                    </code></pre>
+                  `,
                 },
               ],
             },
