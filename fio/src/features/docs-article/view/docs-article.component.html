@@ -18,7 +18,8 @@
 
     <div *ngFor="let row of section.rows" fxLayout="row" fxLayout.lt-md="column">
       <div *ngFor="let cell of row.cells" [fxFlex]="cell.flex">
-        <div [innerHTML]="cell.content"></div>
+        <div [innerHTML]="trustHTML(cell.content)"></div>
+        <docs-code-block *ngIf="cell.code" [code]="cell.code"></docs-code-block>
       </div>
     </div>
   </section>

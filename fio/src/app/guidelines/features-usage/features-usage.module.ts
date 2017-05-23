@@ -17,9 +17,9 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
             {
               cells: [
                 {
-                  content: '\
-                    <p>The code referenced in this document is available at <a href="https://github.com/framing/ng-example" target="_blank">github.com/framing/ng-example</a>.</p>\
-                  ',
+                  content: `
+                    <p>The code referenced in this document is available at <a href="https://github.com/framing/ng-example" target="_blank">github.com/framing/ng-example</a>.</p>
+                  `,
                 },
               ],
             },
@@ -33,27 +33,27 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
               cells: [
                 {
                   flex: '40%',
-                  content: '\
-                    <p>Create an Angular module.</p>\
-                    <p>Use Framing to configure your module</p>\
-                    <p>Create an instance of the feature you want a use and pass it to the Framing .frame() method</p>\
-                  ',
+                  content: `
+                    <p>Create an Angular module.</p>
+                    <p>Use Framing to configure your module</p>
+                    <p>Create an instance of the feature you want a use and pass it to the Framing .frame() method</p>
+                  `,
                 },
                 {
                   flex: '60%',
-                  content: '\
-                    <p><b>src/app/default/default.module.ts</b></p>\
-                    <pre>\
-import { NgModule } from \'@angular/core\';<br>\
-import { Framing } from \'@framing/ng-core\';<br>\
-<br>\
-import { ExampleFeature } from \'features/example/example.feature\';<br>\
-<br>\
-@NgModule(Framing((framing) => framing<br>\
-  .frame(new ExampleFeature()),<br>\
-))<br>\
-export class DefaultModule {}<br>\
-                    </pre>',
+                  content: `<p><b>src/app/default/default.module.ts</b></p>`,
+                  code: {
+                    content: `import { NgModule } from '@angular/core';
+import { Framing } from '@framing/ng-core';
+
+import { ExampleFeature } from 'features/example/example.feature';
+
+@NgModule(Framing((framing) => framing
+  .frame(new ExampleFeature()),
+))
+export class DefaultModule {}`,
+                    language: 'typescript',
+                  },
                 },
               ],
             },
@@ -67,33 +67,33 @@ export class DefaultModule {}<br>\
               cells: [
                 {
                   flex: '40%',
-                  content: '\
-                    <p>Create an Angular module.</p>\
-                    <p>Use Framing to configure your module</p>\
-                    <p>Create an instance of the feature you want a use and pass it to the Framing .frame() method</p>\
-                    <p>Called .model() on the feature and pass the default state to override.</p>\
-                  ',
+                  content: `
+                    <p>Create an Angular module.</p>
+                    <p>Use Framing to configure your module</p>
+                    <p>Create an instance of the feature you want a use and pass it to the Framing .frame() method</p>
+                    <p>Called .model() on the feature and pass the default state to override.</p>
+                  `,
                 },
                 {
                   flex: '60%',
-                  content: '\
-                    <p><b>src/app/custom-model/custom-model.module.ts</b></p>\
-                    <pre>\
-import { NgModule } from \'@angular/core\';<br>\
-import { Framing } from \'@framing/ng-core\';<br>\
-<br>\
-import { ExampleFeature } from \'features/example/example.feature\';<br>\
-<br>\
-@NgModule(Framing((framing) => framing<br>\
-  .frame(new ExampleFeature()<br>\
-    .model({<br>\
-      count: 5,<br>\
-      increment: 10,<br>\
-    }),<br>\
-  ),<br>\
-))<br>\
-export class CustomModelModule {}<br>\
-                  </pre>',
+                  content: `<p><b>src/app/custom-model/custom-model.module.ts</b></p>`,
+                  code: {
+                    content: `import { NgModule } from '@angular/core';
+import { Framing } from '@framing/ng-core';
+
+import { ExampleFeature } from 'features/example/example.feature';
+
+@NgModule(Framing((framing) => framing
+  .frame(new ExampleFeature()
+    .model({
+      count: 5,
+      increment: 10,
+    }),
+  ),
+))
+export class CustomModelModule {}`,
+                    language: 'typescript',
+                  },
                 },
               ],
             },
@@ -107,38 +107,37 @@ export class CustomModelModule {}<br>\
               cells: [
                 {
                   flex: '40%',
-                  content: '\
-                    <p>Create an Angular module.</p>\
-                    <p>Use Framing to configure your module</p>\
-                    <p>Create an instance of the feature you want a use and pass it to the Framing .frame() method</p>\
-                    <p>Import your custom view module.</p>\
-                    <p>Called .view() on the feature to override any components</p>\
-                  ',
+                  content: `
+                    <p>Create an Angular module.</p>
+                    <p>Use Framing to configure your module</p>
+                    <p>Create an instance of the feature you want a use and pass it to the Framing .frame() method</p>
+                    <p>Import your custom view module.</p>
+                    <p>Called .view() on the feature to override any components</p>
+                  `,
                 },
                 {
                   flex: '60%',
-                  content: '\
-                    <p><b>src/app/custom-example-component/custom-example-component.module.ts</b></p>\
-                    <pre>\
-import { NgModule } from \'@angular/core\';<br>\
-import { Framing } from \'@framing/ng-core\';<br>\
-<br>\
-import { ExampleFeature } from \'features/example/example.feature\';<br>\
-<br>\
-import { CustomExampleComponentViewModule } from \'./view/custom-example-component-view.module\';<br>\
-import { CustomExampleComponent } from \'./view/custom-example.component\';<br>\
-<br>\
-@NgModule(Framing((framing) => framing<br>\
-  .import(CustomExampleComponentViewModule)<br>\
-  .frame(new ExampleFeature()<br>\
-    .view({<br>\
-      exampleComponent: CustomExampleComponent,<br>\
-    }),<br>\
-  ),<br>\
-))<br>\
-export class CustomExampleComponentModule {}<br>\
-                    </pre>\
-                    ',
+                  content: `<p><b>src/app/custom-example-component/custom-example-component.module.ts</b></p>`,
+                  code: {
+                    content: `import { NgModule } from '@angular/core';
+import { Framing } from '@framing/ng-core';
+
+import { ExampleFeature } from 'features/example/example.feature';
+
+import { CustomExampleComponentViewModule } from './view/custom-example-component-view.module';
+import { CustomExampleComponent } from './view/custom-example.component';
+
+@NgModule(Framing((framing) => framing
+  .import(CustomExampleComponentViewModule)
+  .frame(new ExampleFeature()
+    .view({
+      exampleComponent: CustomExampleComponent,
+    }),
+  ),
+))
+export class CustomExampleComponentModule {}`,
+                    language: 'typescript',
+                  },
                 },
               ],
             },
@@ -146,27 +145,26 @@ export class CustomExampleComponentModule {}<br>\
               cells: [
                 {
                   flex: '40%',
-                  content: '\
-                    <p>Create the view module.</p>\
-                    <p>Declare any custom components</p>\
-                  ',
+                  content: `
+                    <p>Create the view module.</p>
+                    <p>Declare any custom components</p>
+                  `,
                 },
                 {
                   flex: '60%',
-                  content: '\
-                    <p><b>src/app/custom-example-component/view/custom-example-component-view.module.ts</b></p>\
-                    <pre>\
-import { NgModule } from \'@angular/core\';<br>\
-import { Framing } from \'@framing/ng-core\';<br>\
-<br>\
-import { CustomExampleComponent } from \'./custom-example.component\';<br>\
-<br>\
-@NgModule(Framing((framing) => framing<br>\
-  .declareAndEntryComponent(CustomExampleComponent),<br>\
-))<br>\
-export class CustomExampleComponentViewModule {}<br>\
-                    </pre>\
-                    ',
+                  content: `<p><b>src/app/custom-example-component/view/custom-example-component-view.module.ts</b></p>`,
+                  code: {
+                    content: `import { NgModule } from '@angular/core';
+import { Framing } from '@framing/ng-core';
+
+import { CustomExampleComponent } from './custom-example.component';
+
+@NgModule(Framing((framing) => framing
+  .declareAndEntryComponent(CustomExampleComponent),
+))
+export class CustomExampleComponentViewModule {}`,
+                    language: 'typescript',
+                  },
                 },
               ],
             },
@@ -174,18 +172,17 @@ export class CustomExampleComponentViewModule {}<br>\
               cells: [
                 {
                   flex: '40%',
-                  content: '\
-                    <p>Create the component template</p>\
-                  ',
+                  content: `
+                    <p>Create the component template</p>
+                  `,
                 },
                 {
                   flex: '60%',
-                  content: '\
-                    <p><b>src/app/custom-example-component/custom-example.component.html</b></p>\
-                    <pre>\
-&lt;h1&gt;Custom Example Component&lt;/h1&gt;\
-                    </pre>\
-                    ',
+                  content: `<p><b>src/app/custom-example-component/custom-example.component.html</b></p>`,
+                  code: {
+                    content: `<h1>Custom Example Component</h1>`,
+                    language: 'markup',
+                  },
                 },
               ],
             },
@@ -193,30 +190,29 @@ export class CustomExampleComponentViewModule {}<br>\
               cells: [
                 {
                   flex: '40%',
-                  content: '\
-                    <p>Create the component class</p>\
-                  ',
+                  content: `
+                    <p>Create the component class</p>
+                  `,
                 },
                 {
                   flex: '60%',
-                  content: '\
-                    <p><b>src/app/custom-example-component/view/custom-example.component.ts</b></p>\
-                    <pre>\
-import { Component } from \'@angular/core\';<br>\
-<br>\
-import { ExampleController } from \'features/example/example.controller\';<br>\
-<br>\
-@Component({<br>\
-  selector: \'custom-example-component\',<br>\
-  templateUrl: \'./custom-example.component.html\',<br>\
-})<br>\
-export class CustomExampleComponent {<br>\
-  constructor(<br>\
-    public exampleController: ExampleController,<br>\
-  ) {}<br>\
-}<br>\
-                    </pre>\
-                    ',
+                  content: `<p><b>src/app/custom-example-component/view/custom-example.component.ts</b></p>`,
+                  code: {
+                    content: `import { Component } from '@angular/core';
+
+import { ExampleController } from 'features/example/example.controller';
+
+@Component({
+  selector: 'custom-example-component',
+  templateUrl: './custom-example.component.html',
+})
+export class CustomExampleComponent {
+  constructor(
+    public exampleController: ExampleController,
+  ) {}
+}`,
+                    language: 'typescript',
+                  },
                 },
               ],
             },
@@ -230,34 +226,33 @@ export class CustomExampleComponent {<br>\
               cells: [
                 {
                   flex: '40%',
-                  content: '\
-                    <p>Create an Angular module.</p>\
-                    <p>Use Framing to configure your module</p>\
-                    <p>Create an instance of the feature you want a use and pass it to the Framing .frame() method</p>\
-                    <p>Import your custom view module.</p>\
-                    <p>Called .controller() on the feature and pass in your custom controller class.</p>\
-                  ',
+                  content: `
+                    <p>Create an Angular module.</p>
+                    <p>Use Framing to configure your module</p>
+                    <p>Create an instance of the feature you want a use and pass it to the Framing .frame() method</p>
+                    <p>Import your custom view module.</p>
+                    <p>Called .controller() on the feature and pass in your custom controller class.</p>
+                  `,
                 },
                 {
                   flex: '60%',
-                  content: '\
-                    <p><b>src/app/custom-submit-handler/custom-submit-handler.module.ts</b></p>\
-                    <pre>\
-import { NgModule } from \'@angular/core\';<br>\
-import { Framing } from \'@framing/ng-core\';<br>\
-<br>\
-import { ExampleFeature } from \'features/example/example.feature\';<br>\
-<br>\
-import { CustomSubmitHandlerController } from \'./custom-submit-handler.controller\';<br>\
-<br>\
-@NgModule(Framing((framing) => framing<br>\
-  .frame(new ExampleFeature()<br>\
-    .controller(CustomSubmitHandlerController),<br>\
-  ),<br>\
-))<br>\
-export class CustomSubmitHandlerModule {}<br>\
-                    </pre>\
-                  ',
+                  content: `<p><b>src/app/custom-submit-handler/custom-submit-handler.module.ts</b></p>`,
+                  code: {
+                    content: `import { NgModule } from '@angular/core';
+import { Framing } from '@framing/ng-core';
+
+import { ExampleFeature } from 'features/example/example.feature';
+
+import { CustomSubmitHandlerController } from './custom-submit-handler.controller';
+
+@NgModule(Framing((framing) => framing
+  .frame(new ExampleFeature()
+    .controller(CustomSubmitHandlerController),
+  ),
+))
+export class CustomSubmitHandlerModule {}`,
+                    language: 'typescript',
+                  },
                 },
               ],
             },
@@ -265,30 +260,30 @@ export class CustomSubmitHandlerModule {}<br>\
               cells: [
                 {
                   flex: '40%',
-                  content: '\
-                    <p>Create the controller class.</p>\
-                    <p>Mark it as @Injectable().</p>\
-                    <p>Extend the feature\'s default controller class.</p>\
-                    <p>Override any methods you wouldlike to use alternate logic for.</p>\
-                  ',
+                  content: `
+                    <p>Create the controller class.</p>
+                    <p>Mark it as @Injectable().</p>
+                    <p>Extend the feature's default controller class.</p>
+                    <p>Override any methods you wouldlike to use alternate logic for.</p>
+                  `,
                 },
                 {
                   flex: '60%',
-                  content: '\
-                    <p><b>src/app/custom-submit-handler/customer-submit-handler.controller.ts</b></p>\
-                    <pre>\
-import { Injectable } from \'@angular/core\';<br>\
-<br>\
-import { ExampleController } from \'features/example/example.controller\';<br>\
-<br>\
-@Injectable()<br>\
-export class CustomSubmitHandlerController extends ExampleController {<br>\
-  public submit(): void {<br>\
-    window.alert(\'Custom alert!\');<br>\
-  }<br>\
-}<br>\
-                    </pre>\
-                  ',
+                  content: `<p><b>src/app/custom-submit-handler/customer-submit-handler.controller.ts</b></p>`,
+                  code: {
+                    content: `import { Injectable } from '@angular/core';
+
+import { ExampleController } from 'features/example/example.controller';
+
+@Injectable()
+export class CustomSubmitHandlerController extends ExampleController {
+  public submit(): void {
+    window.alert('Custom alert!');
+  }
+}
+                    `,
+                    language: 'typescript',
+                  },
                 },
               ],
             },
@@ -301,14 +296,14 @@ export class CustomSubmitHandlerController extends ExampleController {<br>\
             {
               cells: [
                 {
-                  content: '\
-                    <p>If you still have questions, please <a href="mailto:ryan@biznas.io">email Biznas CEO Ryan Campbell</a> or \
-                      <a href="http://framing.herokuapp.com/">join the Framing slack team</a>.\
-                    </p>\
-                    <p>Check out the <a href="/guidelines/features-existing">Existing features</a> open sourced by the community.</p>\
-                    <p>Try out the <a href="http://framing.io/tasknas">Tasknas tutorial</a>.</p>\
-                    <p>Review the <a href="http://github.com/framing/ng-framing">@framing/ng-framing git repo</a>.</p>\
-                  ',
+                  content: `
+                    <p>If you still have questions, please <a href="mailto:ryan@biznas.io">email Biznas CEO Ryan Campbell</a> or 
+                      <a href="http://framing.herokuapp.com/">join the Framing slack team</a>.
+                    </p>
+                    <p>Check out the <a href="/guidelines/features-existing">Existing features</a> open sourced by the community.</p>
+                    <p>Try out the <a href="http://framing.io/tasknas">Tasknas tutorial</a>.</p>
+                    <p>Review the <a href="http://github.com/framing/ng-framing">@framing/ng-framing git repo</a>.</p>
+                  `,
                 },
               ],
             },
