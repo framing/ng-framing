@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -9,7 +9,7 @@ import { DocsRootController } from '../../docs-root/docs-root.controller';
   selector: 'docs-article',
   templateUrl: './docs-article.component.html',
 })
-export class DocsArticleComponent implements OnInit, AfterViewInit {
+export class DocsArticleComponent{
   public trustedContent: any;
 
   constructor(
@@ -17,11 +17,7 @@ export class DocsArticleComponent implements OnInit, AfterViewInit {
     public docsRootController: DocsRootController,
     private sanitizer: DomSanitizer,
   ) {}
-
-  public ngAfterViewInit(): void {}
-
-  public ngOnInit(): void {}
-
+  
   public trustHTML(html: any): any {
     return this.sanitizer.bypassSecurityTrustHtml(html);
   }

@@ -6,7 +6,6 @@ import { DocsRootModel } from './docs-root.model';
 import { DocsRootView } from './docs-root.view';
 
 import { MaterialAppFeature } from 'features/material-app/material-app.feature';
-import { PrismHighlightDirective } from './directives/prism-highlight.directive';
 
 export class DocsRootFeature extends Framer<DocsRootModel, DocsRootView> {
   public get framerName(): string { return 'DocsRoot'; }
@@ -28,7 +27,6 @@ export class DocsRootFeature extends Framer<DocsRootModel, DocsRootView> {
 
   public frame(framing: FramingNgModule): void {
     framing
-      .provide(PrismHighlightDirective)
       .frame(new MaterialAppFeature(this.theModel.materialApp));
   }
 }
