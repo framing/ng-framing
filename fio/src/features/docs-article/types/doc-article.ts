@@ -19,4 +19,10 @@ export interface DocArticleSectionRow {
 export interface DocArticleSectionCell {
   flex?: string | number;
   content: string;
+  code?: DocArticleCodeBlock;
+}
+
+export interface DocArticleCodeBlock {
+  content: string;
+  language: string;
 }

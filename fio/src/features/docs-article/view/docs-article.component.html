@@ -11,14 +11,18 @@
     </li>
   </ul>
 
-  <section [id]="section.id" *ngFor="let section of docsArticleController.model.article.sections">
+  <section [id]="section.id" *ngFor="let section of docsArticleController.model.article.sections; let s = index">
     <h3>{{ section.title }}</h3>
 
     <h4 *ngIf="section.subTitle">{{ section.subTitle }}</h4>
 
-    <div *ngFor="let row of section.rows" fxLayout="row" fxLayout.lt-md="column">
-      <div *ngFor="let cell of row.cells" [fxFlex]="cell.flex">
+    <div *ngFor="let row of section.rows; let r = index;" fxLayout="row" fxLayout.lt-md="column">
+      <div *ngFor="let cell of row.cells; let i = index" [fxFlex]="cell.flex">
         <div [innerHTML]="trustHTML(cell.content)"></div>
+        <!--<div id="cell{{s}}{{r}}{{i}}">
+          <div *ngIf="cell.code && generateCodeBlock(s, r, i, cell.code.content, cell.code.language)"></div>
+        </div>-->
+        <docs-code-block *ngIf="cell.code" [code]="cell.code"></docs-code-block>
       </div>
     </div>
   </section>
