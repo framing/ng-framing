@@ -1,1 +1,1 @@
-import './material-app/index';
+export * from './material-app/index';

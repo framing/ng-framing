@@ -1,1 +1,1 @@
-import './features/index';
+export * from './features/index';

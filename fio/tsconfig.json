@@ -6,6 +6,8 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
+      "@framing/ng-core": ["../dist/packages/ng-core"],
+      "@framing/ng-material": ["../dist/packages/ng-material"],
       "app/*": ["./src/app/*"],
       "features/*": ["./src/features/*"]
     },

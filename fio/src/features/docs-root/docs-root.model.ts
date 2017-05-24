@@ -1,4 +1,4 @@
-import { MaterialAppModel } from 'features/material-app/material-app.model';
+import { MaterialAppModel } from '@framing/ng-material';
 
 export interface DocsRootModel {
   materialApp?: MaterialAppModel;
