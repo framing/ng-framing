@@ -4,7 +4,11 @@ import { MaterialAppComponent } from '../material-app.component';
 
 @Component({
   selector: 'app-bar-title',
-  templateUrl: './app-bar-title.component.html',
+  template: `
+    <h2>
+      <span [innerHTML]="model.appBarTitle"></span>
+    </h2>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppBarTitleComponent extends MaterialAppComponent {}
