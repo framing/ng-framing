@@ -119,7 +119,7 @@ export abstract class Controller<M, V> {
     } else {
       this._view = _.assign({}, this._view, view);
     }
-    this._view = view;
+
     this._viewSubject.next(this._view);
   }
 }

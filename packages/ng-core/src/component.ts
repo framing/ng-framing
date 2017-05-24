@@ -16,16 +16,20 @@ export class Component<M, V, C extends Controller<M, V>> {
     controller: C,
     injector: Injector,
   ) {
+    this.controller = controller;
     this.changeDetectorRef = injector.get(ChangeDetectorRef);
 
-    controller.model$.subscribe((model) => {
-      this.model = model;
-      this.changeDetectorRef.markForCheck();
-    });
+    controller.model$.subscribe((model) => this.updateModel(model));
+    controller.view$.subscribe((view) => this.updateView(view));
+  }
 
-    controller.view$.subscribe((view) => {
-      this.view = view;
-      this.changeDetectorRef.markForCheck();
-    });
+  private updateModel(model: M): void {
+    this.model = model;
+    this.changeDetectorRef.markForCheck();
+  }
+
+  private updateView(view: V): void {
+    this.view = view;
+    this.changeDetectorRef.markForCheck();
   }
 }
