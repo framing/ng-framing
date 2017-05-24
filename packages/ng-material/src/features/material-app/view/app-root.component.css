@@ -1,0 +1,7 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.mat-sidenav-content { flex: 1 }
+
+html { height: 100%; }
+body { height: 100%; }
+app-root { height: 100%; }
