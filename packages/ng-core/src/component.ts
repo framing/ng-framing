@@ -4,13 +4,13 @@ import { Controller } from './controller';
 
 export class Component<M, V, C extends Controller<M, V>> {
 
-  private changeDetectorRef: ChangeDetectorRef;
-
   public model: M;
 
   public view: V;
 
   public controller: C;
+
+  private changeDetectorRef: ChangeDetectorRef;
 
   public constructor(
     controller: C,

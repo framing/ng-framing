@@ -71,13 +71,13 @@
   version "0.6.9"
   resolved "https://registry.yarnpkg.com/@biznas/ng-tslint-rules/-/ng-tslint-rules-0.6.9.tgz#cb4c74d2ca6904dda1310dc41e156ecf874ef1bd"
 
-"@framing/ng-core@0.8.3":
-  version "0.8.3"
-  resolved "https://registry.yarnpkg.com/@framing/ng-core/-/ng-core-0.8.3.tgz#a97e4f48e37ee70863e3781959395bfdfdeef526"
+"@framing/ng-core@0.8.4":
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/@framing/ng-core/-/ng-core-0.8.4.tgz#4e73c31fa283e2c81d71ab30793b4ffa1789012e"
 
-"@framing/ng-material@0.8.3":
-  version "0.8.3"
-  resolved "https://registry.yarnpkg.com/@framing/ng-material/-/ng-material-0.8.3.tgz#31b7f850fcb87b69ba2ba924df1f06a63272ba22"
+"@framing/ng-material@0.8.4":
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/@framing/ng-material/-/ng-material-0.8.4.tgz#239f42fef530259f11325f74e3e7cc7f6174dcb2"
 
 "@types/core-js@^0.9.37":
   version "0.9.41"
