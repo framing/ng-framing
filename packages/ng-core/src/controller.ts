@@ -1,16 +1,29 @@
+import * as _ from 'lodash';
+
 import { Injectable, Injector } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+
 import { Frame } from './frame';
 
 @Injectable()
-export abstract class Controller<Model, View> {
+export abstract class Controller<M, V> {
 
   // ========================================
   // private properties
   // ========================================
 
-  private _model: Model;
+  private _modelSubject: BehaviorSubject<M>;
 
-  private _view: View;
+  private _viewSubject: BehaviorSubject<V>;
+
+  private _model$: Observable<M>;
+
+  private _view$: Observable<V>;
+
+  private _model: M;
+
+  private _view: V;
 
   private _frame: Frame;
 
@@ -21,14 +34,24 @@ export abstract class Controller<Model, View> {
   // ========================================
 
   /**
+   * Model observable accessor.
+   */
+  public get model$(): Observable<M> { return this._model$; }
+
+  /**
+   * View observable accessor.
+   */
+  public get view$(): Observable<V> { return this._view$; }
+
+  /**
    * Model accessor.
    */
-  public get model(): Model { return this._model; }
+  public get model(): M { return this._model; }
 
   /**
    * View accessor.
    */
-  public get view(): View { return this._view; }
+  public get view(): V { return this._view; }
 
   /**
    * Frame accessor.
@@ -63,7 +86,11 @@ export abstract class Controller<Model, View> {
   /**
    * Called by framing after construction to link the model, view & frame for this controller.
    */
-  public initController(model: Model, view: View, frame: Frame, injector: Injector): void {
+  public initController(model: M, view: V, frame: Frame, injector: Injector): void {
+    this._modelSubject = new BehaviorSubject<M>(model);
+    this._viewSubject = new BehaviorSubject<V>(view);
+    this._model$ = this._modelSubject.asObservable();
+    this._view$ = this._viewSubject.asObservable();
     this._model = model;
     this._view = view;
     this._frame = frame;
@@ -74,5 +101,25 @@ export abstract class Controller<Model, View> {
       this._frame.resolveCancel$.subscribe(() => { this.onResolveCancel(); });
     }
     this.onControllerInit();
+  }
+
+  public updateModel(model: M, replace: boolean = false): void {
+    if (replace) {
+      this._model = model;
+    } else {
+      this._model = _.assign({}, this._model, model);
+    }
+
+    this._modelSubject.next(this._model);
+  }
+
+  public updateView(view: V, replace: boolean = false): void {
+    if (replace) {
+      this._view = view;
+    } else {
+      this._view = _.assign({}, this._view, view);
+    }
+    this._view = view;
+    this._viewSubject.next(this._view);
   }
 }
