@@ -1,16 +1,23 @@
-import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Injector } from '@angular/core';
 
 import { Controller } from './controller';
 
 export class Component<M, V, C extends Controller<M, V>> {
+
+  private changeDetectorRef: ChangeDetectorRef;
+
   public model: M;
 
   public view: V;
 
+  public controller: C;
+
   public constructor(
-    public controller: C,
-    private changeDetectorRef: ChangeDetectorRef,
+    controller: C,
+    injector: Injector,
   ) {
+    this.changeDetectorRef = injector.get(ChangeDetectorRef);
+
     controller.model$.subscribe((model) => {
       this.model = model;
       this.changeDetectorRef.markForCheck();

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Controller } from '@framing/ng-core';
 
-import { MaterialAppModel } from './material-app.model';
-import { MaterialAppView } from './material-app.view';
+import { MaterialAppModel as M } from './material-app.model';
+import { MaterialAppView as V } from './material-app.view';
 
 @Injectable()
-export class MaterialAppController extends Controller<MaterialAppModel, MaterialAppView> {
+export class MaterialAppController extends Controller<M, V> {
   public toggleSideNav(opened: boolean): void {
     this.updateModel({
       sideNavOpened: opened,
