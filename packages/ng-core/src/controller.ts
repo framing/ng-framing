@@ -105,7 +105,7 @@ export abstract class Controller<M, V> {
 
   public updateModel(model: M, replace: boolean = false): void {
     if (replace) {
-      this._model = model;
+      this._model = _.clone(model);
     } else {
       this._model = _.assign({}, this._model, model);
     }
@@ -115,7 +115,7 @@ export abstract class Controller<M, V> {
 
   public updateView(view: V, replace: boolean = false): void {
     if (replace) {
-      this._view = view;
+      this._view = _.clone(view);
     } else {
       this._view = _.assign({}, this._view, view);
     }
