@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -7,6 +7,8 @@ import { DocsArticleController } from '../docs-article.controller';
 @Component({
   selector: 'docs-article',
   templateUrl: './docs-article.component.html',
+  styleUrls: [ './docs-article.component.scss' ],
+  encapsulation: ViewEncapsulation.None,
 })
 export class DocsArticleComponent {
   public trustedContent: any;
