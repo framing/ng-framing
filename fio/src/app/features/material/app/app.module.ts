@@ -30,6 +30,7 @@ import { Framing } from '@framing/ng-core';
   <b>.frame(new MaterialAppFeature())</b>
 ))
 export class AppModule {}
+          <p>To run it, execute 'yarn start'.</p>
         `,
         modelProperties: [
           { name: 'appBarActions', description: 'AppNavItem[]' },
