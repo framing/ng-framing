@@ -7,7 +7,8 @@
 
   <ul>
     <li *ngFor="let section of docsArticleController.model.article.sections">
-      <a [href]="'#' + section.id">{{ section.title }}</a>
+      <!--<a [routerLink]="'#'' + section.id">{{section.title}]</a>-->
+      <a>{{ section.title }}</a>
     </li>
   </ul>
 
@@ -16,9 +17,9 @@
 
     <h4 *ngIf="section.subTitle">{{ section.subTitle }}</h4>
 
-    <div *ngFor="let row of section.rows" fxLayout="row" fxLayout.lt-md="column">
+    <div class="docs-row" *ngFor="let row of section.rows" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="24px">
       <div *ngFor="let cell of row.cells" [fxFlex]="cell.flex">
-        <div [innerHTML]="trustHTML(cell.content)"></div>
+        <div *ngIf="cell.content" [innerHTML]="trustHTML(cell.content)"></div>
         <docs-code-block *ngIf="cell.code" [code]="cell.code"></docs-code-block>
       </div>
     </div>

@@ -1,0 +1,30 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+side-nav-content {
+  .mat-list-item {
+    cursor: pointer;
+  }
+  .mat-list .mat-list-item .mat-list-item-content {
+    padding-left: 40px;
+    height: 40px;
+  }
+
+  .mat-list-item-content:hover {
+    text-decoration: underline;
+  }
+
+  [mg-subheader] {
+    padding-left: 10px;
+    margin: 11px 0;
+    p {
+      margin: 11px 0;    
+    }
+  }
+  .mat-list {
+    padding: 0;
+  }
+}
+
+h1, h2, h3, h4, h5, p, a {
+  font-family: Roboto, sans-serif;
+}

@@ -18,11 +18,12 @@ export interface DocArticleSectionRow {
 
 export interface DocArticleSectionCell {
   flex?: string | number;
-  content: string;
+  content?: string;
   code?: DocArticleCodeBlock;
 }
 
 export interface DocArticleCodeBlock {
+  filePath?: string;
   content: string;
   language: string;
 }

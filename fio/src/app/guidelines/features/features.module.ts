@@ -96,10 +96,8 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
                 },
                 {
                   flex: '60%',
-                  content: `
-                    <p><b>src/features/example/example.model.ts</b> TBD</p>
-                    `,
                   code: {
+                    filePath: `src/features/example/example.model.ts`,
                     content: `export interface ExampleModel {
   /**
    * Number of times 'Press Me' button has been clicked.
@@ -138,10 +136,8 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
                 },
                 {
                   flex: '60%',
-                  content: `
-                    <p><b>src/features/example/example.controller.ts</b> TBD</p>
-                  `,
                   code: {
+                    filePath: `src/features/example/example.controller.ts`,
                     content: `import { Injectable } from '@angular/core';
 import { Controller } from '@framing/ng-core';
 
@@ -182,8 +178,8 @@ export class ExampleController extends Controller<M, V>; {
                 },
                 {
                   flex: '60%',
-                  content: `<p><b>src/features/example/view/example-view.module.ts</b></p>`,
                   code: {
+                    filePath: `src/features/example/view/example-view.module.ts`,
                     content: `import { NgModule } from '@angular/core';
 import { Framing } from '@framing/ng-core';
 
@@ -215,8 +211,8 @@ export class ExampleViewModule {}`,
                 },
                 {
                   flex: '60%',
-                  content: `<p><b>src/features/example/view/example.component.ts</b></p>`,
                   code: {
+                    filePath: `src/features/example/view/example.component.ts`,
                     content: `import { Component } from '@angular/core';
 
 import { ExampleController } from '../example.controller';
@@ -247,8 +243,8 @@ export class ExampleComponent {
                 },
                 {
                   flex: '60%',
-                  content: `<p><b>src/features/example/view/example.component.html</b></p>`,
                   code: {
+                    filePath: `src/features/example/view/example.component.html`,
                     content: `<h1>Example Component</h1>
 
 <ng-template
@@ -286,8 +282,8 @@ export class ExampleComponent {
                 },
                 {
                   flex: '60%',
-                  content: `<p><b>src/features/example/example.view.ts</b></p>`,
                   code: {
+                    filePath: `src/features/example/example.view.ts`,
                     content: `import { Type } from '@angular/core';
 
 export interface ExampleView {
@@ -316,8 +312,8 @@ export interface ExampleView {
                 },
                 {
                   flex: '60%',
-                  content: `<p><b>src/features/example/example.feature.ts</b></p>`,
                   code: {
+                    filePath: `src/features/example/example.feature.ts`,
                     content: `import { Type } from '@angular/core';
 import { Framer, FramingNgModule } from '@framing/ng-core';
 

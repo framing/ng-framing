@@ -7,7 +7,7 @@ import { DocsArticleController } from '../docs-article.controller';
 @Component({
   selector: 'docs-article',
   templateUrl: './docs-article.component.html',
-  styleUrls: [ './docs-article.component.scss' ],
+  styleUrls: [ './theme.scss', './docs-article.component.scss' ],
   encapsulation: ViewEncapsulation.None,
 })
 export class DocsArticleComponent {
