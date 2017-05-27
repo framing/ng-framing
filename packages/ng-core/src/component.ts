@@ -21,6 +21,7 @@ export class Component<M, V, C extends Controller<M, V>> {
 
     controller.model$.subscribe((model) => this.updateModel(model));
     controller.view$.subscribe((view) => this.updateView(view));
+    controller.markForCheck$.subscribe(() => this.changeDetectorRef.markForCheck());
   }
 
   private updateModel(model: M): void {
