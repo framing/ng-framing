@@ -1,1 +1,6 @@
-<pre><code #codeAnchor class="langauge-{{code.language}}">{{codeBlock}}</code></pre>
+<div class="code-wrapper">
+  <p *ngIf="code.filePath" class="file-path">{{code.filePath}}</p>
+  <div class="inner-wrapper">
+    <pre><code #codeAnchor class="langauge-{{code.language}}">{{codeBlock}}</code></pre>
+  </div>
+</div>
