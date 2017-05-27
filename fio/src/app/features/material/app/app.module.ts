@@ -16,7 +16,8 @@ import { FeatureDetailFeature } from 'features/feature-detail/feature-detail.fea
         installation: `
           <p>git clone https://github.com/biznas/ng-app my-app</p>
           <p>cd my-app</p>
-          <p>npm i @framing/ng-material --save</p>
+          <p>yarn</p>
+          <p>yarn add @framing/ng-material --save</p>
         `,
         usage: `
           <p>Simply import MaterialAppFeature and create an instance of it in a Framing .frame() method call</p>
