@@ -127,7 +127,7 @@ export abstract class Controller<M, V> {
     this._modelSubject.next(this._model);
   }
 
-  public updateView(view: V, replace: boolean = false): void {
+  @Action() public updateView(view: V, replace: boolean = false): void {
     if (replace) {
       this._view = _.clone(view);
     } else {
