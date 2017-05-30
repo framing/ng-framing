@@ -1,5 +1,7 @@
 let controllers: any[] = [];
 const devTools: any = _createReduxDevtoolsExtension();
+let isListening: boolean = false;
+
 /* tslint:disable */
 export function Action(description: string = null, log: boolean = true): Function {
   return function (target: Function, propertyKey: string, descriptor: PropertyDescriptor): PropertyDescriptor {
@@ -25,7 +27,12 @@ export function Action(description: string = null, log: boolean = true): Functio
         args[_i] = arguments[_i];
       }
 
-      listenForChanges();
+      try {
+        listenForChanges();
+      } catch(e) {
+        console.log('Listen to Devtools failed: ');
+        console.log(e);
+      }
 
       originalMethod.apply(controller, args);
 
@@ -35,8 +42,15 @@ export function Action(description: string = null, log: boolean = true): Functio
           controllerIndex: controllerIndex,
           value: controller.model,
         }
-        devTools.send((description || propertyKey), state);
+
+        try {
+          devTools.send((description || propertyKey), state);
+        } catch(e) {
+          console.log('Send to Devtools failed: ');
+          console.log(e);
+        }
       }
+
       controller.markForCheck();
     };
 
@@ -49,6 +63,9 @@ export function Action(description: string = null, log: boolean = true): Functio
  * Changes state on the correct controller to match the state changes broadcast
  */
 function listenForChanges(): void {
+  if (isListening) return;
+  isListening = true;
+
   let connection = devTools.connect();
   connection.subscribe(
     (message: any) => {
@@ -68,9 +85,9 @@ function listenForChanges(): void {
 
 /**
  * Returns correct instance of redux dev tools installed
- * 
+ *
  * @export
- * @returns 
+ * @returns
  */
 export function _createReduxDevtoolsExtension() {
   const legacyExtensionKey = 'devToolsExtension';
