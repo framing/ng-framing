@@ -6,7 +6,10 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
-      "app/*": ["./src/app/*"]
+      "@framing/ng-core": ["../dist/packages/ng-core"],
+      "@framing/ng-material": ["../dist/packages/ng-material"],
+      "app/*": ["./src/app/*"],
+      "features/*": ["./src/features/*"]
     },
     "typeRoots": [
       "./node_modules/@types"

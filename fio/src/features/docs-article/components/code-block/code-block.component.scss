@@ -1,0 +1,24 @@
+@import "~prismjs/themes/prism";
+@import "~prismjs/plugins/unescaped-markup/prism-unescaped-markup";
+
+.code-wrapper {
+  background-color: #F1F1F1;
+  border: 0.5px solid #DBDBDB;
+  border-radius: 5px;
+  overflow-x: hidden;
+}
+
+.inner-wrapper {
+  overflow-x: auto;
+  padding: 10px;
+}
+
+.file-path {
+  background-color: #7E7E7E;
+  border: 0.5px solid #7E7E7E;
+  border-radius: 5px 5px 0 0;
+  color: #FAFAFA;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+}

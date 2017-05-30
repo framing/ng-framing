@@ -7,6 +7,7 @@ cd ${currentDir}
 
 PACKAGES=(
   ng-core
+  ng-material
   ng-security
   ng-ui)
 

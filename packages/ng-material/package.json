@@ -1,0 +1,32 @@
+{
+  "name": "@framing/ng-material",
+  "version": "0.0.0-PLACEHOLDER",
+  "description": "Framing for Angular - the material library",
+  "main": "./bundles/ng-material.umd.js",
+  "module": "./@framing/ng-material.es5.js",
+  "es2015": "./@framing/ng-material.js",
+  "typings": "./ng-material.d.ts",
+  "author": "framing",
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "@angular/common": "4.x.x",
+    "@angular/compiler": "4.x.x",
+    "@angular/compiler-cli": "4.x.x",
+    "@angular/core": "4.x.x",
+    "@angular/forms": "4.x.x",
+    "@angular/http": "4.x.x",
+    "@angular/material": "^2.0.0-beta.2",
+    "@angular/platform-browser": "4.x.x",
+    "@angular/platform-browser-dynamic": "4.x.x",
+    "@angular/platform-server": "4.x.x",
+    "@angular/router": "4.x.x",
+    "@framing/ng-core": "0.0.0-PLACEHOLDER",
+    "lodash": "4.x.x",
+    "rxjs": "5.2.x",
+    "zone.js": "0.8.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/framing/ng-framing.git"
+  }
+}

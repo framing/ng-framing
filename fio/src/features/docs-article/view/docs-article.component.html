@@ -1,0 +1,29 @@
+<div fxLayout="column" style="margin: 20px">
+  <h1>{{ docsArticleController.model.article.title }}</h1>
+
+  <h2 *ngIf="docsArticleController.model.article.subTitle">{{ docsArticleController.model.article.subTitle }}</h2>
+
+  <p>Contents</p>
+
+  <ul>
+    <li *ngFor="let section of docsArticleController.model.article.sections">
+      <!--<a [routerLink]="'#'' + section.id">{{section.title}]</a>-->
+      <a>{{ section.title }}</a>
+    </li>
+  </ul>
+
+  <section [id]="section.id" *ngFor="let section of docsArticleController.model.article.sections">
+    <h3>{{ section.title }}</h3>
+
+    <h4 *ngIf="section.subTitle">{{ section.subTitle }}</h4>
+
+    <div class="docs-row" *ngFor="let row of section.rows" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="24px">
+      <div *ngFor="let cell of row.cells" [fxFlex]="cell.flex">
+        <div *ngIf="cell.content" [innerHTML]="trustHTML(cell.content)"></div>
+        <docs-code-block *ngIf="cell.code" [code]="cell.code"></docs-code-block>
+      </div>
+    </div>
+  </section>
+
+  <disqus shortname="framing-io" [identifier]="'guidelines/' + docsArticleController.model.article.id" ></disqus>
+</div>

@@ -10,6 +10,7 @@ PUBLISH_VERSION=""
 
 PACKAGES=(
   ng-core
+  ng-material
   ng-security
   ng-tasknas-framers
   ng-ui)

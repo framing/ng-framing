@@ -1,16 +1,34 @@
+import * as _ from 'lodash';
+
 import { Injectable, Injector } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+
 import { Frame } from './frame';
 
 @Injectable()
-export abstract class Controller<Model, View> {
+export abstract class Controller<M, V> {
 
   // ========================================
   // private properties
   // ========================================
 
-  private _model: Model;
+  private _modelSubject: BehaviorSubject<M>;
 
-  private _view: View;
+  private _model$: Observable<M>;
+
+  private _model: M;
+
+  private _viewSubject: BehaviorSubject<V>;
+
+  private _view$: Observable<V>;
+
+  private _view: V;
+
+  private _markForCheckSubject: Subject<void>;
+
+  private _markForCheck$: Observable<void>;
 
   private _frame: Frame;
 
@@ -21,14 +39,29 @@ export abstract class Controller<Model, View> {
   // ========================================
 
   /**
+   * Model observable accessor.
+   */
+  public get model$(): Observable<M> { return this._model$; }
+
+  /**
    * Model accessor.
    */
-  public get model(): Model { return this._model; }
+  public get model(): M { return this._model; }
+
+  /**
+   * View observable accessor.
+   */
+  public get view$(): Observable<V> { return this._view$; }
 
   /**
    * View accessor.
    */
-  public get view(): View { return this._view; }
+  public get view(): V { return this._view; }
+
+  /**
+   * Mark for check observable accessor.
+   */
+  public get markForCheck$(): Observable<void> { return this._markForCheck$; }
 
   /**
    * Frame accessor.
@@ -63,16 +96,48 @@ export abstract class Controller<Model, View> {
   /**
    * Called by framing after construction to link the model, view & frame for this controller.
    */
-  public initController(model: Model, view: View, frame: Frame, injector: Injector): void {
+  public initController(model: M, view: V, frame: Frame, injector: Injector): void {
+    this._modelSubject = new BehaviorSubject<M>(model);
+    this._viewSubject = new BehaviorSubject<V>(view);
+    this._model$ = this._modelSubject.asObservable();
+    this._view$ = this._viewSubject.asObservable();
     this._model = model;
     this._view = view;
+    this._markForCheckSubject = new Subject<void>();
+    this._markForCheck$ = this._markForCheckSubject.asObservable();
     this._frame = frame;
     this._injector = injector;
+
     if (this._frame) {
       this._frame.resolveStart$.subscribe(() => { this.onResolveStart(); });
       this._frame.resolveEnd$.subscribe(() => { this.onResolveEnd(); });
       this._frame.resolveCancel$.subscribe(() => { this.onResolveCancel(); });
     }
+
     this.onControllerInit();
+  }
+
+  public updateModel(model: M, replace: boolean = false): void {
+    if (replace) {
+      this._model = _.clone(model);
+    } else {
+      this._model = _.assign({}, this._model, model);
+    }
+
+    this._modelSubject.next(this._model);
+  }
+
+  public updateView(view: V, replace: boolean = false): void {
+    if (replace) {
+      this._view = _.clone(view);
+    } else {
+      this._view = _.assign({}, this._view, view);
+    }
+
+    this._viewSubject.next(this._view);
+  }
+
+  public markForCheck(): void {
+    this._markForCheckSubject.next();
   }
 }
