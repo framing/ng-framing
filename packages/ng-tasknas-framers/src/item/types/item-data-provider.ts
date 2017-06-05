@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 export abstract class ItemDataProvider {
   public abstract queryItems(params: any): Observable<any>;

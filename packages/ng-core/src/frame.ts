@@ -1,5 +1,7 @@
 import { ActivatedRouteSnapshot } from '@angular/router';
-import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Subject } from 'rxjs/Subject';
 
 export class Frame {
 

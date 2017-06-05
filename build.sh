@@ -3,6 +3,8 @@
 set -u -e -o pipefail
 
 readonly currentDir=$(cd $(dirname $0); pwd)
+
+# TODO(i): wrap into subshell, so that we don't pollute CWD, but not yet to minimize diff collision with Jason
 cd ${currentDir}
 
 PACKAGES=(
@@ -11,36 +13,50 @@ PACKAGES=(
   ng-security
   ng-ui)
 
-NOBUILD_PACKAGES=(
+NODE_PACKAGES=(
   ng-tasknas-framers)
 
 BUILD_ALL=true
 BUNDLE=true
 VERSION_PREFIX=$(node -p "require('./package.json').version")
 VERSION_SUFFIX="-$(git log --oneline -1 | awk '{print $1}')"
-
+REMOVE_BENCHPRESS=false
+BUILD_EXAMPLES=true
 COMPILE_SOURCE=true
 TYPECHECK_ALL=true
+BUILD_TOOLS=true
 
 for ARG in "$@"; do
   case "$ARG" in
     --quick-bundle=*)
       COMPILE_SOURCE=false
       TYPECHECK_ALL=false
+      BUILD_EXAMPLES=false
+      BUILD_TOOLS=false
       ;;
     --packages=*)
       PACKAGES_STR=${ARG#--packages=}
       PACKAGES=( ${PACKAGES_STR//,/ } )
       BUILD_ALL=false
       ;;
-    --publish=*)
+    --bundle=*)
+      BUNDLE=( "${ARG#--bundle=}" )
+      ;;
+    --publish)
       VERSION_SUFFIX=""
+      REMOVE_BENCHPRESS=true
+      ;;
+    --examples=*)
+      BUILD_EXAMPLES=${ARG#--examples=}
       ;;
     --compile=*)
       COMPILE_SOURCE=${ARG#--compile=}
       ;;
     --typecheck=*)
       TYPECHECK_ALL=${ARG#--typecheck=}
+      ;;
+    --tools=*)
+      BUILD_TOOLS=${ARG#--tools=}
       ;;
     *)
       echo "Unknown option $ARG."
@@ -95,8 +111,8 @@ downlevelES2015() {
       ts_file="${BASH_REMATCH[1]}${2:-".es5.ts"}"
       cp ${file} ${ts_file}
 
-      echo "======           $TSC ${ts_file} --target es5 --module es2015 --noLib"
-      ($TSC ${ts_file} --target es5 --module es2015 --noLib --sourceMap) > /dev/null 2>&1 || true
+      echo "======           $TSC ${ts_file} --target es5 --module es2015 --noLib --sourceMap --importHelpers"
+      ($TSC ${ts_file} --target es5 --module es2015 --noLib --sourceMap --importHelpers) > /dev/null 2>&1 || true
       mapSources "${BASH_REMATCH[1]}${2:-".es5.js"}"
       rm -f ${ts_file}
     fi
@@ -148,6 +164,7 @@ rollupIndex() {
     done
   fi
 }
+
 
 #######################################
 # Recursively runs rollup on any entry point that has a "rollup.config.js" file
@@ -218,20 +235,6 @@ minify() {
 }
 
 #######################################
-# Rsync a package (no build packages)
-# Arguments:
-#   param1 - Source directory
-#   param2 - Out dir
-#   param3 - Package Name
-# Returns:
-#   None
-#######################################
-rsyncPackage() {
-  echo "======      [${3}]: RSYNC: $RSYNC -ru ${1}/* ${2} --include='*/' --include='*.ts' --include='*.html' --include='*.css' --include='*.scss' --include='*.less' --exclude='*'"
-  $RSYNC -ru --force ${1}/* ${2} --include='*/' --include='*.ts' --include='*.html' --include='*.css' --include='*.scss' --include='*.less' --exclude='*'
-}
-
-#######################################
 # Recursively compile package
 # Arguments:
 #   param1 - Source directory
@@ -243,16 +246,16 @@ rsyncPackage() {
 #######################################
 compilePackage() {
   echo "======      [${3}]: COMPILING: ${NGC} -p ${1}/tsconfig-build.json"
-  $TSC -p ${1}/tsconfig-build.json
-
-  echo "======      [${3}]: LINTING: $TSLINT -c ./tslint.json --type-check --project ${1}/tsconfig-build.json ${1}/**/*.ts"
-  $TSLINT -c ./tslint.json --type-check --project ${1}/tsconfig-build.json ${1}/**/*.ts
-
-  local package_name=$(basename "${2}")
-  echo "======           Create ${1}/../${package_name}.d.ts re-export file for Closure"
-  echo "$(cat ${LICENSE_BANNER}) ${N} export * from './${package_name}/index'" > ${2}/../${package_name}.d.ts
-  # FOR FUTURE AOT SUPPORT
-  # echo "{\"__symbolic\":\"module\",\"version\":3,\"metadata\":{},\"exports\":[{\"from\":\"./${package_name}/index\"}]}" > ${2}/../${package_name}.metadata.json
+  # For NODE_PACKAGES items (not getting rolled up)
+  if containsElement "${PACKAGE}" "${NODE_PACKAGES[@]}"; then
+    $NGC -p ${1}/tsconfig-build.json
+  else
+    local package_name=$(basename "${2}")
+    $NGC -p ${1}/tsconfig-build.json
+    echo "======           Create ${1}/../${package_name}.d.ts re-export file for Closure"
+    echo "$(cat ${LICENSE_BANNER}) ${N} export * from './${package_name}/index'" > ${2}/../${package_name}.d.ts
+    echo "{\"__symbolic\":\"module\",\"version\":3,\"metadata\":{},\"exports\":[{\"from\":\"./${package_name}/index\"}],\"flatModuleIndexRedirect\":true}" > ${2}/../${package_name}.metadata.json
+  fi
 
   for DIR in ${1}/* ; do
     [ -d "${DIR}" ] || continue
@@ -273,13 +276,30 @@ compilePackage() {
 #   None
 #######################################
 moveTypings() {
-  if [[ -f ${1}/index.d.ts ]]; then
+  if [[ -f ${1}/index.d.ts && -f ${1}/index.metadata.json ]]; then
     mv ${1}/index.d.ts ${1}/${2}.d.ts
+    mv ${1}/index.metadata.json ${1}/${2}.metadata.json
   fi
-  # FOR FUTURE AOT SUPPORT
-  # if [[ -f ${1}/index.metadata.json ]]; then
-  #   mv ${1}/index.metadata.json ${1}/${2}.metadata.json
-  # fi
+}
+
+#######################################
+# Adds a package.json in directories where needed (secondary entry point typings).
+# This is read by NGC to be able to find the flat module index.
+# Arguments:
+#   param1 - Source directory of typings files
+# Returns:
+#   None
+#######################################
+addNgcPackageJson() {
+  for DIR in ${1}/* ; do
+    [ -d "${DIR}" ] || continue
+    # Confirm there is an index.d.ts and index.metadata.json file. If so, create
+    # the package.json and recurse.
+    if [[ -f ${DIR}/index.d.ts && -f ${DIR}/index.metadata.json ]]; then
+      echo '{"typings": "index.d.ts"}' > ${DIR}/package.json
+      addNgcPackageJson ${DIR}
+    fi
+  done
 }
 
 #######################################
@@ -296,26 +316,36 @@ mapSources() {
 }
 
 VERSION="${VERSION_PREFIX}${VERSION_SUFFIX}"
-echo "====== BUILDING Framing ${VERSION} ======"
+echo "====== BUILDING: Version ${VERSION}"
 
 N="
 "
-NODE=node
-RSYNC=rsync
 TSC=`pwd`/node_modules/.bin/tsc
-NGC=`pwd`/node_modules/.bin/ngc
-TSLINT=`pwd`/node_modules/.bin/tslint
-MAP_SOURCES="${NODE} `pwd`/scripts/build/map_sources.js "
+NGC="node --max-old-space-size=3000 dist/tools/@angular/tsc-wrapped/src/main"
+MAP_SOURCES="node `pwd`/scripts/build/map_sources.js "
 UGLIFYJS=`pwd`/node_modules/.bin/uglifyjs
 TSCONFIG=./tools/tsconfig.json
 ROLLUP=`pwd`/node_modules/.bin/rollup
+
+if [[ ${BUILD_TOOLS} == true ]]; then
+  echo "====== (tools)COMPILING: \$(npm bin)/tsc -p ${TSCONFIG} ====="
+  rm -rf ./dist/tools/
+  mkdir -p ./dist/tools/
+  $(npm bin)/tsc -p ${TSCONFIG}
+
+  cp ./tools/@angular/tsc-wrapped/package.json ./dist/tools/@angular/tsc-wrapped
+fi
+
 
 if [[ ${BUILD_ALL} == true && ${TYPECHECK_ALL} == true ]]; then
   rm -rf ./dist/all/
   rm -rf ./dist/packages
 
+  mkdir -p ./dist/all/
+
   TSCONFIG="packages/tsconfig.json"
-  $TSC -p ${TSCONFIG}
+  $NGC -p ${TSCONFIG}
+
 fi
 
 if [[ ${BUILD_ALL} == true ]]; then
@@ -324,34 +354,6 @@ if [[ ${BUILD_ALL} == true ]]; then
     rm -rf ./dist/packages-dist
   fi
 fi
-
-mkdir ./dist/packages
-mkdir ./dist/packages-dist
-
-for PACKAGE in ${NOBUILD_PACKAGES[@]}
-do
-  PWD=`pwd`
-  ROOT_DIR=${PWD}/packages
-  SRC_DIR=${ROOT_DIR}/${PACKAGE}
-  NPM_DIR=${PWD}/dist/packages-dist/${PACKAGE}
-
-  rsyncPackage ${SRC_DIR} ${NPM_DIR} ${PACKAGE}
-
-  echo "======        Copy ${PACKAGE} package.json files"
-  rsync -am --include="package.json" --include="*/" --exclude=* ${SRC_DIR}/ ${NPM_DIR}/
-
-  cp ${ROOT_DIR}/README.md ${NPM_DIR}/
-  cp ${PWD}/LICENSE ${NPM_DIR}/
-
-  if [[ -d ${NPM_DIR} ]]; then
-    (
-      echo "======      VERSION: Updating version references"
-      cd ${NPM_DIR}
-      echo "======       EXECUTE: perl -p -i -e \"s/0\.0\.0\-PLACEHOLDER/${VERSION}/g\" $""(grep -ril 0\.0\.0\-PLACEHOLDER .)"
-      perl -p -i -e "s/0\.0\.0\-PLACEHOLDER/${VERSION}/g" $(grep -ril 0\.0\.0\-PLACEHOLDER .) < /dev/null 2> /dev/null
-    )
-  fi
-done
 
 for PACKAGE in ${PACKAGES[@]}
 do
@@ -363,13 +365,12 @@ do
   NPM_DIR=${PWD}/dist/packages-dist/${PACKAGE}
   MODULES_DIR=${NPM_DIR}/@framing
   BUNDLES_DIR=${NPM_DIR}/bundles
+
   LICENSE_BANNER=${ROOT_DIR}/license-banner.txt
 
   if [[ ${COMPILE_SOURCE} == true ]]; then
     rm -rf ${OUT_DIR}
     rm -f ${ROOT_OUT_DIR}/${PACKAGE}.js
-    rm -f ${ROOT_OUT_DIR}/${PACKAGE}.d.ts
-    rm -f ${ROOT_OUT_DIR}/${PACKAGE}.metadata.json
     compilePackage ${SRC_DIR} ${OUT_DIR} ${PACKAGE}
   fi
 
@@ -377,31 +378,38 @@ do
     echo "======      BUNDLING ${PACKAGE}: ${SRC_DIR} ====="
     rm -rf ${NPM_DIR} && mkdir -p ${NPM_DIR}
 
-    echo "======        Copy ${PACKAGE} typings"
-    $RSYNC -a --exclude=*.js --exclude=*.js.map ${OUT_DIR}/ ${NPM_DIR}
-    moveTypings ${NPM_DIR} ${PACKAGE}
+    if ! containsElement "${PACKAGE}" "${NODE_PACKAGES[@]}"; then
 
-    (
-      cd  ${SRC_DIR}
-      echo "======         Rollup ${PACKAGE}"
-      rollupIndex ${OUT_DIR} ${MODULES_DIR} ${ROOT_DIR}
+      echo "======        Copy ${PACKAGE} typings"
+      rsync -a --exclude=*.js --exclude=*.js.map ${OUT_DIR}/ ${NPM_DIR}
+      moveTypings ${NPM_DIR} ${PACKAGE}
 
-      echo "======         Downleveling ES2015 to ESM/ES5"
-      downlevelES2015 ${MODULES_DIR}
+      (
+        cd  ${SRC_DIR}
+        echo "======         Rollup ${PACKAGE}"
+        rollupIndex ${OUT_DIR} ${MODULES_DIR} ${ROOT_DIR}
 
-      echo "======         Run rollup conversions on ${PACKAGE}"
-      runRollup ${SRC_DIR}
-      addBanners ${BUNDLES_DIR}
-      minify ${BUNDLES_DIR}
+        echo "======         Downleveling ES2015 to ESM/ES5"
+        downlevelES2015 ${MODULES_DIR}
 
-    ) 2>&1 | grep -v "as external dependency"
+        echo "======         Run rollup conversions on ${PACKAGE}"
+        runRollup ${SRC_DIR}
+        addBanners ${BUNDLES_DIR}
+        minify ${BUNDLES_DIR}
 
-    echo "======        Copy ${PACKAGE} package.json files"
+      ) 2>&1 | grep -v "as external dependency"
+    else
+      echo "======        Copy ${PACKAGE} node tool"
+      rsync -a ${OUT_DIR}/ ${NPM_DIR}
+    fi
+
+    echo "======        Copy ${PACKAGE} package.json and .externs.js files"
     rsync -am --include="package.json" --include="*/" --exclude=* ${SRC_DIR}/ ${NPM_DIR}/
+    rsync -am --include="*.externs.js" --include="*/" --exclude=* ${SRC_DIR}/ ${NPM_DIR}/
 
     cp ${ROOT_DIR}/README.md ${NPM_DIR}/
-    cp ${PWD}/LICENSE ${NPM_DIR}/
   fi
+
 
   if [[ -d ${NPM_DIR} ]]; then
     (

@@ -1,6 +1,6 @@
 import { ActivatedRouteSnapshot, Route, RouterStateSnapshot } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 import { SecurityGuardModel } from './security-guard.model';
 

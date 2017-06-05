@@ -23,8 +23,6 @@ import { ItemListComponent } from './components/item-list.component';
 import { ItemNewComponent } from './components/item-new.component';
 import { ItemComponent } from './components/item.component';
 
-import * as _ from 'lodash';
-
 export class ItemFramer extends Framer<ItemModel, ItemView> {
 
   private _itemDataProvider: Type<ItemDataProvider> = ItemDataInMemoryService;

@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    !!!                                                                                   !!!
    !!!  This file is special in that it must be able to execute with wrong Node version  !!!
@@ -16,7 +24,7 @@ var issues = [];
 
 // coarse Node version check
 if (+process.version[1] < 5) {
-  issues.push('Framing build currently requires Node 5+. Use nvm to update your node version.');
+  issues.push('Angular build currently requires Node 5+. Use nvm to update your node version.');
 }
 
 try {
@@ -29,8 +37,20 @@ if (issues.length) {
   printWarning(issues);
   console.error(
       'Your environment doesn\'t provide the prerequisite dependencies.\n' +
-      'Please fix the issues listed above and then rerun the gulp command.');
+      'Please fix the issues listed above and then rerun the gulp command.\n' +
+      'Check out https://github.com/angular/angular/blob/master/DEVELOPER.md for more info.');
   process.exit(1);
+}
+
+// wrap in try/catch in case someone requires from within that file
+try {
+  checkNodeModules = require('./npm/check-node-modules.js');
+} catch (e) {
+  issues.push('Looks like you are missing some npm dependencies. Run: npm install');
+  throw e;
+} finally {
+  // print warnings and move on, the next steps will likely fail, but hey, we warned them.
+  printWarning(issues);
 }
 
 if (require.main === module) {
@@ -50,14 +70,8 @@ function checkEnvironment(reqs) {
       var foundNodeVersion = process.version;
       var foundNpmVersion = semver.clean(npmStdout);
       var foundYarnVersion = !yarnErr && semver.clean(yarnStdout);
-
-      if (process.argv.includes('--verbose')) {
-        console.info('Node version ' + foundNodeVersion);
-        console.info('Npm version ' + foundNpmVersion);
-        console.info('Yarn version ' + foundYarnVersion);
-      }
-
       var issues = [];
+
 
       if (!semver.satisfies(foundNodeVersion, reqs.requiredNodeVersion)) {
         issues.push(
@@ -84,6 +98,11 @@ function checkEnvironment(reqs) {
             'https://yarnpkg.com/lang/en/docs/install/');
       }
 
+      if (!checkNodeModules()) {
+        issues.push(
+            'Your node_modules directory is stale or out of sync with npm-shrinkwrap.json. Run: npm install');
+      }
+
       printWarning(issues);
     })
   });
@@ -99,12 +118,10 @@ function printWarning(issues) {
   console.warn('!'.repeat(110));
   console.warn('');
 
-  process.exit(1);
+  if (process.env.CI) {
+    process.exit(1);
+  }
 }
 
-const engines = require('../package.json').engines;
-checkEnvironment({
-  requiredNodeVersion: engines.node,
-  requiredNpmVersion: engines.npm,
-  requiredYarnVersion: engines.yarn
-});
+
+module.exports = checkEnvironment;

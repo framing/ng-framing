@@ -1,39 +1,33 @@
 {
   "compilerOptions": {
-    "target": "es2015",
-    "lib": ["es2015", "dom"],
+    "baseUrl": ".",
+    "declaration": true,
+    "stripInternal": true,
+    "experimentalDecorators": true,
+    "strictNullChecks": true,
     "module": "es2015",
     "moduleResolution": "node",
-
-    "rootDir": ".",
-    "baseUrl": ".",
+    "outDir": "../../dist/packages/ng-security",
     "paths": {
+      "rxjs/*": ["../../node_modules/rxjs/*"],
       "@framing/ng-core": ["../../dist/packages/ng-core"]
     },
-    "outDir": "../../dist/packages/ng-security",
-
-    "stripInternal": true,
-    "skipDefaultLibCheck": true,
-    "skipLibCheck": true,
-    "declaration": true,
+    "rootDir": ".",
     "sourceMap": true,
     "inlineSources": true,
-    "pretty": true,
-
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-
-    "noImplicitAny": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": false,
-
+    "target": "es2015",
+    "lib": ["es2015", "dom"],
+    "skipLibCheck": true,
     // don't auto-discover @types/node, it results in a ///<reference in the .d.ts output
     "types": []
   },
   "files": [
     "index.ts"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "strictMetadataEmit": true,
+    "flatModuleOutFile": "index.js",
+    "flatModuleId": "@framing/ng-security"
+  }
 }

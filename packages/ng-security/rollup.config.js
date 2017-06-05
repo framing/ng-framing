@@ -1,15 +1,25 @@
+import typescript from 'rollup-plugin-typescript';
+
+const globals = {
+  '@angular/core': 'ng.core',
+  '@framing/ng-core': 'framing.ng-core',
+  'rxjs/Observable': 'Rx',
+  'rxjs/ReplaySubject': 'Rx.ReplaySubject',
+  'rxjs/Subject': 'Rx',
+  'rxjs/Observer': 'Rx',
+  'rxjs/AnonymousSubscription': 'Rx',
+  'rxjs/Subscription': 'Rx',
+  'rxjs/observable/merge': 'Rx.Observable',
+  'rxjs/operator/share': 'Rx.Observable.prototype'
+};
+
 export default {
   entry: '../../dist/packages-dist/ng-security/@framing/ng-security.es5.js',
   dest: '../../dist/packages-dist/ng-security/bundles/ng-security.umd.js',
   format: 'umd',
   exports: 'named',
-  moduleName: 'ng.security',
-  globals: {
-    'rxjs/Observable': 'Rx',
-    'rxjs/Subject': 'Rx',
-    'rxjs/Observer': 'Rx',
-    'rxjs/Subscription': 'Rx',
-    'rxjs/observable/merge': 'Rx.Observable',
-    'rxjs/operator/share': 'Rx.Observable.prototype'
-  }
+  moduleName: 'framing.ng-security',
+  plugins: [typescript({typescript: require('typescript')})],
+  external: Object.keys(globals),
+  globals: globals
 };

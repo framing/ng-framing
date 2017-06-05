@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanLoad, Route, 
 import { SecurityGuardAuthorizer } from './security-guard-authorizer';
 import { SecurityGuardModel } from './security-guard.model';
 
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class SecurityGuardService implements CanActivate, CanActivateChild, CanLoad {

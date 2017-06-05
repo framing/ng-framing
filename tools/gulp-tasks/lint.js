@@ -6,12 +6,19 @@ module.exports = (gulp) => () => {
   const tslintConfig = require('../../tslint.json');
   return gulp
       .src([
+        // todo(vicb): add .js files when supported
+        // see https://github.com/palantir/tslint/pull/1515
         './modules/**/*.ts',
         './tools/**/*.ts',
         './*.ts',
 
+        // Ignore TypeScript mocks because it's not managed by us
+        '!./tools/@angular/tsc-wrapped/test/typescript.mocks.ts',
+
         // Ignore generated files due to lack of copyright header
+        // todo(alfaproject): make generated files lintable
         '!**/*.d.ts',
+        '!**/*.ngfactory.ts',
       ])
       .pipe(tslint({
         tslint: require('tslint').default,

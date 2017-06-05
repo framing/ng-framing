@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { Controller } from '@framing/ng-core';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 import { MaterialDialogModel as M } from './material-dialog.model';
 import { MaterialDialogView as V } from './material-dialog.view';
