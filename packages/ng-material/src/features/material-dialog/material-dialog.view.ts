@@ -9,5 +9,5 @@ export interface MaterialDialogView {
   /**
    *
    */
-  dialogHost: Type<any>;
+  dialogHost?: Type<any>;
 }
