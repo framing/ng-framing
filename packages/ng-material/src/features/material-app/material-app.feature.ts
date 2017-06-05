@@ -1,14 +1,12 @@
 import { Type } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MaterialModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { Framer, FramingNgModule } from '@framing/ng-core';
+
+import { MaterialFeature } from '../material/material.feature';
 
 import { MaterialAppController } from './material-app.controller';
 import { MaterialAppModel } from './material-app.model';
 import { MaterialAppView } from './material-app.view';
-
-import { MaterialAppViewModule } from './view/material-app-view.module';
 
 import { AppBarActionsComponent } from './view/app-bar-actions.component';
 import { AppBarTitleComponent } from './view/app-bar-title.component';
@@ -19,6 +17,7 @@ import { SideNavContentComponent } from './view/side-nav-content.component';
 import { SideNavSubTitleComponent } from './view/side-nav-sub-title.component';
 import { SideNavTitleComponent } from './view/side-nav-title.component';
 import { SideNavComponent } from './view/side-nav.component';
+import { MaterialAppViewModule } from './view/view.module';
 
 export class MaterialAppFeature extends Framer<MaterialAppModel, MaterialAppView> {
 
@@ -55,10 +54,9 @@ export class MaterialAppFeature extends Framer<MaterialAppModel, MaterialAppView
     framing
       .component(this.theView.appRoot)
       .imports([
-        FlexLayoutModule,
-        MaterialModule,
         RouterModule,
         MaterialAppViewModule,
-      ]);
+      ])
+      .frame(new MaterialFeature());
   }
 }

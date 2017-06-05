@@ -1,9 +1,9 @@
-import { ChangeDetectorRef, Injector, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Injector, OnDestroy, OnInit } from '@angular/core';
 import { AnonymousSubscription } from 'rxjs/Subscription';
 
 import { Controller } from './controller';
 
-export class Component<M, V, C extends Controller<M, V>> implements OnDestroy {
+export class Component<M, V, C extends Controller<M, V>> implements OnDestroy, OnInit {
 
   public model: M;
 
@@ -28,6 +28,10 @@ export class Component<M, V, C extends Controller<M, V>> implements OnDestroy {
       controller.view$.subscribe((view) => this.updateView(view)),
       controller.markForCheck$.subscribe(() => this.changeDetectorRef.markForCheck()),
     );
+  }
+
+  public ngOnInit(): void {
+
   }
 
   public ngOnDestroy(): void {

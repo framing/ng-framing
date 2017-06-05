@@ -27,22 +27,31 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
           ],
         },
         {
-          id: 'clone',
-          title: 'Clone the repo',
+          id: 'biz-new',
+          title: 'Use the Biz New command',
           rows: [
             {
               cells: [
                 {
-                  content: '\
-                    git clone https://github.com/biznas/ng-app-starter my-app\
-                  ',
+                  flex: '66%',
+                  content: `
+                    <p>Run the biz new command from the command line in the parent folder for where you would like the project created.</p>`,
+                },
+                {
+                  flex: '33%',
+                  content: `
+                    <p><b>Terminal command</b></p>`,
+                  code: {
+                    content: `biz new my-awesome-app`,
+                    language: 'bash',
+                  },
                 },
               ],
             },
           ],
         },
         {
-          id: 'blah',
+          id: 'next-steps',
           title: 'Are you using new or exisiting features?',
           rows: [
             {

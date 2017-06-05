@@ -34,6 +34,8 @@ export abstract class Controller<M, V> {
 
   private _injector: Injector;
 
+  private _refCount: number = 0;
+
   // ========================================
   // public methods
   // ========================================
@@ -115,6 +117,9 @@ export abstract class Controller<M, V> {
     }
 
     this.onControllerInit();
+
+    console.log('initController');
+    console.log(this);
   }
 
   public updateModel(model: M, replace: boolean = false): void {
@@ -139,5 +144,37 @@ export abstract class Controller<M, V> {
 
   public markForCheck(): void {
     this._markForCheckSubject.next();
+  }
+
+  public increaseRefCount(): void {
+    this._refCount++;
+
+    console.log('increaseRefCount');
+    console.log(this);
+
+    if (this._refCount === 1) {
+      this.onInit();
+    }
+  }
+
+  public decreaseRefCount(): void {
+    this._refCount--;
+
+    console.log('decreaseRefCount');
+    console.log(this);
+
+    if (this._refCount === 0) {
+      this.onDestroy();
+    }
+  }
+
+  public onInit(): void {
+    console.log('ngOnInit');
+    console.log(this);
+  }
+
+  public onDestroy(): void {
+    console.log('ngOnDestroy');
+    console.log(this);
   }
 }
