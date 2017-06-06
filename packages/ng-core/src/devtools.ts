@@ -1,7 +1,6 @@
 /**
  * Dev tool class used for framing integration with Redux DevTools
  *
- * @export
  * @class FramingTools
  */
 export class FramingTools {

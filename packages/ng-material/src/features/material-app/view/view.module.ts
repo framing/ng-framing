@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Framing } from '@framing/ng-core';
-
-import { MaterialFeature } from '../../material/material.feature';
+import { MaterialModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppBarActionsComponent } from './app-bar-actions.component';
 import { AppBarTitleComponent } from './app-bar-title.component';
@@ -17,8 +17,9 @@ import { SideNavComponent } from './side-nav.component';
 @NgModule(Framing((framing) => framing
   .imports([
     RouterModule,
+    MaterialModule,
+    FlexLayoutModule,
   ])
-  .frame(new MaterialFeature())
   .declarationsAndEntryComponents([
     AppBarActionsComponent,
     AppBarTitleComponent,
