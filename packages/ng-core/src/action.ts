@@ -37,7 +37,7 @@ export function Action(description: string = null, log: boolean = true): Functio
       originalMethod.apply(controller, args);
 
       // Need to log after the method has been ran and state is updated
-      if (log) {
+      if (log && devTools) {
         let state = {
           controllerIndex: controllerIndex,
           value: controller.model,
@@ -63,7 +63,7 @@ export function Action(description: string = null, log: boolean = true): Functio
  * Changes state on the correct controller to match the state changes broadcast
  */
 function listenForChanges(): void {
-  if (isListening) return;
+  if (isListening || !devTools) return;
   isListening = true;
 
   let connection = devTools.connect();
