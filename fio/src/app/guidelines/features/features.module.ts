@@ -146,14 +146,14 @@ import { ExampleView as V } from './example.view';
 
 @Injectable()
 export class ExampleController extends Controller<M, V>; {
-  
+
   /**
    * Increases count property by the increment property.
    */
   public submit(): void {
     this.model.count += this.model.increment;
   }
-  
+
 }`,
                     language: 'typescript',
                   },
@@ -179,7 +179,7 @@ export class ExampleController extends Controller<M, V>; {
                 {
                   flex: '60%',
                   code: {
-                    filePath: `src/features/example/view/example-view.module.ts`,
+                    filePath: `src/features/example/view/view.module.ts`,
                     content: `import { NgModule } from '@angular/core';
 import { Framing } from '@framing/ng-core';
 
@@ -213,19 +213,19 @@ export class ExampleViewModule {}`,
                   flex: '60%',
                   code: {
                     filePath: `src/features/example/view/example.component.ts`,
-                    content: `import { Component } from '@angular/core';
+                    content: `import { Injectable } from '@angular/core';
+import { Action, Controller } from '@framing/ng-core';
 
-import { ExampleController } from '../example.controller';
+import { ExampleModel as M } from './example.model';
+import { ExampleView as V } from './example.view';
 
-@Component({
-  selector: 'example-component',
-  templateUrl: './example.component.html',
-})
-export class ExampleComponent {
-  constructor(
-    public exampleController: ExampleController,
-  ) {}
-}`,
+@Injectable()
+export class ExampleController extends Controller<M, V> {
+  @Action() public submit(): void {
+    this.model.count += this.model.increment;
+  }
+}
+`,
                     language: 'typescript',
                   },
                 },
@@ -247,18 +247,19 @@ export class ExampleComponent {
                     filePath: `src/features/example/view/example.component.html`,
                     content: `<h1>Example Component</h1>
 
-<ng-template
-  [ngComponentOutlet]="exampleController.view.exampleSubComponent">
-</ng-template>
+<ng-container
+  [ngComponentOutlet]="view.exampleSubComponent">
+</ng-container>
 
 <div>
   <button
-    (click)="exampleController.submit()">
+    (click)="controller.submit()">
     Press Me
   </button>
 </div>
 
-<h3>Count {{ exampleController.model.count }}</h3>`,
+<h3>Count {{ model.count }}</h3>
+`,
                     language: 'markup',
                   },
                 },
@@ -317,9 +318,9 @@ export interface ExampleView {
                     content: `import { Type } from '@angular/core';
 import { Framer, FramingNgModule } from '@framing/ng-core';
 
-import { ExampleController } from './example.controller';
-import { ExampleModel } from './example.model';
-import { ExampleView } from './example.view';
+import { ExampleController as C } from './example.controller';
+import { ExampleModel as M } from './example.model';
+import { ExampleView as V } from './example.view';
 
 import { ExampleSubComponent } from './view/example-sub.component';
 import { ExampleViewModule } from './view/example-view.module';
@@ -343,7 +344,7 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {`,
                   flex: '60%',
                   content: ``,
                   code: {
-                    content: `public get framerName(): string { return 'ExampleFeature'; }`,
+                    content: `public get framerName(): string { return 'Example'; }`,
                     language: 'typescript',
                   },
                 },
@@ -361,7 +362,7 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {`,
                   flex: '60%',
                   content: ``,
                   code: {
-                    content: `public get defaultModel(): ExampleModel {
+                    content: `public get defaultModel(): M {
     return {
       count: 0,
       increment: 1,
@@ -384,10 +385,10 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {`,
                   flex: '60%',
                   content: ``,
                   code: {
-                    content: `public get defaultView(): ExampleView {
+                    content: `public get defaultView(): V {
     return {
-      exampleComponent: ExampleComponent,
-      exampleSubComponent: ExampleSubComponent,
+      example: ExampleComponent,
+      exampleSub: ExampleSubComponent,
     };
   }`,
                     language: 'typescript',
@@ -407,8 +408,8 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {`,
                   flex: '60%',
                   content: ``,
                   code: {
-                    content: `public get defaultController(): Type&lt;ExampleController> {
-    return ExampleController;
+                    content: `public get defaultController(): Type<C> {
+    return C;
   }`,
                     language: 'typescript',
                   },
@@ -430,7 +431,7 @@ export class ExampleFeature extends Framer<ExampleModel, ExampleView> {`,
                     content: `public frame(framing: FramingNgModule): void {
     framing
       .import(ExampleViewModule)
-      .component(this.theView.exampleComponent);
+      .component(this.theView.example);
   }
 }`,
                     language: 'typescript',

@@ -4,6 +4,7 @@ export * from './framing-container-outlet/index';
 export * from './framing-components/index';
 export * from './component';
 export * from './controller';
+export * from './devtools';
 export * from './frame';
 export * from './framer.helper';
 export * from './framer';
