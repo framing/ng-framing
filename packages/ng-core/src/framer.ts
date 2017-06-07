@@ -6,12 +6,14 @@ import { Frame } from './frame';
 import { FramingNgModule } from './framing-ng-module';
 
 import * as _ from 'lodash';
+import { FramingTools } from './devtools';
 
 /**
  * @description This is a description
  */
 export abstract class Framer<Model, View> {
   private static _nextId: number = 1;
+  private devTools: FramingTools = FramingTools.Instance;
 
   // ========================================
   // public properties
@@ -290,12 +292,14 @@ export abstract class Framer<Model, View> {
             provide: this.framerIdent + '-Controller',
             useFactory: (injector: Injector) => {
               if (controllerInstance) {
+                this.devTools.addController(this.framerName, controllerInstance);
                 return controllerInstance;
               }
               self._injector = injector;
               controllerInstance = injector.get(this.framerIdent + '-ControllerInternal');
-              controllerInstance.initController(this._model, this._view, this._frame, injector);
+              controllerInstance.initController(this._model, this._view, this._frame, this.framerName, injector);
               this.framerOnControllerInit(controllerInstance);
+              this.devTools.addController(this.framerName, controllerInstance);
               return controllerInstance;
             },
             deps: [ Injector ],

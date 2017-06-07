@@ -4,7 +4,7 @@ import { Framing } from '@framing/ng-core';
 import { DocsRootFeature } from 'features/docs-root/docs-root.feature';
 
 @NgModule(Framing((framing) => framing
-  .frame(new DocsRootFeature({
+  .use(new DocsRootFeature({
     materialApp: {
       sideNavTitle: 'Framing Guidelines',
       sideNavItems: [

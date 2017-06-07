@@ -452,6 +452,10 @@ export class FramingNgModule {
     return this;
   }
 
+  public use(...framers: Framer<any, any>[]): FramingNgModule {
+    return this.frame(...framers);
+  }
+
   /**
    * Builds @NgModule() config in the following order:
    * - Route framers

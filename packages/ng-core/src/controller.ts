@@ -32,6 +32,8 @@ export abstract class Controller<M, V> {
 
   private _frame: Frame;
 
+  private _framerName: string;
+
   private _injector: Injector;
 
   private _refCount: number = 0;
@@ -98,7 +100,7 @@ export abstract class Controller<M, V> {
   /**
    * Called by framing after construction to link the model, view & frame for this controller.
    */
-  public initController(model: M, view: V, frame: Frame, injector: Injector): void {
+  public initController(model: M, view: V, frame: Frame, framerName: string, injector: Injector): void {
     this._modelSubject = new BehaviorSubject<M>(model);
     this._viewSubject = new BehaviorSubject<V>(view);
     this._model$ = this._modelSubject.asObservable();
@@ -109,6 +111,7 @@ export abstract class Controller<M, V> {
     this._markForCheck$ = this._markForCheckSubject.asObservable();
     this._frame = frame;
     this._injector = injector;
+    this._framerName = framerName;
 
     if (this._frame) {
       this._frame.resolveStart$.subscribe(() => { this.onResolveStart(); });
