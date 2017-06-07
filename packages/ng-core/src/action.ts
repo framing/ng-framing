@@ -1,4 +1,7 @@
-let controllers: any[] = [];
+import { FramingTools } from './devtools';
+
+let framingTools: FramingTools = FramingTools.Instance;
+// let controllers: any[] = [];
 const devTools: any = _createReduxDevtoolsExtension();
 let isListening: boolean = false;
 
@@ -14,14 +17,14 @@ export function Action(description: string = null, log: boolean = true): Functio
     descriptor.value = function (): void {
       let args = [];
       let controller: any = this;
-      let controllerIndex: number;
+      // let controllerIndex: number;
 
-      if (controllers.indexOf(controller) <= -1) {
-        controllers.push(controller);
-        controllerIndex = controllers.length - 1;
-      } else {
-        controllerIndex = controllers.indexOf(controller);
-      }
+      // if (controllers.indexOf(controller) <= -1) {
+      //   controllers.push(controller);
+      //   controllerIndex = controllers.length - 1;
+      // } else {
+      //   controllerIndex = controllers.indexOf(controller);
+      // }
 
       for (let _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
@@ -39,7 +42,8 @@ export function Action(description: string = null, log: boolean = true): Functio
       // Need to log after the method has been ran and state is updated
       if (log && devTools) {
         let state = {
-          controllerIndex: controllerIndex,
+          framerName: controller._framerName,
+          // controllerIndex: controllerIndex,
           value: controller.model,
         }
 
@@ -71,13 +75,14 @@ function listenForChanges(): void {
     (message: any) => {
       if (!!message.state) {
         let messageState: any = JSON.parse(message.state);
-        let messageController: any = controllers[messageState.controllerIndex]
+        let messageController: any = framingTools.findFramer(messageState.framerName);
 
-        for (let prop in messageController.model) {
-          messageController.model[prop] = messageState.value[prop];
+        if (messageController) {
+          for (let prop in messageController.model) {
+            messageController.model[prop] = messageState.value[prop];
+          }
+          messageController.markForCheck();
         }
-
-        messageController.markForCheck();
       }
     }
   )

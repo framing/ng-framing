@@ -5,7 +5,7 @@
  */
 export class FramingTools {
   private static _instance: FramingTools;
-  public instantiatedFramers: any[];
+  public instantiatedControllers: any = {};
 
   public constructor() {}
 
@@ -13,11 +13,15 @@ export class FramingTools {
     return this._instance || (this._instance = new this());
   }
 
-  public addFramer(framer: any): void {
-    this.instantiatedFramers.push(framer);
+  public addController(framerName: string, controller: any): void {
+    this.instantiatedControllers[framerName] = controller;
   }
 
-  public getAllFramers(): any {
-    return this.instantiatedFramers;
+  public getAllControllers(): any {
+    return this.instantiatedControllers;
+  }
+
+  public findFramer(key: any): any {
+    return this.instantiatedControllers[key] ? this.instantiatedControllers[key] : null;
   }
 }
