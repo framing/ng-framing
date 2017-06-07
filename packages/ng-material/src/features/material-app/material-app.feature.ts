@@ -1,8 +1,7 @@
 import { Type } from '@angular/core';
+import { MaterialModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { Framer, FramingNgModule } from '@framing/ng-core';
-
-import { MaterialFeature } from '../material/material.feature';
 
 import { MaterialAppController } from './material-app.controller';
 import { MaterialAppModel } from './material-app.model';
@@ -52,11 +51,11 @@ export class MaterialAppFeature extends Framer<MaterialAppModel, MaterialAppView
 
   public frame(framing: FramingNgModule): void {
     framing
-      .component(this.theView.appRoot)
+      .root(this.theView.appRoot)
       .imports([
+        MaterialModule,
         RouterModule,
         MaterialAppViewModule,
-      ])
-      .frame(new MaterialFeature());
+      ]);
   }
 }

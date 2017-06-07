@@ -149,35 +149,23 @@ export abstract class Controller<M, V> {
     this._markForCheckSubject.next();
   }
 
-  public increaseRefCount(): void {
+  public attach(): void {
     this._refCount++;
 
-    console.log('increaseRefCount');
-    console.log(this);
-
     if (this._refCount === 1) {
-      this.onInit();
+      this.onAttached();
     }
   }
 
-  public decreaseRefCount(): void {
+  public detach(): void {
     this._refCount--;
 
-    console.log('decreaseRefCount');
-    console.log(this);
-
     if (this._refCount === 0) {
-      this.onDestroy();
+      this.onDetached();
     }
   }
 
-  public onInit(): void {
-    console.log('ngOnInit');
-    console.log(this);
-  }
+  public onAttached(): void { }
 
-  public onDestroy(): void {
-    console.log('ngOnDestroy');
-    console.log(this);
-  }
+  public onDetached(): void { }
 }

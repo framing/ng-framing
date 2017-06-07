@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { FramingEmptyParentComponent } from './empty-parent.component';
+import { FramingRootComponent } from './root.component';
 
 @NgModule({
   imports: [
@@ -9,9 +10,11 @@ import { FramingEmptyParentComponent } from './empty-parent.component';
   ],
   declarations: [
     FramingEmptyParentComponent,
+    FramingRootComponent,
   ],
   exports: [
     FramingEmptyParentComponent,
+    FramingRootComponent,
   ],
 })
 export class FramingComponentsModule {}
