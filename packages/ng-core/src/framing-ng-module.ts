@@ -64,6 +64,13 @@ export class FramingNgModule {
     return this;
   }
 
+  public bootstrap(bootstrap: any[]): FramingNgModule {
+    const flattened = [].concat.apply([], bootstrap);
+    this._ngModule.bootstrap = _.uniqWith(this._ngModule.bootstrap.concat(_.reject(flattened, _.isNil)), _.isEqual);
+
+    return this;
+  }
+
   /**
    * Add a child route. Adds to '' route by default
    */

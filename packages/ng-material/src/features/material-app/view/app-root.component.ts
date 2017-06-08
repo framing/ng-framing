@@ -11,11 +11,11 @@ import { MaterialAppComponent } from '../material-app.component';
       </md-toolbar>
 
       <md-sidenav-container fxFlex="100%" fxLayout="row">
-        <md-sidenav mode="side" [opened]="model.sideNavOpened" class="sidenav">
+        <md-sidenav mode="side" [opened]="model.sideNavOpened" style="width: 200px">
           <ng-container [ngComponentOutlet]="view.sideNav"></ng-container>
         </md-sidenav>
 
-        <div fxFlex="100%">
+        <div style="overflow: auto; margin: 0; width: 100%; height: 100%;">
           <router-outlet></router-outlet>
         </div>
 

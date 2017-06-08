@@ -3,7 +3,6 @@ import * as _ from 'lodash';
 import { Injectable, Injector } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 
 import { Frame } from './frame';
 
@@ -26,9 +25,9 @@ export abstract class Controller<M, V> {
 
   private _view: V;
 
-  private _markForCheckSubject: Subject<void>;
+  private _markForCheckSubject: BehaviorSubject<any>;
 
-  private _markForCheck$: Observable<void>;
+  private _markForCheck$: Observable<any>;
 
   private _frame: Frame;
 
@@ -107,7 +106,7 @@ export abstract class Controller<M, V> {
     this._view$ = this._viewSubject.asObservable();
     this._model = model;
     this._view = view;
-    this._markForCheckSubject = new Subject<void>();
+    this._markForCheckSubject = new BehaviorSubject<any>(true);
     this._markForCheck$ = this._markForCheckSubject.asObservable();
     this._frame = frame;
     this._injector = injector;
@@ -146,14 +145,16 @@ export abstract class Controller<M, V> {
   }
 
   public markForCheck(): void {
-    this._markForCheckSubject.next();
+    this._markForCheckSubject.next(true);
   }
 
   public attach(): void {
     this._refCount++;
 
     if (this._refCount === 1) {
-      this.onAttached();
+      setTimeout(() => {
+        this.onAttached();
+      });
     }
   }
 
@@ -161,7 +162,9 @@ export abstract class Controller<M, V> {
     this._refCount--;
 
     if (this._refCount === 0) {
-      this.onDetached();
+      setTimeout(() => {
+        this.onDetached();
+      });
     }
   }
 

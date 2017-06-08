@@ -28,7 +28,7 @@ import { MaterialAppComponent } from '../material-app.component';
         <ng-template [ngComponentOutlet]="view.appBarActions"></ng-template>
       </span>
 
-      <button md-button class="md-icon-button" aria-label="More"
+      <button md-icon-button aria-label="More"
         (click)="controller.toggleRightNav(!model.rightNavOpened)">
         <md-icon>more_vert</md-icon>
       </button>

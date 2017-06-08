@@ -18,6 +18,8 @@ import { SideNavTitleComponent } from './view/side-nav-title.component';
 import { SideNavComponent } from './view/side-nav.component';
 import { MaterialAppViewModule } from './view/view.module';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 export class MaterialAppFeature extends Framer<MaterialAppModel, MaterialAppView> {
 
   public get framerName(): string { return 'MaterialApp'; }
@@ -53,6 +55,7 @@ export class MaterialAppFeature extends Framer<MaterialAppModel, MaterialAppView
     framing
       .root(this.theView.appRoot)
       .imports([
+        BrowserAnimationsModule,
         MaterialModule,
         RouterModule,
         MaterialAppViewModule,
