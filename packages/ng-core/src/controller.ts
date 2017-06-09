@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
 import { Frame } from './frame';
+// import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export abstract class Controller<M, V> {
@@ -25,9 +26,10 @@ export abstract class Controller<M, V> {
 
   private _view: V;
 
-  private _markForCheckSubject: BehaviorSubject<any>;
+  private _markForCheckSubject: BehaviorSubject<boolean>;
 
-  private _markForCheck$: Observable<any>;
+  private _markForCheck$: Observable<boolean>;
+
 
   private _frame: Frame;
 
@@ -64,7 +66,7 @@ export abstract class Controller<M, V> {
   /**
    * Mark for check observable accessor.
    */
-  public get markForCheck$(): Observable<void> { return this._markForCheck$; }
+  public get markForCheck$(): Observable<boolean> { return this._markForCheck$; }
 
   /**
    * Frame accessor.
@@ -106,7 +108,7 @@ export abstract class Controller<M, V> {
     this._view$ = this._viewSubject.asObservable();
     this._model = model;
     this._view = view;
-    this._markForCheckSubject = new BehaviorSubject<any>(true);
+    this._markForCheckSubject = new BehaviorSubject<boolean>(true);
     this._markForCheck$ = this._markForCheckSubject.asObservable();
     this._frame = frame;
     this._injector = injector;
