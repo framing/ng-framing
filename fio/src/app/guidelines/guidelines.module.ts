@@ -1,32 +1,33 @@
 import { NgModule } from '@angular/core';
-import { Framing } from '@framing/ng-core';
+import { Framing, FramingDevToolsFeature } from '@framing/ng-core';
 
 import { DocsRootFeature } from 'features/docs-root/docs-root.feature';
 
 @NgModule(Framing((framing) => framing
+  .use(new FramingDevToolsFeature({}))
   .use(new DocsRootFeature({
     materialApp: {
       sideNavTitle: 'Framing Guidelines',
       sideNavItems: [
         {
           label: 'Introduction',
-          routerLink: '/guidelines/introduction',
+          routerLink: '/introduction',
         },
         {
           label: 'Why Framing?',
-          routerLink: '/guidelines/why-framing',
+          routerLink: '/why-framing',
         },
         {
           label: 'Prerequisites',
-          routerLink: '/guidelines/prerequisites',
+          routerLink: '/prerequisites',
         },
         {
           label: 'Concepts',
-          routerLink: '/guidelines/concepts',
+          routerLink: '/concepts',
         },
         {
           label: 'Getting started',
-          routerLink: '/guidelines/getting-started',
+          routerLink: '/getting-started',
         },
         //
         {
@@ -35,11 +36,11 @@ import { DocsRootFeature } from 'features/docs-root/docs-root.feature';
         },
         {
           label: 'Build a new app',
-          routerLink: '/guidelines/applications-develop',
+          routerLink: '/applications-develop',
         },
         {
           label: 'Refactoring an app',
-          routerLink: '/guidelines/applications-refactor',
+          routerLink: '/applications-refactor',
         },
         //
         {
@@ -48,19 +49,19 @@ import { DocsRootFeature } from 'features/docs-root/docs-root.feature';
         },
         {
           label: 'Features overview',
-          routerLink: '/guidelines/features',
+          routerLink: '/features',
         },
         {
           label: 'Develop a feature',
-          routerLink: '/guidelines/features-develop',
+          routerLink: '/features-develop',
         },
         {
           label: 'Use a feature',
-          routerLink: '/guidelines/features-usage',
+          routerLink: '/features-usage',
         },
         {
           label: 'Existing features',
-          routerLink: '/guidelines/features-existing',
+          routerLink: '/features-existing',
         },
         //
         {
@@ -69,12 +70,13 @@ import { DocsRootFeature } from 'features/docs-root/docs-root.feature';
         },
         {
           label: 'Process overview',
-          routerLink: '/guidelines/process',
+          routerLink: '/process',
         },
       ],
     },
   }))
   .children([
+    { path: '', redirectTo: 'introduction' },
     { path: 'applications-develop', loadChildren: './applications-develop/applications-develop.module#ApplicationsDevelopModule' },
     { path: 'applications-refactor', loadChildren: './applications-refactor/applications-refactor.module#ApplicationsRefactorModule' },
     { path: 'concepts', loadChildren: './concepts/concepts.module#ConceptsModule' },

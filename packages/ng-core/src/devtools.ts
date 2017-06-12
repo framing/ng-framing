@@ -21,7 +21,7 @@ export class FramingTools {
     return this.instantiatedControllers;
   }
 
-  public findFramer(key: any): any {
+  public getControllerByKey(key: any): any {
     return this.instantiatedControllers[key] ? this.instantiatedControllers[key] : null;
   }
 }
