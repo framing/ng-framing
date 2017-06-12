@@ -3,7 +3,8 @@ import './vendor';
 
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from './app/app.module';
+// import { AppModule } from './app/app.module';
+import { GuidelinesModule } from './app/guidelines/guidelines.module';
 
 /* tslint:disable:no-var-requires */
 const buildConfig = require('build-config'); // require path is a webpack config alias
@@ -21,6 +22,6 @@ if (buildConfig.isReleaseBuild) {
   console.group = () => {};
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
+platformBrowserDynamic().bootstrapModule(GuidelinesModule)
   .catch((err) => console.error(err))
   .then((platformRef) => { console.log('Bootstrap done'); });

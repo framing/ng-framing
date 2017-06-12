@@ -1,6 +1,8 @@
 import { FramingTools } from './devtools';
 
 let framingTools: FramingTools = FramingTools.Instance;
+let stateRoot: any = {};
+let onLoad: boolean = true;
 // let controllers: any[] = [];
 const devTools: any = _createReduxDevtoolsExtension();
 let isListening: boolean = false;
@@ -37,14 +39,33 @@ export function Action(description: string = null, log: boolean = true): Functio
         console.log(e);
       }
 
+      // Send the initial state if this is the first time connecting to the dev tools
+      if (onLoad && log && devTools) {
+        onLoad = !onLoad;
+        stateRoot[controller._framerName] = controller.model;
+        let state = {
+          framerName: controller._framerName,
+          value: stateRoot,
+        }
+        try {
+          devTools.send((description || propertyKey), state);
+        } catch(e) {
+          console.log('Send to Devtools failed: ');
+          console.log(e);
+        }
+      }
+
       originalMethod.apply(controller, args);
 
       // Need to log after the method has been ran and state is updated
       if (log && devTools) {
+
+        stateRoot[controller._framerName] = controller.model;
+
         let state = {
           framerName: controller._framerName,
           // controllerIndex: controllerIndex,
-          value: controller.model,
+          value: stateRoot,
         }
 
         try {
@@ -75,11 +96,10 @@ function listenForChanges(): void {
     (message: any) => {
       if (!!message.state) {
         let messageState: any = JSON.parse(message.state);
-        let messageController: any = framingTools.findFramer(messageState.framerName);
-
+        let messageController: any = framingTools.getControllerByKey(messageState.framerName);
         if (messageController) {
           for (let prop in messageController.model) {
-            messageController.model[prop] = messageState.value[prop];
+            messageController.model[prop] = messageState.value[messageState.framerName][prop];
           }
           messageController.markForCheck();
         }

@@ -1,3 +1,4 @@
+export * from './features/index';
 export * from './action';
 export * from './framing-component-outlet/index';
 export * from './framing-container-outlet/index';
