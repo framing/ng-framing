@@ -6,7 +6,7 @@ import { MaterialAppComponent } from '../material-app.component';
   selector: 'app-bar',
   template: `
     <div fxLayout="row" class="md-toolbar-tools">
-      <button md-button fxFlex="none" class="md-icon-button" aria-label="toggle Menu"
+      <button md-icon-button fxFlex="none" class="md-icon-button" aria-label="toggle Menu"
         (click)="controller.toggleSideNav(!model.sideNavOpened)"
         *ngIf="model.isRoot">
         <md-icon>menu</md-icon>
