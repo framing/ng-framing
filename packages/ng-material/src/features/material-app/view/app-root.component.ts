@@ -6,16 +6,16 @@ import { MaterialAppComponent } from '../material-app.component';
   selector: 'app-root',
   template: `
     <div fxLayout="column" style="height: 100%">
-      <md-toolbar fxLayout="row">
+      <md-toolbar fxLayout="row" color="primary">
         <ng-container [ngComponentOutlet]="view.appBar"></ng-container>
       </md-toolbar>
 
       <md-sidenav-container fxFlex="100%" fxLayout="row">
-        <md-sidenav mode="side" [opened]="model.sideNavOpened" class="sidenav">
+        <md-sidenav mode="side" [opened]="model.sideNavOpened" style="min-width: 200px">
           <ng-container [ngComponentOutlet]="view.sideNav"></ng-container>
         </md-sidenav>
 
-        <div fxFlex="100%">
+        <div style="overflow: auto; margin: 0; width: 100%; height: 100%;">
           <router-outlet></router-outlet>
         </div>
 

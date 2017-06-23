@@ -5,9 +5,9 @@ import { MaterialAppComponent } from '../material-app.component';
 @Component({
   selector: 'side-nav-title',
   template: `
-    <div class="md-toolbar-tools">
+    <md-toolbar color="accent">
       <h3 [innerHTML]="model.sideNavTitle"></h3>
-    </div>
+    </md-toolbar>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

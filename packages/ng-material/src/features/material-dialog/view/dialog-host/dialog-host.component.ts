@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, Injector, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 
 import { MaterialDialogComponent } from '../../material-dialog.component';
-import { MaterialDialogController } from '../../material-dialog.controller';
+
 
 @Component({
   template: '<div></div>',

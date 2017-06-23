@@ -10,9 +10,12 @@ import { FramingContainerOutletContent } from './framing-container-outlet/contai
 import { FramingContainerOutletResolver } from './framing-container-outlet/container-outlet.resolver';
 
 import { Framer } from './framer';
-import { FramingComponentsModule, FramingEmptyParentComponent, FramingRootComponent } from './framing-components/index';
 import { FramingRootComponentConfig } from './framing-root-component-config';
 import { FramingRouteConfig } from './framing-route-config';
+
+import { FramingEmptyParentComponent } from './framing-components/empty-parent.component';
+import { FramingComponentsModule } from './framing-components/framing-components.module';
+import { FramingRootComponent } from './framing-components/root.component';
 
 /**
  *
@@ -57,6 +60,13 @@ export class FramingNgModule {
         (this._ngModule as any)[key] = _.uniqWith((this._ngModule as any)[key].concat(_.reject((ngModule as any)[key], _.isNil)), _.isEqual);
       });
     }
+
+    return this;
+  }
+
+  public bootstrap(bootstrap: any[]): FramingNgModule {
+    const flattened = [].concat.apply([], bootstrap);
+    this._ngModule.bootstrap = _.uniqWith(this._ngModule.bootstrap.concat(_.reject(flattened, _.isNil)), _.isEqual);
 
     return this;
   }
@@ -452,6 +462,10 @@ export class FramingNgModule {
     return this;
   }
 
+  public use(...framers: Framer<any, any>[]): FramingNgModule {
+    return this.frame(...framers);
+  }
+
   /**
    * Builds @NgModule() config in the following order:
    * - Route framers
@@ -500,12 +514,7 @@ export class FramingNgModule {
         FormsModule,
       ]), _.isEqual);
 
-      m.declarations = _.uniqWith(m.declarations.concat([ this._rootComponent ]), _.isEqual);
-      if (this._rootComponentConfig.hybrid) {
-        m.entryComponents = _.uniqWith(m.entryComponents.concat([ this._rootComponent ]), _.isEqual);
-      } else {
-        m.bootstrap = _.uniqWith(m.bootstrap.concat([ this._rootComponent ]), _.isEqual);
-      }
+      m.bootstrap = _.uniqWith(m.bootstrap.concat([ this._rootComponent ]), _.isEqual);
     } else {
       m.imports = _.uniqWith(m.imports.concat([
         CommonModule,

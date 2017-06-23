@@ -6,4 +6,6 @@ export interface AppNavItem {
   routerLink?: string;
 
   isSubheader?: boolean;
+
+  action?: Function;
 }

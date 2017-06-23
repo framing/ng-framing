@@ -3,9 +3,9 @@ import * as _ from 'lodash';
 import { Injectable, Injector } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 
 import { Frame } from './frame';
+// import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export abstract class Controller<M, V> {
@@ -26,11 +26,14 @@ export abstract class Controller<M, V> {
 
   private _view: V;
 
-  private _markForCheckSubject: Subject<void>;
+  private _markForCheckSubject: BehaviorSubject<boolean>;
 
-  private _markForCheck$: Observable<void>;
+  private _markForCheck$: Observable<boolean>;
+
 
   private _frame: Frame;
+
+  private _framerName: string;
 
   private _injector: Injector;
 
@@ -63,7 +66,7 @@ export abstract class Controller<M, V> {
   /**
    * Mark for check observable accessor.
    */
-  public get markForCheck$(): Observable<void> { return this._markForCheck$; }
+  public get markForCheck$(): Observable<boolean> { return this._markForCheck$; }
 
   /**
    * Frame accessor.
@@ -98,17 +101,18 @@ export abstract class Controller<M, V> {
   /**
    * Called by framing after construction to link the model, view & frame for this controller.
    */
-  public initController(model: M, view: V, frame: Frame, injector: Injector): void {
+  public initController(model: M, view: V, frame: Frame, framerName: string, injector: Injector): void {
     this._modelSubject = new BehaviorSubject<M>(model);
     this._viewSubject = new BehaviorSubject<V>(view);
     this._model$ = this._modelSubject.asObservable();
     this._view$ = this._viewSubject.asObservable();
     this._model = model;
     this._view = view;
-    this._markForCheckSubject = new Subject<void>();
+    this._markForCheckSubject = new BehaviorSubject<boolean>(true);
     this._markForCheck$ = this._markForCheckSubject.asObservable();
     this._frame = frame;
     this._injector = injector;
+    this._framerName = framerName;
 
     if (this._frame) {
       this._frame.resolveStart$.subscribe(() => { this.onResolveStart(); });
@@ -143,38 +147,30 @@ export abstract class Controller<M, V> {
   }
 
   public markForCheck(): void {
-    this._markForCheckSubject.next();
+    this._markForCheckSubject.next(true);
   }
 
-  public increaseRefCount(): void {
+  public attach(): void {
     this._refCount++;
 
-    console.log('increaseRefCount');
-    console.log(this);
-
     if (this._refCount === 1) {
-      this.onInit();
+      setTimeout(() => {
+        this.onAttached();
+      });
     }
   }
 
-  public decreaseRefCount(): void {
+  public detach(): void {
     this._refCount--;
 
-    console.log('decreaseRefCount');
-    console.log(this);
-
     if (this._refCount === 0) {
-      this.onDestroy();
+      setTimeout(() => {
+        this.onDetached();
+      });
     }
   }
 
-  public onInit(): void {
-    console.log('ngOnInit');
-    console.log(this);
-  }
+  public onAttached(): void { }
 
-  public onDestroy(): void {
-    console.log('ngOnDestroy');
-    console.log(this);
-  }
+  public onDetached(): void { }
 }

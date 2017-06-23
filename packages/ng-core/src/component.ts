@@ -4,7 +4,6 @@ import { AnonymousSubscription } from 'rxjs/Subscription';
 import { Controller } from './controller';
 
 export class Component<M, V, C extends Controller<M, V>> implements OnDestroy, OnInit {
-
   public model: M;
 
   public view: V;
@@ -28,6 +27,8 @@ export class Component<M, V, C extends Controller<M, V>> implements OnDestroy, O
       controller.view$.subscribe((view) => this.updateView(view)),
       controller.markForCheck$.subscribe(() => this.changeDetectorRef.markForCheck()),
     );
+
+    this.controller.attach();
   }
 
   public ngOnInit(): void {
@@ -35,6 +36,8 @@ export class Component<M, V, C extends Controller<M, V>> implements OnDestroy, O
   }
 
   public ngOnDestroy(): void {
+    this.controller.detach();
+
     this.subscriptions.forEach((s) => s.unsubscribe());
     this.subscriptions = null;
 

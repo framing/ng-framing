@@ -5,15 +5,11 @@ import { MaterialAppComponent } from '../material-app.component';
 @Component({
   selector: 'side-nav',
   template: `
-    <md-toolbar>
-      <ng-container [ngComponentOutlet]="view.sideNavTitle"></ng-container>
-    </md-toolbar>
+    <ng-container [ngComponentOutlet]="view.sideNavTitle"></ng-container>
 
     <ng-container [ngComponentOutlet]="view.sideNavSubTitle"></ng-container>
 
-    <div fxLayoutPadding>
-      <ng-container [ngComponentOutlet]="view.sideNavContent"></ng-container>
-    </div>
+    <ng-container [ngComponentOutlet]="view.sideNavContent"></ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

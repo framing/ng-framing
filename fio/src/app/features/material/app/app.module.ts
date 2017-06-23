@@ -10,17 +10,18 @@ import { FeatureDetailFeature } from 'features/feature-detail/feature-detail.fea
         id: 'app',
         title: 'App',
         description: `
-          <p>Adds a left side nav, app bar, right nav based on 
+          <p>Adds a left side nav, app bar, right nav based on
             <a href="https://material.io/guidelines/layout/structure.html">Google Material Layout Structure</a></p>
         `,
         installation: `
-          <p>git clone https://github.com/biznas/ng-app my-app</p>
+          <p>npm i -g yarn</p>
+          <p>npm i -g @framing/biz</p>
+          <p>biz new my-app</p>
           <p>cd my-app</p>
-          <p>yarn</p>
-          <p>yarn add @framing/ng-material --save</p>
+          <p>yarn add @angular/flex-layout @angular/material @framing/ng-material</p>
         `,
         usage: `
-          <p>Simply import MaterialAppFeature and create an instance of it in a Framing .frame() method call</p>
+          <p>Step 1: Import MaterialAppFeature and pass an instance of it to framing.use()</p>
           <p><b>src/app/app.module.ts</b></p>
           <pre>
 import { NgModule } from '@angular/core';
@@ -28,10 +29,18 @@ import { Framing } from '@framing/ng-core';
 <b>import { MaterialAppFeature } from '@framing/ng-material';</b>
 
 @NgModule(Framing((framing) => framing
-  <b>.frame(new MaterialAppFeature())</b>
+  <b>.use(new MaterialAppFeature())</b>
+  // ...
 ))
 export class AppModule {}
-          <p>To run it, execute 'yarn start'.</p>
+          </pre>
+          <p>Step 2: Add css imports</p>
+          <p><b>src/styles.css</p></p>
+          <pre>
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~https://fonts.googleapis.com/icon?family=Material+Icons';
+          </pre>
+          <p>Run 'biz serve' to run a local server</p>
         `,
         modelProperties: [
           { name: 'appBarActions', description: 'AppNavItem[]' },

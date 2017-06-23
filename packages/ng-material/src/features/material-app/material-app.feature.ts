@@ -1,8 +1,7 @@
 import { Type } from '@angular/core';
+import { MaterialModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { Framer, FramingNgModule } from '@framing/ng-core';
-
-import { MaterialFeature } from '../material/material.feature';
 
 import { MaterialAppController } from './material-app.controller';
 import { MaterialAppModel } from './material-app.model';
@@ -18,6 +17,8 @@ import { SideNavSubTitleComponent } from './view/side-nav-sub-title.component';
 import { SideNavTitleComponent } from './view/side-nav-title.component';
 import { SideNavComponent } from './view/side-nav.component';
 import { MaterialAppViewModule } from './view/view.module';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export class MaterialAppFeature extends Framer<MaterialAppModel, MaterialAppView> {
 
@@ -52,11 +53,12 @@ export class MaterialAppFeature extends Framer<MaterialAppModel, MaterialAppView
 
   public frame(framing: FramingNgModule): void {
     framing
-      .component(this.theView.appRoot)
+      .root(this.theView.appRoot)
       .imports([
+        BrowserAnimationsModule,
+        MaterialModule,
         RouterModule,
         MaterialAppViewModule,
-      ])
-      .frame(new MaterialFeature());
+      ]);
   }
 }
