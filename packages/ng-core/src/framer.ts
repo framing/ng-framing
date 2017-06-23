@@ -280,30 +280,32 @@ export abstract class Framer<Model, View> {
       // FUTURE
       // this.provideTypeByName(framing, this.framerName + 'Controller', this._controller);
 
-      if (this.provideControllerByType) {
-        let controllerInstance: Controller<Model, View>;
+      let controllerInstance: Controller<Model, View>;
 
-        framing
-          .provide({
-            provide: this.framerIdent + '-ControllerInternal',
-            useClass: this._controller,
-          })
-          .provide({
-            provide: this.framerIdent + '-Controller',
-            useFactory: (injector: Injector) => {
-              if (controllerInstance) {
-                this.framingDevTools.addController(this.framerName, controllerInstance);
-                return controllerInstance;
-              }
-              self._injector = injector;
-              controllerInstance = injector.get(this.framerIdent + '-ControllerInternal');
-              controllerInstance.initController(this._model, this._view, this._frame, this.framerName, injector);
-              this.framerOnControllerInit(controllerInstance);
+      framing
+        .provide({
+          provide: this.framerIdent + '-ControllerInternal',
+          useClass: this._controller,
+        })
+        .provide({
+          provide: this.framerIdent + '-Controller',
+          useFactory: (injector: Injector) => {
+            if (controllerInstance) {
               this.framingDevTools.addController(this.framerName, controllerInstance);
               return controllerInstance;
-            },
-            deps: [ Injector ],
-          })
+            }
+            self._injector = injector;
+            controllerInstance = injector.get(this.framerIdent + '-ControllerInternal');
+            controllerInstance.initController(this._model, this._view, this._frame, this.framerName, injector);
+            this.framerOnControllerInit(controllerInstance);
+            this.framingDevTools.addController(this.framerName, controllerInstance);
+            return controllerInstance;
+          },
+          deps: [ Injector ],
+        });
+
+      if (this.provideControllerByType) {
+        framing
           .provide({
             provide: this._controller,
             useExisting: this.framerIdent + '-Controller',
