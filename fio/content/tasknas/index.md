@@ -21,7 +21,7 @@ npm i
 npm start
 ```
 
-loads app and developer dependencies (these are maintained by Biznas) 
+loads app and developer dependencies (these are maintained by Ryan Campbell) 
 
 ### **SETTING UP MATERIAL DESIGN**
 

@@ -24,7 +24,7 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
                       It’s a framework on top of a framework, a super framework really.\
                       It’s a higher level of abstraction, a new evolution of development… welcome :) If Angular was the C language, Framing would be C++.\
                       Our team is excited about it and we hope we can convince you of the same\
-                      (and if not <a href="mailto:ryan@biznas.io">email Biznas CEO Ryan Campbell</a> and \
+                      (and if not <a href="mailto:ryan@safaricreative.com">email Ryan Campbell</a> and \
                       tell him why or <a href="http://framing.herokuapp.com/">join the Framing slack team</a>.\
                     </p>\
                     <p>The easiest way to understand what Framing is,\
@@ -140,7 +140,7 @@ import { DocsArticleFeature } from 'features/docs-article/docs-article.feature';
               cells: [
                 {
                   content: '\
-                    <p>If you still have questions, please <a href="mailto:ryan@biznas.io">email Biznas CEO Ryan Campbell</a> or \
+                    <p>If you still have questions, please <a href="mailto:ryan@safaricreative.com">email Ryan Campbell</a> or \
                       <a href="http://framing.herokuapp.com/">join the Framing slack team</a>.\
                     </p>\
                     <p>Read the <a href="/guidelines/features">Features overview</a> guide.</p>\

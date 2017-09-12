@@ -15,7 +15,7 @@ For example, if you add @framing/ng-security to your application you'll have a s
 
 Framers are easy to implement. In fact, there is very little difference between a standard Angular NgModule and a Framer.
 
-At Biznas we've made it best pratice to develop everything in Framers.
+At Ryan Campbell we've made it best pratice to develop everything in Framers.
 
 If done correctly, you'll never need to write the same code twice. Every Framer you create decreases the time needed to develop future applications that share similar functionality.
 

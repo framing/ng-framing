@@ -1,5 +1,5 @@
 /**
  * @license Framing v0.0.0-PLACEHOLDER
- * Copyright 2016-2017 Biznas Innovations, Inc. http://biznas.io
+ * Copyright 2016-2017 Ryan Campbell. http://biznas.io
  * License: Apache License, Version 2.0
  */

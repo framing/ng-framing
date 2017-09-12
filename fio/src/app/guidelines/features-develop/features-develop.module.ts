@@ -405,7 +405,7 @@ export class ExampleFeature extends Framer<M, V> {`,
               cells: [
                 {
                   content: `
-                    <p>If you still have questions, please <a href="mailto:ryan@biznas.io">email Biznas CEO Ryan Campbell</a> or
+                    <p>If you still have questions, please <a href="mailto:ryan@safaricreative.com">email Ryan Campbell</a> or
                       <a href="http://framing.herokuapp.com/">join the Framing slack team</a>.
                     </p>
                     <p>Read the <a href="/guidelines/features-usage">Use a feature</a> guide.</p>
