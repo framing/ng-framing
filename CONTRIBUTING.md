@@ -1,8 +1,8 @@
 # Contributing to Framing
 
-Welcome to the Framing open source project. We're glad you're here. This contributing guide outlines our code of conduct and how you can get involved. If you have any questions or concerns please email [reid@biznas.io](mailto:reid@biznas.io). 
+Welcome to the Framing open source project. We're glad you're here. This contributing guide outlines our code of conduct and how you can get involved. If you have any questions or concerns please email [ryan@safaricreative.com](mailto:ryan@safaricreative.com). 
 
-We'd also love to see you join our Slack framing-community group, please email [reid@biznas.io](mailto:reid@biznas.io) so he can invite you to the group. 
+We'd also love to see you join our Slack framing-community group, please email [ryan@safaricreative.com](mailto:ryan@safaricreative.com) so he can invite you to the group. 
 
 ## Code of Conduct
 
@@ -40,7 +40,7 @@ This Code of Conduct applies both within project spaces and in public spaces whe
 
 #### Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project manager at [reid@biznas.io](mailto:reid@biznas.io). All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project manager at [ryan@safaricreative.com](mailto:ryan@safaricreative.com). All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
 
 Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
 
@@ -50,7 +50,7 @@ This Code of Conduct is adapted from the Contributor Covenant, version 1.4, avai
 
 ## Got a Question or Problem?
 
-Send our project manager a note at [reid@biznas.io](mailto:reid@biznas.io). 
+Send our project manager a note at [ryan@safaricreative.com](mailto:ryan@safaricreative.com). 
 
 ## Found a Bug?
 

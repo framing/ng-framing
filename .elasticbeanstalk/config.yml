@@ -10,5 +10,4 @@ global:
   default_ec2_keyname: aws-eb
   default_platform: 64bit Amazon Linux 2016.09 v2.5.1 running Docker 1.12.6
   default_region: us-east-1
-  profile: biznas
   sc: git

@@ -91,10 +91,6 @@
   dependencies:
     tsickle "^0.21.0"
 
-"@biznas/ng-tslint-rules@^0.6.9":
-  version "0.6.9"
-  resolved "https://registry.yarnpkg.com/@biznas/ng-tslint-rules/-/ng-tslint-rules-0.6.9.tgz#cb4c74d2ca6904dda1310dc41e156ecf874ef1bd"
-
 "@types/acorn@^1.0.31":
   version "1.0.31"
   resolved "https://registry.yarnpkg.com/@types/acorn/-/acorn-1.0.31.tgz#f6cf5879989a1f6677023896847af1e4fe3345ba"

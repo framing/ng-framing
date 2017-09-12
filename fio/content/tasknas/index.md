@@ -11,7 +11,7 @@ How to build the tasknas app with framing
 
 Use our ng-app project to get started
 
-`git clone https://github.com/biznas/ng-app.git tasknas`
+`git clone tasknas`
 
 ### **NPM INSTALL**
 

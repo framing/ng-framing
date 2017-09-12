@@ -67,10 +67,6 @@
   dependencies:
     tsickle "^0.21.0"
 
-"@biznas/ng-tslint-rules@^0.6.9":
-  version "0.6.9"
-  resolved "https://registry.yarnpkg.com/@biznas/ng-tslint-rules/-/ng-tslint-rules-0.6.9.tgz#cb4c74d2ca6904dda1310dc41e156ecf874ef1bd"
-
 "@framing/ng-core@^0.8.20":
   version "0.8.20"
   resolved "https://registry.yarnpkg.com/@framing/ng-core/-/ng-core-0.8.20.tgz#aa19a2f951bf6f60a9ac4084780bc18d6c90d094"
