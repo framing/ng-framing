@@ -16,4 +16,5 @@ export interface MaterialAppModel {
   sideNavOpened?: boolean;
 
   sideNavTitle?: string;
+
 }

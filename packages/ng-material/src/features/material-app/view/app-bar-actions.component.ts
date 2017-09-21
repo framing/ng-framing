@@ -10,7 +10,7 @@ import { MaterialAppComponent } from '../material-app.component';
         md-icon-button
         [mdTooltip]="action.label"
         *ngFor="let action of model.appBarActions"
-        [routerLink]="action.link"
+        [routerLink]="action.routerLink"
         (click)="controller.actionClicked(action)">
         <md-icon>{{ action.icon }}</md-icon>
       </button>

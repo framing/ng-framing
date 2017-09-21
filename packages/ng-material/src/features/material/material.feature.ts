@@ -30,12 +30,10 @@ import {
   MdTooltipModule,
   OverlayModule,
   PortalModule,
-  RtlModule,
   StyleModule,
   A11yModule,
-  PlatformModule,
+  PlatformModule, 
   MdCommonModule,
-  ObserveContentModule,
 } from '@angular/material';
 
 import { MaterialController as C } from './material.controller';
@@ -81,12 +79,10 @@ export class MaterialFeature extends Framer<M, V> {
       MdTooltipModule,
       OverlayModule,
       PortalModule,
-      RtlModule,
       StyleModule,
       A11yModule,
       PlatformModule,
       MdCommonModule,
-      ObserveContentModule,
     ]);
   }
 }

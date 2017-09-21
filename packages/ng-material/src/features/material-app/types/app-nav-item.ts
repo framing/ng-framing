@@ -9,5 +9,7 @@ export interface AppNavItem {
 
   action?: Function;
 
-  isSelected?: boolean;  
+  isSelected?: boolean;
+
+  enabled?: boolean;
 }
