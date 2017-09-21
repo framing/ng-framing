@@ -3,8 +3,7 @@
     <md-list-item 
       *ngIf="!item.isSubheader; else elseBlock" 
       [routerLink]="item.routerLink" 
-      [ngClass]="{'selected': item.isSelected }"
-      (click)="selectItem(i)">
+      [ngClass]="{'selected': item.isSelected }">
       <md-icon md-list-icon *ngIf="item.icon">{{item.icon}}</md-icon>
       <p md-line>{{item.label}}</p>
     </md-list-item>
