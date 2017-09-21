@@ -1,0 +1,5 @@
+@import "./src/features/material-app/view/side-nav-content.component.scss";
+
+@mixin framing-material-theme($theme) {
+  @include side-nav-content-component($theme);
+}

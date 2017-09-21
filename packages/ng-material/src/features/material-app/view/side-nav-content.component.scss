@@ -1,0 +1,20 @@
+@import '~@angular/material/theming';
+
+@mixin side-nav-content-component($theme) {
+  $primary: map-get($theme, primary);
+
+  .mat-list-item.selected {
+    // color: map-get($primary, A100);
+    background-color: mat-color($primary, 50);
+    color: mat-color($primary, '50-contrast');
+  }
+
+  .mat-list-icon {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  
+  md-list-item:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.14);
+  }
+}

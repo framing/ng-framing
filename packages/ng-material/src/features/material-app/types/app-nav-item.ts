@@ -8,4 +8,6 @@ export interface AppNavItem {
   isSubheader?: boolean;
 
   action?: Function;
+
+  isSelected?: boolean;  
 }

@@ -4,24 +4,14 @@ import { MaterialAppComponent } from '../material-app.component';
 
 @Component({
   selector: 'side-nav-content',
-  template: `
-    <div fxLayoutPadding>
-      <md-list>
-        <span *ngFor="let item of model.sideNavItems">
-          <md-list-item *ngIf="!item.isSubheader; else elseBlock" [routerLink]="item.routerLink">
-            <md-icon *ngIf="item.icon">{{item.icon}}</md-icon>
-            <p>{{item.label}}</p>
-          </md-list-item>
-          <ng-template #elseBlock>
-            <h3 mg-subheader>
-              <md-icon *ngIf="item.icon">{{item.icon}}</md-icon>
-              <p>{{item.label}}</p>
-            </h3>
-          </ng-template>
-        </span>
-      </md-list>
-    </div>
-  `,
+  templateUrl: 'side-nav-content.component.html',
+  styleUrls: [ 'side-nav-content.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SideNavContentComponent extends MaterialAppComponent {}
+export class SideNavContentComponent extends MaterialAppComponent {
+
+  public selectItem(index: number): void {
+    this.model.sideNavItems.forEach(i => i.isSelected = false);
+    this.model.sideNavItems[index].isSelected = true;
+  }
+}
