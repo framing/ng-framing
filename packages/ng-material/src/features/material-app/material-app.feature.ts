@@ -1,5 +1,5 @@
 import { Type } from '@angular/core';
-import { MaterialModule } from '@angular/material';
+import { MaterialModule } from '../material.module';
 import { RouterModule } from '@angular/router';
 import { Framer, FramingNgModule } from '@framing/ng-core';
 

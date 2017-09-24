@@ -6,13 +6,13 @@ import { MaterialAppComponent } from '../material-app.component';
   selector: 'app-bar-actions',
   template: `
     <div>
-      <button
-        md-icon-button
-        [mdTooltip]="action.label"
+      <button 
+        mat-icon-button
+        [matTooltip]="action.label"
         *ngFor="let action of model.appBarActions"
         [routerLink]="action.routerLink"
         (click)="controller.actionClicked(action)">
-        <md-icon>{{ action.icon }}</md-icon>
+        <mat-icon>{{ action.icon }}</mat-icon>
       </button>
     </div>
   `,

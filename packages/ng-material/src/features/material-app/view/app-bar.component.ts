@@ -5,17 +5,17 @@ import { MaterialAppComponent } from '../material-app.component';
 @Component({
   selector: 'app-bar',
   template: `
-    <div fxLayout="row" class="md-toolbar-tools">
-      <button md-icon-button fxFlex="none" class="md-icon-button" aria-label="toggle Menu"
+    <div fxLayout="row" class="mat-toolbar-tools">
+      <button mat-icon-button fxFlex="none" class="mat-icon-button" aria-label="toggle Menu"
         (click)="controller.toggleSideNav(!model.sideNavOpened)"
         *ngIf="model.isRoot">
-        <md-icon>menu</md-icon>
+        <mat-icon>menu</mat-icon>
       </button>
 
-      <button md-button class="md-icon-button" aria-label="Back"
+      <button mat-button class="mat-icon-button" aria-label="Back"
         (click)="controller.goBack()"
         *ngIf="!model.isRoot">
-        <md-icon>arrow_back</md-icon>
+        <mat-icon>arrow_back</mat-icon>
       </button>
 
       <span fxFlex="shrink" style="overflow: hidden">
@@ -28,9 +28,9 @@ import { MaterialAppComponent } from '../material-app.component';
         <ng-template [ngComponentOutlet]="view.appBarActions"></ng-template>
       </span>
 
-      <button md-icon-button aria-label="More"
+      <button mat-icon-button aria-label="More"
         (click)="controller.toggleRightNav(!model.rightNavOpened)">
-        <md-icon>more_vert</md-icon>
+        <mat-icon>more_vert</mat-icon>
       </button>
     </div>
   `,
