@@ -6,8 +6,25 @@ import { MaterialAppController } from '../material-app.controller';
 
 @Component({
   selector: 'side-nav-content',
-  templateUrl: 'side-nav-content.component.html',
-  styleUrls: [ 'side-nav-content.component.scss' ],
+  template: `
+<md-list>
+  <span *ngFor="let item of model.sideNavItems; let i = index">
+    <md-list-item
+      *ngIf="!item.isSubheader; else elseBlock"
+      [routerLink]="item.routerLink"
+      [ngClass]="{'selected': item.isSelected }">
+      <md-icon md-list-icon *ngIf="item.icon">{{item.icon}}</md-icon>
+      <p md-line>{{item.label}}</p>
+    </md-list-item>
+    <ng-template #elseBlock>
+      <h3 md-subheader>
+        <md-icon md-list-icon *ngIf="item.icon">{{item.icon}}</md-icon>
+        <p md-line>{{item.label}}</p>
+      </h3>
+    </ng-template>
+  </span>
+</md-list>
+`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SideNavContentComponent extends MaterialAppComponent implements OnInit {
