@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MaterialModule } from '@angular/material';
+import { MaterialModule } from '@framing/ng-material';
 import { RouterModule } from '@angular/router';
 import { Framing } from '@framing/ng-core';
 
